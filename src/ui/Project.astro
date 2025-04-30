@@ -1,0 +1,60 @@
+---
+import type { Project } from "@/shared/types";
+import { TAGS } from "@/shared/constants";
+
+interface Props {
+  project: {
+    name: string;
+    description: string;
+    thumbnail: string;
+    stackTech: string[];
+  };
+}
+
+const { project } = Astro.props;
+---
+
+<article class='grid grid-cols-2 gap-8 overflow-hidden w-full font-light'>
+  <div>
+    <div
+      class='relative flex flex-col items-center gap-8 p-2 rounded-md overflow-clip w-full bg-white/10'
+    >
+      <img
+        alt={`proyecto-${project.name}`}
+        loading='lazy'
+        class='object-cover object-top w-full h-56'
+        src={`/images/${project.thumbnail}`}
+      />
+    </div>
+  </div>
+
+  <div class='flex flex-col gap-4'>
+    <h2 class='font-bold'>{project.name}</h2>
+    <p class='text-sm mb-2 w-full text-gray-400 leading-relaxed'>
+      {project.description}
+    </p>
+    <ul class='flex items-center gap-2 flex-wrap'>
+      {
+        project.stackTech.map((tech) => {
+          const techKey = tech.replace(/\s+/g, "_").toUpperCase();
+          const tag = TAGS[techKey];
+
+          if (!tag) return null;
+
+          const { class: className, name, icon } = tag;
+
+          return (
+            <li class={`flex items-center gap-2`}>
+              <span
+                class={`inline-flex rounded-full px-2 py-1.5 ${className} text-xs`}
+              >
+                <img src={icon} alt={tech} class='inline-block w-4 h-4 mr-2' />
+                {name}
+              </span>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+</article>
