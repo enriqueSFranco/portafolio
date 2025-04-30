@@ -1,0 +1,70 @@
+---
+import IcGithub from "@/components/icons/IcGithub.astro";
+import IcLinkedin from "@/components/icons/IcLinkedin.astro";
+import IcMaildotru from "@/components/icons/IcMaildotru.astro";
+import cv from "@/cv.json";
+import meSrc from "@/assets/me.jpeg";
+import Badge from "@/components/Badge.astro";
+
+const { email, name, profiles, job } = cv.basic;
+
+const SOCIAL_NETWORK: Record<string, any> = {
+  github: IcGithub,
+  linkedin: IcLinkedin,
+};
+---
+
+<section class='relative w-full font-light text-sm leading-normal flex flex-col items-start justify-center gap-4'>
+  <div class="flex items-center gap-4">
+    <figure class='w-20 h-20 overflow-hidden rounded-full'>
+      <img
+        class='w-full h-full object-cover object-top'
+        src={meSrc}
+        alt={`foto de ${name}`}
+        loading="lazy"
+      />
+    </figure>
+    <Badge>Disponible para trabajar</Badge>
+  </div>
+  <h2 class='text-2xl font-normal flex justify-center items-center gap-2 text-center leading-relaxed'>
+    Hey, soy {name} 👋  
+  </h2>
+  <p class="text-md text-gray-400 font-normal max-w-xl leading-relaxed">
+
+    Soy <span class="bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 inline-block text-transparent bg-clip-text">Frontend Developer</span> con conocimientos en <em>JavaScript</em> y <em>React</em>, siempre buscando mejorar la
+    experiencia del usuario. 
+  </p>
+    <ul class='flex items-center justify-start gap-4 self-start'>
+      <li>
+        <a
+          href={`mailto:${email}`}
+          target='_blank'
+          aria-label={`Enviar correo electrónico a ${email}`}
+          title={`Enviar correo electrónico a ${email}`}
+          tabindex='0'
+          class='bg-white/20 flex items-center gap-2 text-xs px-3 py-1.5 rounded-full'><IcMaildotru />{email}</a
+        >
+      </li>
+      {
+        profiles.map(({ network, url, username }, idx) => {
+          const IcNetwork = SOCIAL_NETWORK[network.toLowerCase()];
+          return (
+            <li>
+                <a
+                  href={url}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  aria-label={`Visitar perfil de ${username} en ${network}`}
+                  title={`Visitar perfil de ${username} en ${network}`}
+                  tabindex={`${idx + 1}`}
+                  class='bg-white/20 flex items-center gap-2 text-xs px-3 py-1.5 rounded-full'
+                >
+                  <IcNetwork />
+                  {network}
+                </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+</section>
