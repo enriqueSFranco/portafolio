@@ -1,46 +1,43 @@
 {
   "basic": {
-    "name": "Enrique",
-    "job": "desarrollador frontend",
+    "name": "Enrique Salinas Franco",
+    "label": "Desarrollador Frontend",
     "email": "enrique.sfranco04@gmail.com",
-    "summary": "",
+    "summary": "Desarrollador Frontend Jr con formación en Ingeniería en Sistemas Computacionales y experiencia creando interfaces web con TypeScript, React.js, Next.js y Tailwind CSS. Me interesa construir experiencias digitales claras y funcionales, colaborar en equipo y aprender continuamente nuevas tecnologías para seguir creciendo como desarrollador.",
     "profiles": [
       {
-        "network": "Github",
+        "network": "GitHub",
         "username": "enriqueSFranco",
-        "url": ""
+        "url": "https://github.com/enriqueSFranco"
       },
       {
-        "network": "Linkedin",
+        "network": "LinkedIn",
         "username": "enriqueSFranco",
-        "url": ""
+        "url": "https://www.linkedin.com/in/enrique-sfranco"
       }
     ]
   },
-  "profile": "Desarrollador Frontend con un sólido conocimiento de las tecnologías modernas de desarrollo web, incluyendo JavaScript, TypeScript y React.js. Además, cuento con un conocimiento básico de React Native, lo que me permite extender mis habilidades al desarrollo de aplicaciones móviles multiplataforma.",
   "education": [
     {
       "institution": "Escuela Superior de Cómputo - IPN",
       "url": "https://www.escom.ipn.mx/",
-      "area": "Ingenieria en Sistemas Computacionales",
-      "studyType": "Universidad",
-      "startDate": "2017",
-      "endDate": "2023"
+      "area": "Ingeniería en Sistemas Computacionales",
+      "degree": "Licenciatura",
+      "startDate": "2017-08",
+      "endDate": "2023-06"
     }
   ],
+
   "skills": {
-    "hardSkills": [
-      "HTML5",
-      "CSS3",
-      "Tailwind CSS",
-      "JavaScript",
-      "TypeScript",
-      "React.js",
-      "React Native - Básico",
-      "Kotlin - Básico",
+    "technical": [
+      "Typescript",
+      "React",
+      "Next.js",
+      "React Native",
+      "Python",
       "Git"
     ],
-    "softSkills": [
+    "soft": [
       "Disciplina",
       "Autogestión",
       "Empatía",
@@ -48,26 +45,60 @@
       "Perseverancia"
     ]
   },
-  "experience": [
+
+  "projects": [
     {
       "id": 0,
-      "name": "Bolsa de Trabajo ESCOM (Proyecto de Tesis) | Enero 2022 – Enero 2023",
-      "description": "Sistema web que facilita la búsqueda y postulación de empleo para los alumnos de ESCOM, a la vez utiliza un algoritmo de recomendación para sugerir vacantes que mejor se adapten a las habilidades y conocimientos de los alumnos.",
-      "highlights": [
-        "Trabajé de forma eficaz enunequipomultidisciplinario,compartiendoideasycontribuyendoactivamenteala toma de decisiones del grupo.",
-        "Aprendí a abordar desafíos técnicos y funcionales de manera efectiva, buscando soluciones innovadoras en conjunto con mis compañeros de equipo.",
-        "Me adapté rápidamente a los cambios en los requisitos del proyecto y a las necesidades del cliente, ajustando mis enfoques y prioridades según fuera necesario.",
-        "Adquirí experiencia en el desarrollo tanto del frontend como del backend, lo que me permitió comprender el ciclo completo de desarrollo de software y crear una solución completa y funcional para el proyecto."
+      "title": "Bolsa de Trabajo ESCOM",
+      "period": "Enero 2022 – Enero 2023",
+      "type": "Proyecto de Tesis",
+      "description": "Sistema web que facilita la búsqueda y postulación de empleo para los alumnos de ESCOM, incluyendo un algoritmo de recomendación que sugiere vacantes basadas en habilidades y perfil del usuario.",
+      "thumbnail": "bolsa-trabajo-escom.webp",
+      "repository": "https://github.com/enriqueSFranco/TT-ESCOM",
+      "stack": [
+        "JavaScript",
+        "React",
+        "Python",
+        "Django REST Framework",
+        "Recommendation Algorithm"
       ]
     },
     {
       "id": 1,
-      "name": "Detección de Toxicidad en Chat de Twitch",
-      "description": "Aplicación para detectar en tiempo real mensajes que contengan lenguaje tóxico en las comunidades de canales de Twitch.",
-      "highlights": [
-        "Reforcé mis habilidades en desarrollo frontend y backend.",
-        "Mejoré mi capacidad para integrar APIs externas en aplicaciones web.",
-        "Aprendí a trabajar de manera autónoma en un proyecto desde la concepción hasta la implementación, gestionando eficazmente el tiempo y los recursos."
+      "title": "PriceWatch",
+      "period": "",
+      "type": "Web Scraper + API + Automatización",
+      "status": "En desarrollo",
+      "description": "Sistema que monitorea productos en tiendas online, detecta cambios de precio/disponibilidad y expone una API de consulta en tiempo real.",
+      "thumbnail": "raspin.webp",
+      "repository": "https://github.com/enriqueSFranco/price-watch-platform",
+      "stack": [
+        "TypeScript",
+        "Next.js",
+        "Node",
+        "Puppeteer",
+        "Api REST",
+        "PostgreSQL",
+        "Web Scraping"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Seguimiento de postulaciones",
+      "period": "",
+      "type": "Web App + Web Scraping",
+      "status": "En desarrollo",
+      "description": "Herramienta para monitorear y analizar precios de productos en e-commerce. Permite recibir alertas y tomar decisiones de compra informadas.",
+      "thumbnail": "raspin.webp",
+      "repository": "https://github.com/enriqueSFranco/application-pipeline",
+      "stack": [
+        "TypeScript",
+        "Next.js",
+        "Tailwind CSS",
+        "Node",
+        "PostgreSQL",
+        "Web Scraping",
+        "Cron Jobs"
       ]
     }
   ]

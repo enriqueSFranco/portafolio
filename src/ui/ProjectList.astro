@@ -1,0 +1,20 @@
+---
+import Project from "./Project.astro"
+import { IProject } from '@/shared/types'
+
+interface Props {
+    projects: IProject[]
+}
+
+const {projects} = Astro.props
+---
+
+<ol class="grid grid-cols-2 gap-8">      
+  {
+    projects.map((item) => (     
+      <li>            
+        <Project project={item} />
+      </li>
+    ))
+  }            
+</ol>
