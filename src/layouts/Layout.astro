@@ -1,5 +1,4 @@
 ---
-import Blob from '@/components/Blob.astro';
 
 export interface Props {
   title: string;
@@ -14,13 +13,6 @@ const { title } = Astro.props;
     <meta charset='UTF-8' />
     <meta name='viewport' content='width=device-width' />
     <link rel='icon' type='image/svg+xml' href='/logo.svg' />
-    <!-- GOOGLE FONTS -->
-    <link rel='preconnect' href='https://fonts.googleapis.com' />
-    <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
-    <link
-      href='https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap'
-      rel='stylesheet'
-    />
     <meta
       name='description'
       content='curriculum vitae, cv, Frontend Developer, Desarrollo Web'
@@ -29,14 +21,8 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
   <body
-    class='relative min-h-scree flex flex-col items-center bg-black text-white text-base tracking-normal font-inter'
+    class='relative min-h-scree flex flex-col items-center bg-white text-black text-base tracking-normal font-inter'
   >
-  <Blob />
-
-    <header class="w-full h-16 px-4 py-2 shadow-sm flex items-center">
-      <h2 class="text-3xl font-bold self-end">Enrique</h2>
-      <div class="w-2 h-2 bg-emerald-500 rounded-full self-end"></div>
-    </header>
     <slot />
   </body>
 </html>
@@ -45,31 +31,12 @@ const { title } = Astro.props;
   @tailwind components;
   @tailwind utilities;
 
-  @layer {
-    html {
-      font-family: "Inter", sans-serif;
-      font-optical-sizing: auto;
-      font-weight: 400;
-      font-style: normal;
-      font-variation-settings: "slnt" 0;
-    }
-  }
-
-  @media print {
-    /* Estilos para la impresión */
-    body {
-      color: #000;
-    }
-    main {
-      color: #000;
-      padding: 4rem;
-      margin: auto;
-      width: 100%;
-    }
-    @media (width <= 700px) {
-      main {
-        padding: 2rem;
-      }
-    }
+  /* Register your custom font family and tell the browser where to find it. */
+  @font-face {
+    font-family: 'DistantGalaxy';
+    src: url('/fonts/DistantGalaxy.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
   }
 </style>
