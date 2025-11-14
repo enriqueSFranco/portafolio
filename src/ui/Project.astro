@@ -1,0 +1,32 @@
+---
+import type { IProject } from "@/shared/types.d";
+import { TAGS } from "@/shared/constants.d";
+import iconGithub from "/icons/github.svg"
+
+interface Props {
+  project: IProject
+}
+
+const { project } = Astro.props;
+
+---
+
+<article class='select-none flex flex-col overflow-hidden w-fit font-light border border-gray-100 hover:shadow-md hover:shadow-gray-200 transition-shadow duration-300 ease-out rounded-md p-4'>
+  <a 
+    class="size-5 self-end"
+    href={project.repository}
+    target='_blank'
+    rel='noopener noreferrer'
+  >
+    <img src={iconGithub} />
+  </a>
+  <div class="flex flex-col gap-3">
+    <div class="flex flex-col gap-1">
+      <h2 class='font-bold'>{project.title}</h2>
+      <h3 class="text-xs">{project.type}</h3>
+    </div>
+    <p class='text-sm mb-2 w-full text-gray-500 leading-relaxed'>
+      {project.description}
+    </p>
+  </div>
+</article>

@@ -1,0 +1,15 @@
+---
+import cv from "@/cv.json";
+import { IProject } from "@/shared/types.d";
+import ProjectList from "@/ui/ProjectList.astro";
+
+
+const projects: IProject[] = cv.projects;
+---
+
+<section class='flex flex-col gap-4 justify-start items-start'>
+  <h2 class="text-2xl capitalize font-semibold">
+    proyectos personales
+  </h2>
+  <ProjectList projects={projects} />
+</section>
