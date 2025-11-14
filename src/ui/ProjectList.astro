@@ -3,18 +3,18 @@ import Project from "./Project.astro"
 import { IProject } from '@/shared/types'
 
 interface Props {
-    data: IProject[]
+    projects: IProject[]
 }
 
-const {data} = Astro.props
+const {projects} = Astro.props
 ---
 
-<ol class="flex flex-col gap-16">      
-    {
-        data.map((item) => (     
-            <li>            
-                <Project project={item} />
-            </li>
-        ))
-    }            
+<ol class="grid grid-cols-2 gap-8">      
+  {
+    projects.map((item) => (     
+      <li>            
+        <Project project={item} />
+      </li>
+    ))
+  }            
 </ol>
