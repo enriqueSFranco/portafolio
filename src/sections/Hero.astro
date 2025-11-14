@@ -1,22 +1,54 @@
 ---
-import IcGithub from "@/components/icons/IcGithub.astro";
-import IcLinkedin from "@/components/icons/IcLinkedin.astro";
-import IcMaildotru from "@/components/icons/IcMaildotru.astro";
+import github from "/icons/github.svg";
+import linkedin from "/icons/linkedin.svg";
 import cv from "@/cv.json";
 import meSrc from "@/assets/me.jpeg";
-import Badge from "@/components/Badge.astro";
 
-const { email, name, profiles, job } = cv.basic;
+const { name, profiles, summary } = cv.basic;
 
-const SOCIAL_NETWORK: Record<string, any> = {
-  github: IcGithub,
-  linkedin: IcLinkedin,
+const SOCIAL_ICONS = {
+  github,
+  linkedin
 };
+
+function escapeRegExp(str: string) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+
+function highlightKeywords(text: string, colorsMap: Record<string, string>) {
+  Object.entries(colorsMap).forEach(([keyword, color]) => {
+    const escaped = escapeRegExp(keyword);
+
+    // Lookarounds para evitar texto dentro de tags HTML
+    const regex = new RegExp(
+      `(?<!<[^>]*)(\\b${escaped}\\b)(?![^<]*>)`,
+      "gi"
+    );
+
+    text = text.replace(
+      regex,
+      `<span style="color: ${color}">$1</span>`
+    );
+  });
+
+  return text;
+}
+
+const KEYWORD_COLORS = {
+  "Desarrollador Frontend Jr": "#2563eb",
+  "Ingeniería en Sistemas Computacionales": "#611232",
+};
+
+
+const highlightedSummary = highlightKeywords(summary, KEYWORD_COLORS);
+
 ---
 
 <section class='relative w-full font-light text-sm leading-normal flex flex-col items-start justify-center gap-4'>
-  <div class="flex items-center gap-4">
-    <figure class='w-20 h-20 overflow-hidden rounded-full'>
+  
+  <div class="flex flex-col items-start gap-3">
+    <figure class='w-20 h-20 overflow-hidden rounded-md'>
       <img
         class='w-full h-full object-cover object-top'
         src={meSrc}
@@ -24,47 +56,41 @@ const SOCIAL_NETWORK: Record<string, any> = {
         loading="lazy"
       />
     </figure>
-    <Badge>Disponible para trabajar</Badge>
+    <h2 class='text-2xl flex flex-col justify-start items-start text-center leading-relaxed'>
+      Hey, soy {name} 👋  
+      <span class="text-blue-600 text-base">Desarrollador Frontend Jr</span>
+    </h2>
   </div>
-  <h2 class='text-2xl font-normal flex justify-center items-center gap-2 text-center leading-relaxed'>
-    Hey, soy {name} 👋  
-  </h2>
-  <p class="text-md text-gray-400 font-normal max-w-xl leading-relaxed">
 
-    Soy <span class="bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 inline-block text-transparent bg-clip-text">Frontend Developer</span> con conocimientos en <em>JavaScript</em> y <em>React</em>, siempre buscando mejorar la
-    experiencia del usuario. 
-  </p>
-    <ul class='flex items-center justify-start gap-4 self-start'>
-      <li>
-        <a
-          href={`mailto:${email}`}
-          target='_blank'
-          aria-label={`Enviar correo electrónico a ${email}`}
-          title={`Enviar correo electrónico a ${email}`}
-          tabindex='0'
-          class='bg-white/20 flex items-center gap-2 text-xs px-3 py-1.5 rounded-full'><IcMaildotru />{email}</a
-        >
-      </li>
-      {
-        profiles.map(({ network, url, username }, idx) => {
-          const IcNetwork = SOCIAL_NETWORK[network.toLowerCase()];
-          return (
-            <li>
-                <a
-                  href={url}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  aria-label={`Visitar perfil de ${username} en ${network}`}
-                  title={`Visitar perfil de ${username} en ${network}`}
-                  tabindex={`${idx + 1}`}
-                  class='bg-white/20 flex items-center gap-2 text-xs px-3 py-1.5 rounded-full'
-                >
-                  <IcNetwork />
-                  {network}
-                </a>
-            </li>
-          );
-        })
-      }
-    </ul>
+
+  <p
+    id="summary"
+    set:html={highlightedSummary}
+    class="text-sm max-w-xl leading-relaxed mt-3"
+  >{summary}</p>
+
+  <ul class='flex items-center justify-start gap-1.5 self-start mt-3'>
+    {profiles.map((profile, idx) => {
+      const key = profile.network.toLowerCase(); // Github → github
+      const icon = SOCIAL_ICONS[key];
+
+      return (
+        <li>
+          <a
+            href={profile.url}
+            target='_blank'
+            rel='noopener noreferrer'
+            aria-label={`Visitar perfil de ${profile.username} en ${profile.network}`}
+            title={`Visitar perfil de ${profile.username} en ${profile.network}`}
+            tabindex={`${idx + 1}`}
+            class="bg-gray-100 px-1.5 py-1 rounded-md flex items-center justify-center gap-1 transition-colors hover:bg-gray-200 duration-300 ease-in-out"
+          >
+            <img src={icon} class="size-5 opacity-90 hover:opacity-100" />
+            <span class="text-xs">{profile.network}</span>
+          </a>
+        </li>
+      );
+    })}
+  </ul>
+
 </section>
