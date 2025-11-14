@@ -1,49 +1,113 @@
-# Portafolio - Frontend Developer
+# 🌐 Portafolio – Frontend Developer
 
-![Vista previa del proyecto](./src/assets/portafolio-preview.png)
+<p align="center">
+  <img src="./public/images/portfolio-preview.png" width="700" alt="Vista previa del portafolio" />
+</p>
 
-# Portafolio - Frontend Developer
+<p align="center">
+  <strong>Diseño limpio • Código mantenible • Experiencias enfocadas en el usuario</strong>
+</p>
 
-¡Bienvenido a mi portafolio de Frontend Developer! Aquí podrás explorar algunos de los proyectos que he creado utilizando tecnologías web modernas. Mi objetivo es siempre crear interfaces de usuario intuitivas, responsivas y accesibles. A continuación, encontrarás una descripción general de los proyectos que forman parte de mi portafolio, así como las tecnologías que utilizo.
-
----
-
-## 🚀 Sobre mí
-
-Soy **Frontend Developer** con experiencia en **JavaScript**, **TypeScript** y **React**, siempre buscando mejorar la experiencia del usuario. Me apasiona seguir aprendiendo y explorar nuevas tecnologías, lo que me permite adaptarme a distintos proyectos y aportar soluciones prácticas.
-
----
-
-## 🛠️ Tecnologías que utilizo
-
-- **HTML5**: Estructuración de contenido y accesibilidad web.
-- **Tailwind CSS**: Diseño visual, Flexbox y Grid.
-- **Astro**: Framework para crear sitios estáticos rápidos y modernos.
-- **JavaScript/TypeScript**: Lenguajes de programación para la lógica y la interactividad del sitio.
----
-
-## 💻 Proyectos Destacados
-
-### 1. **[Bolsa de Trabajo ESCOM (Proyecto de Tesis)](enlace-a-tu-proyecto)**
-**Descripción**: Plataforma web para gestionar ofertas de trabajo, dirigida a estudiantes de la Escuela Superior de Cómputo. Los usuarios pueden publicar vacantes, postularse a ellas y gestionar sus aplicaciones.
-
-**Tecnologías utilizadas**: React, Context, Redux, Styled Components, Axios, Python, Django REST Framework.
+<p align="center">
+  <a href="https://github.com/enriqueSFranco">
+    <img src="https://img.shields.io/badge/GitHub-enriqueSFranco-black?style=flat-square&logo=github" />
+  </a>
+  <a href="https://www.linkedin.com/in/enrique-sfranco">
+    <img src="https://img.shields.io/badge/LinkedIn-enriqueSFranco-blue?style=flat-square&logo=linkedin" />
+  </a>
+</p>
 
 ---
 
-### 2. **[Detección de Toxicidad (Proyecto Personal)](enlace-a-tu-proyecto)**
-**Descripción**: Aplicación web para detectar en tiempo real mensajes con lenguaje tóxico en las comunidades de canales de **Twitch**. Utiliza un modelo de inteligencia artificial para identificar comentarios inapropiados.
+# 👋 Sobre mí
 
-**Tecnologías utilizadas**: JavaScript, React, Tailwind CSS, tmi.js, Node.js, API REST.
+Soy **Desarrollador Frontend** con experiencia construyendo interfaces modernas utilizando **JavaScript**, **TypeScript**, **React**, **Astro** y **Tailwind CSS**.  
+Me enfoco en:
+
+- Crear experiencias accesibles y rápidas  
+- Mantener un código claro, escalable y fácil de mantener  
+- Integrar buenas prácticas y patrones modernos  
+
+Me gusta trabajar en proyectos que resuelvan problemas reales y aprender nuevas tecnologías constantemente.
 
 ---
 
-### 3. **[Intellice CV (Proyecto Personal)](enlace-a-tu-proyecto)**
-**Descripción**: Página personal para la gestión y creación de currículums de manera interactiva. Los usuarios pueden diseñar su CV de manera intuitiva y exportarlo en formato PDF.
+# 🛠️ Tecnologías Principales
 
-**Tecnologías utilizadas**: TypeScript, React, Tailwind CSS, Zustand, DnD Kit, TipTap Editor.
+| Categoría | Tecnologías |
+|----------|-------------|
+| **Frontend** | React · Next.js · Astro · Tailwind CSS |
+| **Lenguajes** | JavaScript · TypeScript · Python |
+| **UI / Styling** | Tailwind CSS · Styled Components · Material UI |
+| **Herramientas** | Git · PNPM · Zustand · Redux · Drizzle |
+| **Backend / Otros** | Node.js · Express · Django REST · Web Scraping (Puppeteer) |
 
 ---
 
-¡Gracias por visitar mi portafolio!
+# 💼 Proyectos Destacados
+
+A continuación encontrarás algunos de mis proyectos principales.  
+Puedes ver el código, tecnologías y enlaces de demo.
+
+---
+
+## 🎓 **1. Bolsa de Trabajo ESCOM**  
+**Tipo:** Proyecto de Tesis | Plataforma de vacantes + algoritmo de recomendación  
+**Estado:** Finalizado  
+🔗 *(Agrega el enlace cuando lo tengas)*
+
+**Descripción**  
+Sistema web que conecta estudiantes de la ESCOM con oportunidades laborales mediante un algoritmo que recomienda vacantes según habilidades.
+
+**Stack**  
+`React` · `Styled Components` · `Material UI` · `Python` · `Django REST Framework`
+
+---
+
+## 🧠 **2. Detección de Toxicidad en Twitch**  
+**Tipo:** Proyecto Personal  
+🔗 *(Agrega el enlace cuando lo tengas)*
+
+**Descripción**  
+Sistema que detecta mensajes tóxicos en tiempo real usando un modelo de IA. Ideal para moderación de chats de Twitch.
+
+**Stack**  
+`React` · `Tailwind CSS` · `tmi.js` · `Node.js` · `API REST`
+
+---
+
+## 📝 **3. Intellice CV – Generador de Currículums**  
+**Tipo:** Proyecto Personal  
+🔗 *(Agrega el enlace cuando lo tengas)*
+
+**Descripción**  
+Aplicación para crear, editar y exportar currículums de forma interactiva. Incluye drag & drop y edición enriquecida.
+
+**Stack**  
+`TypeScript` · `React` · `Zustand` · `DnD Kit` · `TipTap Editor`
+
+---
+
+# 📸 Galería
+
+<p align="center">
+  <img src="./public/images/portfolio-preview.png" width="600" />
+</p>
+
+---
+
+# 📬 Contacto
+
+Si te interesa colaborar, tienes una oportunidad laboral o quieres hablar sobre algún proyecto:
+
+- **Email:** enrique.sfranco04@gmail.com  
+- **GitHub:** https://github.com/enriqueSFranco  
+- **LinkedIn:** https://www.linkedin.com/in/enrique-sfranco  
+
+---
+
+# ⭐ Apoya el repositorio
+
+Si te gustó este proyecto, ¡considera dejar una estrella! ⭐  
+
 
