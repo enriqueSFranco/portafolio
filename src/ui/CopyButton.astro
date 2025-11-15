@@ -1,0 +1,59 @@
+---
+interface Props {
+  text: string;
+  label?: string;
+  copiedLabel?: string;
+}
+
+const { text, label = "Copiar", copiedLabel = "¡Copiado!" } = Astro.props;
+---
+
+<button
+  aria-live="polite"
+  data-copy={text}
+  class="relative bg-gray-100 px-2 py-1.5 rounded-md flex items-center justify-center gap-2 transition hover:bg-gray-200 duration-300"
+>
+  {label}
+  <span
+    data-copy-feedback
+    class="absolute -bottom-6 left-0 text-xs opacity-0 transition-opacity"
+  >
+    {copiedLabel}
+  </span>
+</button>
+
+<script is:inline>
+  const btn = document.currentScript.previousElementSibling;
+
+  const feedback = btn.querySelector("[data-copy-feedback]");
+  const toCopy = btn.dataset.copy;
+
+  btn.addEventListener("click", async () => {
+    try {
+        console.log("copy")
+      await navigator.clipboard.writeText(toCopy);
+      showFeedback();
+    } catch {
+      fallbackCopy(toCopy);
+      showFeedback(true);
+    }
+  });
+
+  function showFeedback(isFallback = false) {
+    if (!feedback) return;
+
+    if (isFallback) feedback.textContent = "Copiado (fallback)";
+
+    feedback.style.opacity = "1";
+    setTimeout(() => (feedback.style.opacity = "0"), 1500);
+  }
+
+  function fallbackCopy(value) {
+    const el = document.createElement("textarea");
+    el.value = value;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand("copy");
+    el.remove();
+  }
+</script>

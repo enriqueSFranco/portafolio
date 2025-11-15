@@ -1,0 +1,69 @@
+---
+import cv from "@/cv.json"
+import ProjectCard from "./ProjectCard.astro"
+import StackFilters from "./StackFilters.astro"
+
+// lista de tecnologías únicas
+const {projects} = cv
+const techs = Array.from(new Set(projects.flatMap(p => p.stack)))
+---
+
+<div class="w-full flex flex-col gap-4">
+  <StackFilters options={["Todos", ...techs]} active="Todos" />
+  <ol 
+    id="projects-grid" 
+    class="
+      grid 
+      grid-cols-1
+      sm:grid-cols-2 
+      lg:grid-cols-3 
+      gap-4 sm:gap-5 lg:gap-6
+      auto-rows-fr
+    "
+  >      
+    {
+      projects.map((project) => (     
+        <li class="transition-opacity duration-200 ease-out transform scale-100" data-tech={project.stack.join(" ")}>            
+          <ProjectCard project={project} />
+        </li>
+      ))
+    }            
+  </ol>
+</div>
+
+<script>
+  const $buttons = document.querySelectorAll("[data-filter]")
+  const $cards = document.querySelectorAll("#projects-grid li")
+  $buttons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const filter: string = btn.dataset.filter
+      
+      // actualizamos los estilos del boton activo
+      $buttons.forEach(b => b.classList.remove("bg-blue-600", "text-white", "border-blue-600"));
+      btn.classList.add("bg-blue-600", "text-white", "border-blue-600");
+      
+      // mostar/ocultar los proyectos
+      $cards.forEach(card => {
+        const techs: string = card.dataset.tech.toLowerCase()
+
+        const isAll = filter === "Todos"
+        const matches = isAll || techs.includes(filter.toLowerCase())
+        if (matches) {
+          card.classList.remove(
+            "opacity-0",
+            "scale-95",
+            "pointer-events-none",
+            "invisible"
+          )
+        } else {
+          card.classList.add(
+            "opacity-0",
+            "scale-95",
+            "pointer-events-none",
+            "invisible"
+          )
+        }
+      })
+    })
+  })
+</script>

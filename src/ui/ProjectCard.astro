@@ -1,0 +1,47 @@
+---
+import iconGithub from "/icons/github.svg"
+
+interface Props {
+  project: {
+    id: number
+    title: string
+    period: string
+    type: string
+    description: string
+    thumbnail: string
+    repository: string | null
+    stack: string[]
+  }
+}
+
+const { project } = Astro.props;
+
+---
+
+<article
+  aria-labelledby={`project-${project.id}-title`}
+  class="select-none h-full flex flex-col overflow-hidden w-full sm:w-auto font-light 
+  border border-gray-100 rounded-lg p-4 
+  transition-shadow duration-300 ease-out
+  hover:shadow-md hover:shadow-gray-200"
+>
+  <a 
+    aria-label="Abrir repositorio en GitHub"
+    title="Abrir repositorio en GitHub"
+    class="size-6 self-end opacity-80 hover:opacity-100 transition"
+    href={project.repository}
+    target='_blank'
+    rel='noopener noreferrer'
+  >
+    <img src={iconGithub} alt="" aria-hidden="true" role="presentation" />
+  </a>
+  <div class="flex flex-col gap-3 mt-1 h-full">
+    <div class="flex flex-col gap-0.5">
+      <h2 class="font-semibold text-base sm:text-lg md:text-xl leading-tight">{project.title}</h2>
+      <h3 class="text-xs sm:text-sm text-gray-500 tracking-tight">{project.type}</h3>
+    </div>
+    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mt-1 flex-grow">
+      {project.description}
+    </p>
+  </div>
+</article>
