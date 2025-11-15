@@ -58,9 +58,7 @@
       "stack": [
         "JavaScript",
         "React",
-        "Python",
-        "Django REST Framework",
-        "Recommendation Algorithm"
+        "Python"
       ]
     },
     {
@@ -74,11 +72,9 @@
       "repository": "https://github.com/enriqueSFranco/price-watch-platform",
       "stack": [
         "TypeScript",
+        "React",
         "Next.js",
         "Node",
-        "Puppeteer",
-        "Api REST",
-        "PostgreSQL",
         "Web Scraping"
       ]
     },
@@ -93,12 +89,9 @@
       "repository": "https://github.com/enriqueSFranco/application-pipeline",
       "stack": [
         "TypeScript",
+        "React",
         "Next.js",
-        "Tailwind CSS",
-        "Node",
-        "PostgreSQL",
-        "Web Scraping",
-        "Cron Jobs"
+        "Node"
       ]
     }
   ]
