@@ -1,0 +1,75 @@
+---
+import type { DownloadLink, SocialProfile } from "@/shared/types";
+import { Image } from "astro:assets";
+
+
+// clase base compartidas para todos los enlaces
+const BASE_LINK_CLASSES = `
+  cursor-pointer flex gap-2 items-center px-4 py-2 rounded-md font-medium text-sm
+  backdrop-blur-sm shadow-md hover:shadow-lg transition-all duration-300
+  border border-transparent dark:hover:border-white/20
+`;
+
+// Estilos específicos para enlaces de perfil que no tienen un estilo de marca
+const DEFAULT_PROFILE_CLASSES = `
+  bg-black/10 text-[#181717] dark:bg-white/10 dark:text-white
+  hover:border-black/20
+`;
+
+// obtener las clases dinámicamente según la red social
+const getNetworkClasses = (network: string) => {
+  switch (network) {
+    case "github":
+      return DEFAULT_PROFILE_CLASSES;
+    case "linkedin":
+      return `
+                bg-[#0077B5] border-[#0077B5]/30 text-white
+                hover:border-[#0077B5]/50
+            `;
+    default:
+      return DEFAULT_PROFILE_CLASSES;
+  }
+};
+
+interface Props {
+    downloadLink: DownloadLink;
+    profiles: SocialProfile[];
+}
+
+const { downloadLink, profiles } = Astro.props;
+---
+
+<ul
+  class="flex flex-wrap items-center justify-center sm:justify-start gap-2 mt-3"
+>
+  <li>
+    <a
+      href="/cv.pdf"
+      download="CV Salinas Franco Carlos Enrique Ingeniero en Sistemas Computacionales"
+      class={`${BASE_LINK_CLASSES} ${DEFAULT_PROFILE_CLASSES}`}
+    >
+      {downloadLink.text}
+    </a>
+  </li>
+
+  {profiles.map((profile) => (
+      <li>
+        <a
+          href={profile.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Visitar perfil de ${profile.username} en ${profile.network}`}
+          title={`Visitar perfil de ${profile.username} en ${profile.network}`}
+          class={`${BASE_LINK_CLASSES} ${getNetworkClasses(profile.network)}`}
+        >
+          <Image
+            src="/icons/github.svg"
+            alt={`Logo de ${profile.network}`}
+            width="20"
+            height="20"
+          />
+          <span class="text-sm">{profile.username}</span>
+        </a>
+      </li>
+  ))}
+</ul>
