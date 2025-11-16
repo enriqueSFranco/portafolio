@@ -1,111 +1,109 @@
 ---
-import github from "/icons/github.svg";
-import linkedin from "/icons/linkedin.svg";
+import { Image } from "astro:assets";
+
+import type { DownloadLink, SocialProfile } from "@/shared/types";
 import cv from "@/cv.json";
-import meSrc from "@/assets/me.jpeg";
+import me from "@/images/me.jpeg";
+import TextHighlightKeywords from "@/ui/TextHighlightKeywords.astro";
+import SocialLinks from "@/ui/SocialLinks.astro";
 import CopyButton from "@/ui/CopyButton.astro";
 
-const { email, name, profiles, summary } = cv.basic;
+const { name, profiles, summary } = cv.basic;
 
-const SOCIAL_ICONS = {
-  github,
-  linkedin
+const downloadLink: DownloadLink = {
+  href: "/cv.pdf",
+  downloadName:
+    "CV Salinas Franco Carlos Enrique Ingeniero en Sistemas Computacionales",
+  text: "Descargar CV",
 };
+const profilesData = profiles as SocialProfile[];
 
-function escapeRegExp(str: string) {
-  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
-
-
-function highlightKeywords(text: string, colorsMap: Record<string, string>) {
-  Object.entries(colorsMap).forEach(([keyword, color]) => {
-    const escaped = escapeRegExp(keyword);
-
-    // Lookarounds para evitar texto dentro de tags HTML
-    const regex = new RegExp(
-      `(?<!<[^>]*)(\\b${escaped}\\b)(?![^<]*>)`,
-      "gi"
-    );
-
-    text = text.replace(
-      regex,
-      `<span style="color: ${color}">$1</span>`
-    );
-  });
-
-  return text;
-}
-
-const KEYWORD_COLORS = {
-  "Desarrollador Frontend Jr": "#2563eb",
-  "Ingeniería en Sistemas Computacionales": "#611232",
+const KEYWORD_CLASSES = {
+  // Mapeo de palabra clave a la CLASE CSS definida en el paso 1
+  "Desarrollador Frontend Jr": "highlight-frontend",
+  "Ingeniería en Sistemas Computacionales": "highlight-engineer",
 };
-
-
-const highlightedSummary = highlightKeywords(summary, KEYWORD_COLORS);
-
 ---
 
-<header aria-labelledby="hero-title" class='w-full font-light text-sm leading-normal flex flex-col justify-center gap-6'>
-  <div class="flex flex-col items-start gap-4 max-sm:items-center max-sm:justify-center">
-    <figure class="w-24 h-24 overflow-hidden rounded-md sm:w-28 sm:h-28 lg:w-32 lg:h-32 sm:mx-0">
-      <img
-        class="w-full h-full object-cover object-top"
-        src={meSrc}
-        alt={`foto de ${name}`}
-        loading="lazy"
-      />
+<style is:inline>
+  /* Desarrollador Frontend Jr: Usaremos tonos Azules/Cian */
+  .highlight-frontend {
+    /* Modo Claro */
+    color: #0b50d5; /* Azul sólido */
+    background-color: rgba(
+      186,
+      230,
+      253,
+      0.5
+    ); /* Fondo Azul claro transparente */
+    backdrop-filter: blur(2px);
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.5rem; /* Bordes redondeados tipo chip */
+    font-weight: 600; /* Semi-bold para destacar */
+  }
+
+  /* Modo Oscuro */
+  .dark .highlight-frontend {
+    color: #58c4dc; /* Azul más claro para texto */
+    background-color: #61dafb15; /* Fondo Azul oscuro transparente */
+  }
+
+  /* Ingeniería en Sistemas Computacionales: Usaremos tonos Púrpura/Magenta */
+  .highlight-engineer {
+    /* Modo Claro */
+    color: #9333ea; /* Púrpura sólido */
+    background-color: rgba(
+      221,
+      214,
+      254,
+      0.5
+    ); /* Fondo Púrpura claro transparente */
+    backdrop-filter: blur(2px);
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+  }
+
+  /* Modo Oscuro */
+  .dark .highlight-engineer {
+    color: #a78bfa; /* Púrpura más claro para texto */
+    background-color: rgba(
+      126,
+      34,
+      206,
+      0.4
+    ); /* Fondo Púrpura oscuro transparente */
+  }
+</style>
+
+<section
+  aria-labelledby="hero-title"
+  class="w-full font-light text-sm leading-normal flex flex-col justify-center gap-6"
+>
+  <div
+    class="flex flex-col items-start gap-4 max-sm:items-center max-sm:justify-center"
+  >
+    <figure
+      class="w-24 h-24 overflow-hidden rounded-md sm:w-28 sm:h-28 lg:w-32 lg:h-32 sm:mx-0"
+    >
+      <Image src={me} alt={`foto de ${name}`} />
     </figure>
 
     <h2
       id="hero-title"
-      class="text-center sm:text-left flex flex-col justify-start items-center sm:items-start leading-relaxed"
+      class="text-center text-gray-200 sm:text-left flex flex-col justify-start items-center sm:items-start leading-relaxed"
     >
-      <span class="text-2xl sm:text-3xl lg:text-4xl font-medium">
-        Hey, soy {name}
+      <span class="text-2xl tracking-tight sm:text-3xl lg:text-5xl font-medium">
+        {name}
       </span>
 
-      <span class="text-blue-600 text-base sm:text-lg lg:text-xl font-normal">
+      <span class="text-gray-300 text-base sm:text-base lg:text-xl font-medium">
         Desarrollador Frontend Jr
       </span>
     </h2>
   </div>
 
+  <TextHighlightKeywords text={summary} keywords={KEYWORD_CLASSES} />
 
-  <p
-    id="summary"
-    set:html={highlightedSummary}
-    class="text-base sm:text-lg max-w-xl leading-relaxed tracking-tight text-center mt-1 sm:text-left"
-  >{summary}</p>
-
-  <ul class="flex flex-wrap items-center justify-center sm:justify-start gap-2 mt-3">
-    <li>
-      <a href="/cv.pdf" download="CV Salinas Franco Carlos Enrique Ingeniero en Sistemas Computacionales" class="bg-gray-100 px-2 py-1.5 rounded-md flex items-center justify-center gap-2 transition hover:bg-gray-200 duration-300">descargar CV</a>
-    </li>
-    <li>
-      <CopyButton text={email} label="Copiar email" />
-    </li>
-    {profiles.map((profile, idx) => {
-      const key = profile.network.toLowerCase();
-      const icon = SOCIAL_ICONS[key];
-
-      return (
-        <li>
-          <a
-            href={profile.url}
-            target='_blank'
-            rel='noopener noreferrer'
-            aria-label={`Visitar perfil de ${profile.username} en ${profile.network}`}
-            title={`Visitar perfil de ${profile.username} en ${profile.network}`}
-            tabindex={`${idx + 1}`}
-            class="bg-gray-100 px-2 py-1.5 rounded-md flex items-center justify-center gap-2 transition hover:bg-gray-200 duration-300"
-          >
-            {icon && <img src={icon} alt="" aria-hidden="true" role="presentation" class="size-5 opacity-80 transition hover:opacity-100" />}
-            <span class="text-xs sm:text-sm">{profile.username}</span>
-          </a>
-        </li>
-      );
-    })}
-  </ul>
-
-</header>
+  <SocialLinks profiles={profilesData} downloadLink={downloadLink} />
+</section>
