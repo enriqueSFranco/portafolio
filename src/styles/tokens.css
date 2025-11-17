@@ -1,0 +1,45 @@
+/* (design tokens) */
+
+/* Design tokens globales */
+:root {
+  /* colores base */
+  --wolt-blue: #00b1e6;
+  --wolt-blue-light: #0fb9f2;
+  --wolt-blue-dark: #0097c2;
+
+  /* Surface */
+  --wolt-surface: #ffffff;
+  --wolt-surface-dark: #1d2834;
+
+  /* Border */
+  --wolt-border: #e6e8ec;
+  --wolt-border-dark: #2a3a4a;
+
+  /* Text */
+  --wolt-text: #0f172a;
+  --wolt-text-dark: #f8fafc;
+
+  --wolt-text-secondary: #334155;
+  --wolt-text-secondary-dark: #cbd5e1;
+
+  --wolt-text-muted: #64748b;
+  --wolt-text-muted-dark: #94a3b8;
+
+  --bg-light: #ffffff;
+  --bg-dark: #111a26;
+
+  --text-dark: #181717;
+  --text-light: #fafafa;
+
+  /* Sombras */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.16);
+
+  /* Radios */
+  --radius-md: 0.75rem;
+  --radius-full: 9999px;
+
+  /* Duraciones */
+  --duration-fast: 180ms;
+
+}
