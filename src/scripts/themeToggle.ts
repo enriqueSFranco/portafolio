@@ -4,12 +4,16 @@ export function initThemeToggle() {
     const $checkbox = document.querySelector<HTMLInputElement>(".switch .circle");
 
     if (!$checkbox) throw new Error("Theme toggle input not found")
-
-
+    
     // inicializar el theme
     const initialTheme = getStoredTheme() ?? "dark"
-    applyTheme(initialTheme)
-    $checkbox.checked = initialTheme === 'light'
+    const prefersDark = typeof window !== "undefined" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const initial: "light" | "dark" = initialTheme ?? (prefersDark ? "dark" : "light");
+
+
+    applyTheme(initial);
+    $checkbox.checked = initial === "light";
+
 
     // listener
     $checkbox.addEventListener("change", () => {
