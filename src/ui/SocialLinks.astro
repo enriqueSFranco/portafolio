@@ -2,74 +2,130 @@
 import type { DownloadLink, SocialProfile } from "@/shared/types";
 import { Image } from "astro:assets";
 
-
-// clase base compartidas para todos los enlaces
-const BASE_LINK_CLASSES = `
-  cursor-pointer flex gap-2 items-center px-4 py-2 rounded-md font-medium text-sm
-  backdrop-blur-sm shadow-md hover:shadow-lg transition-all duration-300
-  border border-transparent dark:hover:border-white/20
+const BASE = `
+  cursor-pointer flex items-center gap-2
+  px-4 py-2 rounded-xl text-sm font-medium
+  transition-all duration-200
+  active:scale-[0.97]
+  hover:-translate-y-[1px]
+  shadow-sm hover:shadow-md
+  relative overflow-hidden
+  before:content-['']
+  before:absolute before:inset-0 before:rounded-xl
+  before:opacity-0 before:transition-opacity
 `;
 
-// Estilos específicos para enlaces de perfil que no tienen un estilo de marca
-const DEFAULT_PROFILE_CLASSES = `
-  bg-black/10 text-[#181717] dark:bg-white/10 dark:text-white
-  hover:border-black/20
-`;
+const VARIANTS: Record<string, string> = {
+  primary: `
+    bg-gradient-to-r from-[#00B1E6] to-[#0FB9F2]
+    text-white border border-[#00B1E6]/40
+    hover:brightness-110
+    dark:from-[#00B1E6] dark:to-[#0FB9F2]
+    dark:text-white dark:border-[#00B1E6]/50
+  `,
 
-// obtener las clases dinámicamente según la red social
-const getNetworkClasses = (network: string) => {
-  switch (network) {
-    case "github":
-      return DEFAULT_PROFILE_CLASSES;
-    case "linkedin":
-      return `
-                bg-[#0077B5] border-[#0077B5]/30 text-white
-                hover:border-[#0077B5]/50
-            `;
-    default:
-      return DEFAULT_PROFILE_CLASSES;
-  }
+  outline: `
+    border border-[#00B1E6] text-[#00B1E6]
+    bg-transparent
+    hover:bg-[#00B1E6]/10
+    dark:text-[#00CCFF]
+    dark:border-[#00CCFF]
+    dark:hover:bg-[#00CCFF]/10
+  `,
+
+  subtle: `
+    bg-black/5 text-black border border-transparent
+    hover:bg-black/10
+    dark:bg-white/5 dark:text-white
+    dark:hover:bg-white/10
+  `,
+
+  ghost: `
+    text-black/70 border-none shadow-none
+    bg-transparent
+    hover:bg-black/5
+    dark:text-white/70
+    dark:hover:bg-white/5
+  `,
+
+  chip: `
+    text-[#00B1E6] border border-[#00B1E6]/40
+    px-3 py-1 rounded-full text-xs shadow-none
+    hover:bg-[#00B1E6]/10
+    dark:text-[#00CCFF]
+    dark:border-[#00CCFF]/40
+    dark:hover:bg-[#00CCFF]/10
+  `,
+
+  iconBubble: `
+    bg-white/10 text-white px-3 py-1.5 rounded-full
+    border border-white/20
+    hover:bg-white/15 hover:border-white/30
+    dark:bg-[#1d2834] dark:text-white
+    dark:border-gray-700 dark:hover:bg-[#243241]
+  `,
 };
 
+function classes(variant: string) {
+  return `${BASE} ${VARIANTS[variant] ?? VARIANTS.subtle}`;
+}
+
 interface Props {
-    downloadLink: DownloadLink;
-    profiles: SocialProfile[];
+  downloadLink: DownloadLink;
+  profiles: SocialProfile[];
 }
 
 const { downloadLink, profiles } = Astro.props;
 ---
 
 <ul
-  class="flex flex-wrap items-center justify-center sm:justify-start gap-2 mt-3"
+  class="flex flex-wrap items-center justify-center sm:justify-start gap-3 mt-3"
 >
   <li>
-    <a
-      href="/cv.pdf"
-      download="CV Salinas Franco Carlos Enrique Ingeniero en Sistemas Computacionales"
-      class={`${BASE_LINK_CLASSES} ${DEFAULT_PROFILE_CLASSES}`}
-    >
+    <a href="/cv.pdf" download="CV Salinas Franco" class={classes("primary")}>
       {downloadLink.text}
     </a>
   </li>
 
-  {profiles.map((profile) => (
+  {
+    profiles.map((profile) => (
       <li>
         <a
           href={profile.url}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label={`Visitar perfil de ${profile.username} en ${profile.network}`}
-          title={`Visitar perfil de ${profile.username} en ${profile.network}`}
-          class={`${BASE_LINK_CLASSES} ${getNetworkClasses(profile.network)}`}
+          class={classes("iconBubble")}
         >
           <Image
-            src="/icons/github.svg"
-            alt={`Logo de ${profile.network}`}
-            width="20"
-            height="20"
+            src={`/icons/${profile.network.toLowerCase()}.svg`}
+            alt={profile.network}
+            width="18"
+            height="18"
+            class="opacity-90"
           />
-          <span class="text-sm">{profile.username}</span>
+          <span>{profile.username}</span>
         </a>
       </li>
-  ))}
+    ))
+  }
+
+  <!-- Ejemplos de variantes premium extra -->
+
+  <!-- <li>
+    <button class={classes("subtle")}>Subtle</button>
+  </li>
+
+  <li>
+    <button class={classes("ghost")}>Ghost</button>
+  </li>
+
+  <li>
+    <button class={classes("chip")}>Tag</button>
+  </li>
+
+  <li>
+    <button class={classes("iconBubble")}>
+      <span class="text-xs">💬</span> Chat
+    </button>
+  </li> -->
 </ul>
