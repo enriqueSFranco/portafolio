@@ -1,0 +1,30 @@
+/* (helpers globales) */
+
+/* Ripple effect */
+.btn-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-ripple::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity var(--duration-fast);
+}
+
+.btn-ripple:active::after {
+  opacity: 0.15;
+  background: currentColor;
+}
+
+/* Elevation hover */
+.btn-elevate {
+  transition: transform var(--duration-fast), box-shadow var(--duration-fast);
+}
+
+.btn-elevate:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
