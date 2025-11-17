@@ -18,36 +18,12 @@ const { title } = Astro.props;
   </body>
 </html>
 <style is:global>
+  @import "@/styles/tokens.css";
+  @import "@/styles/utilities.css";
   @tailwind base;
   @tailwind components;
   @tailwind utilities;
 
-  @theme {
-    /* Styles text */
-    --color-primary: oklch(0.07 0 0);
-    /* Styles background */
-    --color-secondary: oklch(1 0 0);
-    /* For accents */
-    --color-accent: oklch(0.67 0.2941 338.67);
-  }
-
-  [data-theme="dark"] {
-    /* Styles text */
-    --color-primary: oklch(1 0 0);
-    /* Styles background */
-    --color-secondary: oklch(0.37 0.0073 264.48);
-    /* For accents */
-    --color-accent: oklch(0.67 0.2941 338.67);
-  }
-
-  [data-theme="accent"] {
-    /* Styles text */
-    --color-primary: oklch(1 0 0);
-    /* Styles background */
-    --color-secondary: oklch(0.41 0.1992 291.76);
-    /* For accents */
-    --color-accent: oklch(0.67 0.2941 338.67);
-  }
 
   /* Register your custom font family and tell the browser where to find it. */
   @font-face {
