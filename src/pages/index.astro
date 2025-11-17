@@ -4,21 +4,29 @@ import Projects from "../sections/Projects.astro";
 import Education from "../sections/Education.astro";
 import Hero from "../sections/Hero.astro";
 import Footer from "@/ui/Footer.astro";
-import Knowledge from "../sections/Knowledge.astro";
 import cv from "@/cv.json";
+import ThemeToggle from "@/ui/ThemeToggle.astro";
+import FloatingContactButton from "@/ui/FloatingContactButton.astro";
+import ContactModal from "@/ui/ContactModal.astro"
 
 const { name, label} = cv.basic;
 ---
 
 <Layout title={`Portafolio de ${name} - ${label}`}>
+  <header class="sticky top-0 z-50 h-16 flex items-center justify-end w-full px-6">
+    <ThemeToggle />
+  </header>
   <main
     id='app'
-    class='flex grow flex-col gap-6 max-w-4xl text-sm p-6'
+    class='flex grow flex-col gap-6 w-2/3 text-sm'
   >
     <Hero />
     <Education />
     <Projects />
-    <!-- <Knowledge /> -->
   </main>
+  <FloatingContactButton />
+  <ContactModal />
   <Footer />
 </Layout>
+
+<script src="../scripts/modal.ts"></script>
