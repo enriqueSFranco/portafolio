@@ -1,20 +1,64 @@
 ---
 interface Props {
-    options: string[]
-    active: string
+  options: string[];
+  active: string;
 }
 
-const {options, active} = Astro.props
+const { options, active } = Astro.props;
 ---
 
+<nav
+  aria-label="Filtro de proyectos"
+  class="flex items-center flex-wrap gap-2 mb-5 text-sm"
+>
+  <span
+    class="capitalize text-[var(--wolt-text-secondary)] dark:text-[var(--wolt-text-secondary-dark)] font-medium"
+  >
+    filtros:
+  </span>
 
-<nav aria-label="Filtro de proyectos" class="flex items-center flex-wrap text-xs mb-4 gap-2">
-    <span class="capitalize font-semibold">filtros: </span>
-    {options.map(option => {
-        return (
-            <button aria-pressed={active === option} class={`text-gray-600 dark:text-gray-400 dark:bg-gray-950 dark:border-gray-700  inline-flex px-2 py-1.5 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 border transition ${active === option ? "bg-blue-600 text-white border-blue-600" : "border-gray-300 hover:bg-gray-100"}`} data-filter={option}>
-                {option}
-            </button>
-        )
-    })}
+  {
+    options.map((option) => {
+      const isActive = active === option;
+
+      return (
+        <button
+          aria-pressed={isActive}
+          data-filter={option}
+          class={`
+            px-3 py-1.5 rounded-full select-none
+            text-xs font-medium transition-all duration-200
+            backdrop-blur-sm border
+            focus:outline-none focus:ring-2 focus:ring-[var(--wolt-blue)]
+            inline-flex items-center
+
+            ${
+              isActive
+                ? `
+                  bg-[var(--wolt-blue)]
+                  text-white
+                  border-[var(--wolt-blue)]
+                  shadow-sm
+                  hover:bg-[var(--wolt-blue-dark)]
+                `
+                : `
+                  bg-[var(--wolt-surface)]
+                  dark:bg-[var(--wolt-surface-dark)]
+                  text-[var(--wolt-text-secondary)]
+                  dark:text-[var(--wolt-text-secondary-dark)]
+                  border-[var(--wolt-border)]
+                  dark:border-[var(--wolt-border-dark)]
+                  hover:border-[var(--wolt-border-strong)]
+                  dark:hover:border-[var(--wolt-border-strong-dark)]
+                  hover:bg-[var(--wolt-hover)]
+                  dark:hover:bg-[var(--wolt-hover-dark)]
+                `
+            }
+          `}
+        >
+          {option}
+        </button>
+      );
+    })
+  }
 </nav>
