@@ -1,0 +1,35 @@
+/* --- Highlight base (chip, blur, smooth, subtle) --- */
+.wolt-highlight {
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.6rem;
+  font-weight: 600;
+  backdrop-filter: blur(6px);
+  transition: all 0.25s ease;
+  display: inline-block;
+}
+
+/* --- Frontend (azul Wolt) --- */
+.highlight-frontend {
+  color: var(--wolt-blue-dark);
+  background: color-mix(in srgb, var(--wolt-blue) 20%, transparent);
+  border: 1px solid color-mix(in srgb, var(--wolt-blue) 25%, transparent);
+}
+
+.dark .highlight-frontend {
+  color: var(--wolt-blue-light);
+  background: color-mix(in srgb, var(--wolt-blue-dark) 25%, transparent);
+  border-color: color-mix(in srgb, var(--wolt-blue-dark) 40%, transparent);
+}
+
+/* --- Engineer (púrpura Wolt secondary) --- */
+.highlight-engineer {
+  color: var(--wolt-purple-dark);
+  background: color-mix(in srgb, var(--wolt-purple) 20%, transparent);
+  border: 1px solid color-mix(in srgb, var(--wolt-purple) 25%, transparent);
+}
+
+.dark .highlight-engineer {
+  color: var(--wolt-purple-light);
+  background: color-mix(in srgb, var(--wolt-purple-dark) 25%, transparent);
+  border-color: color-mix(in srgb, var(--wolt-purple-dark) 40%, transparent);
+}
