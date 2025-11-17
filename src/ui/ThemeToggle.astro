@@ -1,9 +1,9 @@
-<style>
+<style is:inline>
   .switch {
     --transition: 300ms;
     --transition500: 500ms;
-    --color-dark: #0c0f14;
-    --color-darkGray: #21262e;
+    --color-dark: #1d2834;
+    --color-darkGray: #1e1e1e;
     --color-gray: #52555a;
     --color-offwhite: #cecece;
     --shadow-color: var(--color-dark);
@@ -144,3 +144,8 @@
     </div>
   </label>
 </div>
+
+<script is:inline type="module">
+  import { initThemeToggle } from "/src/scripts/themeToggle";
+  initThemeToggle();
+</script>
