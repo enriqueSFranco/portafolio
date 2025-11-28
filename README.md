@@ -54,7 +54,7 @@ Puedes ver el código, tecnologías y enlaces de demo.
 ## 🎓 **1. Bolsa de Trabajo ESCOM**  
 **Tipo:** Proyecto de Tesis | Plataforma de vacantes + algoritmo de recomendación  
 **Estado:** Finalizado  
-🔗 *(Agrega el enlace cuando lo tengas)*
+🔗 *(Agregar enlace)*
 
 **Descripción**  
 Sistema web que conecta estudiantes de la ESCOM con oportunidades laborales mediante un algoritmo que recomienda vacantes según habilidades.
@@ -66,7 +66,7 @@ Sistema web que conecta estudiantes de la ESCOM con oportunidades laborales medi
 
 ## 🧠 **2. Detección de Toxicidad en Twitch**  
 **Tipo:** Proyecto Personal  
-🔗 *(Agrega el enlace cuando lo tengas)*
+🔗 *(Agregar enlace)*
 
 **Descripción**  
 Sistema que detecta mensajes tóxicos en tiempo real usando un modelo de IA. Ideal para moderación de chats de Twitch.
@@ -78,7 +78,7 @@ Sistema que detecta mensajes tóxicos en tiempo real usando un modelo de IA. Ide
 
 ## 📝 **3. Intellice CV – Generador de Currículums**  
 **Tipo:** Proyecto Personal  
-🔗 *(Agrega el enlace cuando lo tengas)*
+🔗 *(Agregar enlace)*
 
 **Descripción**  
 Aplicación para crear, editar y exportar currículums de forma interactiva. Incluye drag & drop y edición enriquecida.
