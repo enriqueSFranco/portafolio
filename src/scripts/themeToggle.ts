@@ -1,4 +1,4 @@
-import { storeTheme, getStoredTheme, applyTheme } from "@/utils/theme";
+import { storeTheme, getStoredTheme, applyTheme } from "@utils/theme";
 
 export function initThemeToggle() {
     const $checkbox = document.querySelector<HTMLInputElement>(".switch .circle");
