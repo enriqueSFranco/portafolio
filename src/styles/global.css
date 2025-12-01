@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+
+@import "@/styles/tokens.css";
+@import "@/styles/utilities.css";
+
+
+html {
+  font-family: "Geist", sans-serif;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+  scroll-behavior: smooth;
+}
+
+@font-face {
+  font-family: "Geist";
+  src: url("/fonts/Geist-Bold.woft2") format("woft2");
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist";
+  src: url("/fonts/Geist-ExtraBold.woft2") format("woft2");
+  font-weight: 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist";
+  src: url("/fonts/Geist-SemiBold.woft2") format("woft2");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist";
+  src: url("/fonts/Geist-ExtraLight.woft2") format("woft2");
+  font-weight: 200;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist";
+  src: url("/fonts/Geist-Light.woft2") format("woft2");
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist";
+  src: url("/fonts/Geist-Medium.woft2") format("woft2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist";
+  src: url("/fonts/Geist-Regular.woft2") format("woft2");
+  font-weight: normal;
+  font-display: swap;
+}
+
+a.nav-link {
+  @apply opacity-70 hover:opacity-100 transition px-1 pb-1;
+}
+
+a.active-link {
+  @apply text-sky-400 opacity-100 font-medium;
+}
+
+section {
+  scroll-margin-top: 6rem;
+}
+
+
