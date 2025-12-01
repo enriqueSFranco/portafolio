@@ -1,32 +1,23 @@
 ---
-import Layout from "@/layouts/Layout.astro";
+import cv from "../cv.json";
+import Layout from "@layouts/Layout.astro";
 import Projects from "../sections/Projects.astro";
 import Education from "../sections/Education.astro";
-import Hero from "../sections/Hero.astro";
-import Footer from "@/ui/Footer.astro";
-import cv from "@/cv.json";
-import ThemeToggle from "@/ui/ThemeToggle.astro";
-import FloatingContactButton from "@/ui/FloatingContactButton.astro";
-import ContactModal from "@/ui/ContactModal.astro"
+import Hero from "../components/Hero.astro";
+import Footer from "@components/Footer.astro";
+import FloatingContactButton from "@components/FloatingContactButton.astro";
+import ContactModal from "@components/ContactModal.astro";
+import "../styles/global.css";
 
-const { name, label} = cv.basic;
+const { name, label } = cv.basic;
 ---
 
 <Layout title={`Portafolio de ${name} - ${label}`}>
-  <header class="sticky top-0 z-50 h-16 flex items-center justify-end w-full px-6">
-    <ThemeToggle />
-  </header>
-  <main
-    id='app'
-    class='flex grow flex-col gap-6 w-2/3 text-sm'
-  >
-    <Hero />
-    <Education />
-    <Projects />
-  </main>
-  <FloatingContactButton />
-  <ContactModal />
-  <Footer />
+  
+  <Hero />
+  <Education />
+  <Projects />
+  
 </Layout>
 
 <script src="../scripts/modal.ts"></script>
