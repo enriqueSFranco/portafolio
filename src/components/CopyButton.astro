@@ -1,0 +1,76 @@
+---
+interface Props {
+  text: string;
+  label?: string;
+  copiedLabel?: string;
+}
+
+const { text, label = "Copiar", copiedLabel = "¡Copiado!" } = Astro.props;
+---
+
+<button
+  aria-live="polite"
+  data-copy={text}
+  class="relative px-3 py-1.5 rounded-lg select-none
+    flex items-center justify-center gap-2
+    font-medium text-sm
+    bg-[var(--wolt-surface)]
+    dark:bg-[var(--wolt-surface-dark)]
+    text-[var(--wolt-text-primary)]
+    dark:text-[var(--wolt-text-primary-dark)]
+    border border-[var(--wolt-border)]
+    dark:border-[var(--wolt-border-dark)]
+    hover:bg-[var(--wolt-hover)]
+    dark:hover:bg-[var(--wolt-hover-dark)]
+    hover:border-[var(--wolt-border-strong)]
+    dark:hover:border-[var(--wolt-border-strong-dark)]
+    transition-all duration-200"
+>
+  {label}
+
+  <span
+    data-copy-feedback
+    class="absolute -bottom-7 left-1/2 -translate-x-1/2
+      bg-[var(--wolt-blue)] text-white px-2 py-0.5 rounded-md
+      text-[10px] font-medium shadow-md
+      opacity-0 pointer-events-none
+      transition-opacity duration-300"
+  >
+    {copiedLabel}
+  </span>
+</button>
+
+<script is:inline>
+  const btn = document.currentScript.previousElementSibling;
+
+  const feedback = btn.querySelector("[data-copy-feedback]");
+  const toCopy = btn.dataset.copy;
+
+  btn.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(toCopy);
+      showFeedback();
+    } catch {
+      fallbackCopy(toCopy);
+      showFeedback(true);
+    }
+  });
+
+  function showFeedback(isFallback = false) {
+    if (!feedback) return;
+
+    if (isFallback) feedback.textContent = "Copiado (fallback)";
+
+    feedback.style.opacity = "1";
+    setTimeout(() => (feedback.style.opacity = "0"), 1500);
+  }
+
+  function fallbackCopy(value) {
+    const el = document.createElement("textarea");
+    el.value = value;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand("copy");
+    el.remove();
+  }
+</script>

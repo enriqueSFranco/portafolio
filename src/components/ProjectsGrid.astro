@@ -1,0 +1,83 @@
+---
+import cv from "../cv.json";
+import ProjectCard from "./ProjectCard.astro";
+import StackFilters from "./StackFilters.astro";
+
+const COLOR_PALETTE = [
+  "#ef4444", // red-500
+  "#f97316", // orange-500
+  "#10b981", // emerald-500
+  "#06b6d4", // cyan-500
+  "#6366f1", // indigo-500
+  "#a855f7", // purple-500
+  "#ec4899", // pink-500
+];
+
+// lista de tecnologías únicas
+const { projects } = cv;
+const techs = Array.from(new Set(projects.flatMap((p) => p.stack)));
+const projectsWithColors = projects.map((project, idx) => {
+  const colorIndex = idx % COLOR_PALETTE.length;
+  return {
+    ...project,
+    customColor: COLOR_PALETTE[colorIndex],
+  };
+});
+---
+
+<div class="w-full flex flex-col gap-4">
+  <StackFilters options={["Todos", ...techs]} active="Todos" />
+  <ol
+    id="projects-grid"
+    class="grid
+      grid-cols-1
+      sm:grid-cols-2
+      lg:grid-cols-3
+      gap-4 sm:gap-5 lg:gap-6
+      auto-rows-fr"
+  >
+    {
+      projectsWithColors.map((project) => (
+        <li
+          class="transition-opacity duration-200 ease-out transform scale-100"
+          data-project-color={project.customColor}
+          style={`--project-color:${project.customColor}`}
+          data-tech={project.stack.join(" ")}
+        >
+          <ProjectCard project={project} customColor={project.customColor} />
+        </li>
+      ))
+    }
+  </ol>
+</div>
+
+<script>
+  const $buttons = document.querySelectorAll("[data-filter]");
+  const $cards = document.querySelectorAll("#projects-grid li");
+
+  // Marcar "Todos" como activo al inicio
+  const defaultBtn = document.querySelector('[data-filter="Todos"]');
+  defaultBtn.classList.add("active");
+
+  $buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const filter = btn.dataset.filter;
+
+      // UI: actualizar estado activo
+      $buttons.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      // Filtrar proyectos
+      $cards.forEach((card) => {
+        const techs = card.dataset.tech.toLowerCase();
+        const isAll = filter === "Todos";
+        const matches = isAll || techs.includes(filter.toLowerCase());
+
+        card.classList.toggle("opacity-0", !matches);
+        card.classList.toggle("scale-95", !matches);
+        card.classList.toggle("pointer-events-none", !matches);
+        card.classList.toggle("invisible", !matches);
+      });
+    });
+  });
+</script>

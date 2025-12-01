@@ -1,0 +1,64 @@
+---
+interface Props {
+  options: string[];
+  active: string;
+}
+
+const { options, active } = Astro.props;
+---
+
+<nav
+  aria-label="Filtro de proyectos"
+  class="flex items-center flex-wrap gap-2 mb-5 text-sm"
+>
+  <span
+    class="capitalize text-[var(--wolt-text-secondary)] dark:text-[var(--wolt-text-secondary-dark)] font-medium"
+  >
+    filtros:
+  </span>
+
+  {
+    options.map((option) => {
+      const isActive = active === option;
+
+      return (
+        <button
+          aria-pressed={isActive}
+          data-filter={option}
+          class={`
+            px-3 py-1.5 rounded-full select-none
+            text-xs font-medium transition-all duration-200
+            backdrop-blur-sm border
+            focus:outline-none focus:ring-2 focus:ring-[var(--wolt-blue)]
+            inline-flex items-center
+
+            ${
+              isActive
+                ? `
+                  bg-[var(--wolt-blue)]
+                  text-white
+                  border-[var(--wolt-blue)]
+                  shadow-sm
+                  hover:bg-[var(--wolt-blue-dark)]
+                `
+                : `
+                  bg-[var(--wolt-surface)]
+                  dark:bg-[var(--wolt-surface-dark)]
+                  text-[var(--wolt-text-secondary)]
+                  dark:text-[var(--wolt-text-secondary-dark)]
+                  border-[var(--wolt-border)]
+                  dark:border-[var(--wolt-border-dark)]
+                  hover:border-[var(--wolt-border-strong)]
+                  dark:hover:border-[var(--wolt-border-strong-dark)]
+                  hover:bg-[var(--wolt-hover)]
+                  dark:hover:bg-[var(--wolt-hover-dark)]
+                `
+            }
+          `}
+        >
+          {option}
+        </button>
+      );
+    })
+  }
+</nav>

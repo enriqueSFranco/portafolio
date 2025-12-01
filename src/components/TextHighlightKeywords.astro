@@ -1,0 +1,18 @@
+---
+import { highlightKeywords } from "@utils/highlightKeywords";
+
+interface Props {
+  text: string;
+  keywords: Record<string, string>;
+}
+
+const { text, keywords } = Astro.props;
+
+const highlightedKeywords = highlightKeywords(text, keywords);
+---
+
+<div
+  class="text-base sm:text-[15px] w-3xl leading-relaxed tracking-tight text-center mt-1 sm:text-left"
+>
+  <p id="highlighted-keywords" set:html={highlightedKeywords} />
+</div>

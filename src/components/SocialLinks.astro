@@ -1,0 +1,41 @@
+---
+import type { DownloadLink, SocialProfile } from "@shared/types";
+
+interface Props {
+  downloadLink: DownloadLink;
+  profiles: SocialProfile[];
+}
+
+const { downloadLink, profiles } = Astro.props;
+---
+
+<ul
+  class="flex flex-wrap items-center justify-center sm:justify-start gap-3"
+>
+  <li>
+    <a href="/cv.pdf" download="CV Salinas Franco" class="
+    inline-flex items-center text-sm font-light text-zinc-300 transition-all duration-200 ease-out hover:text-white cursor-pointer border-b border-transparent hover:border-zinc-500 hover:-translate-y-0.5">
+      {downloadLink.text}
+    </a>
+  </li>
+
+  {
+    profiles.map(({network, url}) => (
+      <li class="flex">
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Logo de ${network}`}
+          title={`Ir a ${network} de @enriqueSFranco`}
+          class="inline-flex items-center gap-2 group transition-all duration-300 hover:-translate-y-0.5 border-b border-transparent hover:border-zinc-500 cursor-pointer"
+        >
+          <svg width="28" height="28" class="text-zinc-400 transition-all duration-200 ease-out group-hover:text-white group-hover:scale-105">
+            <use xlink:href={`sprite.svg#${network}`} />
+          </svg>
+          <span class="text-sm font-light capitalize text-zinc-400 group-hover:text-white transition-colors">{network}</span>
+        </a>
+      </li>
+    ))
+  }
+</ul>

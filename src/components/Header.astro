@@ -1,0 +1,122 @@
+---
+import ThemeToggle from "./ThemeToggle.astro";
+---
+
+<header
+  id="navbar"
+  class="sticky top-0 z-50 h-20 flex items-center justify-between w-full px-4 bg-black/20 glass-nav"
+>
+  <div class="flex items-center gap-4">
+    <a
+      href="#"
+      class="text-lg font-semibold tracking-wide hover:opacity-80 transition"
+      >MiLogo</a
+    >
+  </div>
+  <nav
+    id="main-nav"
+    class="hidden md:block relative space-x-4"
+    aria-label="Main navigation"
+  >
+    <span id="nav-underline" class="nav-underline"></span>
+    <a class="nav-link" href="#sobremi">Sobre mí</a>
+    <a class="nav-link" href="#educacion">Educación</a>
+    <a class="nav-link" href="#proyectos">Proyectos</a>
+    <a class="nav-link" href="#contacto">Contacto</a>
+    <!-- <div class="ml-2">
+        <ThemeToggle />
+      </div> -->
+  </nav>
+
+  <!-- boton en mobile -->
+  <button
+    id="mobile-toggle"
+    class="md:hidden p-2 rounded-md"
+    aria-label="Abrir menú"
+  >
+    <svg width="20" height="28">
+      <use xlink:href="../assets/sprite.svg#menu" />
+    </svg>
+  </button>
+</header>
+
+<div
+  id="mobile-menu"
+  class="fixed inset-x-4 top-20 z-50 rounded-xl bg-gray-900/75 border border-gray-800 backdrop-blur md:hidden hidden p-4"
+>
+  <ul class="flex flex-col gap-3 text-base">
+    <li>
+      <a class="nav-link" href="#sobremi">Sobre mí</a>
+      <li><a class="nav-link" href="#educacion">Educación</a></li>
+      <li><a class="nav-link" href="#proyectos">Proyectos</a></li>
+      <li><a class="nav-link" href="#contacto">Contacto</a></li>
+    </li>
+  </ul>
+</div>
+
+<style is:inline>
+  #navbar {
+    transition: all 300ms ease;
+  }
+  #navbar.navbar--shrink {
+    height: 3.5rem; /* más pequeño */
+    background: rgba(0, 0, 0, 0.35); /* más marcado */
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  #navbar-content {
+    transition:
+      padding 300ms ease,
+      transform 300ms ease;
+  }
+
+  #navbar.navbar--shrink #navbar-content {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    transform: translateY(-2px);
+  }
+
+  .nav-underline {
+    position: absolute;
+    bottom: -3px;
+    height: 2px;
+    background: var(--color-accent, #38bdf8);
+    transition:
+      transform 300ms ease,
+      width 300ms ease;
+    pointer-events: none;
+  }
+
+  .glass-nav {
+    background: linear-gradient(
+        to bottom right,
+        rgba(255, 255, 255, 0.12),
+        rgba(255, 255, 255, 0.03)
+      )
+      rgba(0, 0, 0, 0.25);
+
+    backdrop-filter: blur(18px) saturate(1.8);
+    box-shadow:
+      inset 0 0 1px rgba(255, 255, 255, 0.3),
+      0 8px 20px rgba(0, 0, 0, 0.25);
+  }
+
+  #navbar.navbar--shrink.glass-nav {
+    background: linear-gradient(
+        to bottom right,
+        rgba(255, 255, 255, 0.15),
+        rgba(255, 255, 255, 0.05)
+      )
+      rgba(0, 0, 0, 0.35);
+
+    backdrop-filter: blur(22px) saturate(2.2);
+
+    box-shadow:
+      inset 0 0 1px rgba(255, 255, 255, 0.35),
+      0 6px 16px rgba(0, 0, 0, 0.35);
+
+    border-color: rgba(255, 255, 255, 0.28);
+  }
+</style>
+
+<script src="@scripts/scrollspy"></script>
