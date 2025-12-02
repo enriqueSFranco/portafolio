@@ -1,8 +1,6 @@
 console.log("[scrollspy.ts]");
 
-// --------------------
 // MOBILE MENU
-// --------------------
 const mobileToggle = document.getElementById("mobile-toggle");
 const mobileMenu = document.getElementById("mobile-menu");
 
@@ -16,9 +14,7 @@ mobileMenu?.querySelectorAll("a").forEach((a) => {
   a.addEventListener("click", () => mobileMenu.classList.add("hidden"));
 });
 
-// --------------------
 // DESKTOP UNDERLINE
-// --------------------
 const nav = document.getElementById("main-nav");
 const links =
   document.querySelectorAll<HTMLAnchorElement>("nav#main-nav .nav-link") ?? [];
@@ -38,32 +34,52 @@ function moveUnderlineTo(link: HTMLAnchorElement) {
   underline.style.transform = `translateX(${offsetLeft}px)`;
 }
 
-// --------------------
 // SCROLLSPY
-// --------------------
 const sections = Array.from(links)
   .map((link) =>
     document.getElementById(link.getAttribute("href")!.replace("#", ""))
   )
   .filter(Boolean) as HTMLElement[];
 
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      const id = entry.target.id;
+  let currentSectionId = "";
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      let bestEntry: IntersectionObserverEntry | null = null;
+  
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        if (!bestEntry || entry.intersectionRatio > bestEntry.intersectionRatio) {
+          bestEntry = entry;
+        }
+      }
+  
+      if (!bestEntry) return;
+  
+      const id = bestEntry.target.id;
+  
+      if (currentSectionId === id) return;
+      currentSectionId = id;
+  
+      // Actualizar UI (sin parpadeo)
       const link = document.querySelector(
         `nav#main-nav a.nav-link[href="#${id}"]`
       );
-
-      if (entry.isIntersecting) {
-        links.forEach((l) => l.classList.remove("active-link"));
-        link?.classList.add("active-link");
-        if (link) moveUnderlineTo(link);
+  
+      links.forEach((l) => l.classList.remove("active-link"));
+      link?.classList.add("active-link");
+      if (link) moveUnderlineTo(link);
+  
+      if (location.hash !== `#${id}`) {
+        history.replaceState(null, "", `#${id}`);
       }
-    });
-  },
-  { threshold: 0.55 }
-);
+    },
+    {
+      threshold: [0.25, 0.5, 0.75],
+      rootMargin: "-20% 0px",
+    }
+  );
+  
 
 sections.forEach((section) => observer.observe(section));
 
@@ -86,4 +102,30 @@ function handleNavbarShrink() {
 }
 
 window.addEventListener("scroll", handleNavbarShrink);
-handleNavbarShrink();
+
+function setInitialActiveSection() {
+  const scrollPos = window.scrollY + window.innerHeight / 2;
+
+  let currentSection = sections[0];
+
+  for (const section of sections) {
+    const rect = section.getBoundingClientRect();
+    const offsetTop = rect.top + window.scrollY;
+
+    if (offsetTop <= scrollPos) {
+      currentSection = section;
+    }
+  }
+
+  const activeLink = document.querySelector(
+    `nav#main-nav a.nav-link[href="#${currentSection.id}"]`
+  );
+
+  if (activeLink) {
+    links.forEach(l => l.classList.remove("active-link"));
+    activeLink.classList.add("active-link");
+    moveUnderlineTo(activeLink);
+  }
+}
+
+window.addEventListener("load", setInitialActiveSection);
