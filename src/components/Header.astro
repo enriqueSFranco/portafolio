@@ -4,7 +4,7 @@ import ThemeToggle from "./ThemeToggle.astro";
 
 <header
   id="navbar"
-  class="sticky top-0 z-50 h-20 flex items-center justify-between w-full px-4 bg-black/20 glass-nav"
+  class="sticky top-0 z-50 h-20 flex items-center justify-between w-full px-4 glass-nav"
 >
   <div class="flex items-center gap-4">
     <a
@@ -22,7 +22,6 @@ import ThemeToggle from "./ThemeToggle.astro";
     <a class="nav-link" href="#sobremi">Sobre mí</a>
     <a class="nav-link" href="#educacion">Educación</a>
     <a class="nav-link" href="#proyectos">Proyectos</a>
-    <a class="nav-link" href="#contacto">Contacto</a>
     <!-- <div class="ml-2">
         <ThemeToggle />
       </div> -->
@@ -35,7 +34,7 @@ import ThemeToggle from "./ThemeToggle.astro";
     aria-label="Abrir menú"
   >
     <svg width="20" height="28">
-      <use xlink:href="../assets/sprite.svg#menu" />
+      <use xlink:href="/sprite.svg#menu" />
     </svg>
   </button>
 </header>
@@ -55,68 +54,94 @@ import ThemeToggle from "./ThemeToggle.astro";
 </div>
 
 <style is:inline>
-  #navbar {
-    transition: all 300ms ease;
-  }
-  #navbar.navbar--shrink {
-    height: 3.5rem; /* más pequeño */
-    background: rgba(0, 0, 0, 0.35); /* más marcado */
-    border-color: rgba(255, 255, 255, 0.15);
-  }
+#navbar {
+  transition: all 250ms ease;
+  backdrop-filter: blur(14px);
+  background: rgba(10, 10, 10, 0.35);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.045);
+}
 
-  #navbar-content {
-    transition:
-      padding 300ms ease,
-      transform 300ms ease;
-  }
+/* Navbar shrink */
+#navbar.navbar--shrink {
+  height: 3.5rem;
+  background: rgba(10, 10, 10, 0.55);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
 
-  #navbar.navbar--shrink #navbar-content {
-    padding-top: 0.25rem;
-    padding-bottom: 0.25rem;
-    transform: translateY(-2px);
-  }
+/* Links */
+nav a,
+#mobile-menu a {
+  position: relative;
+  padding: 0.25rem 0;
+  font-weight: 500;
+  transition: opacity 150ms ease;
+}
 
-  .nav-underline {
-    position: absolute;
-    bottom: -3px;
-    height: 2px;
-    background: var(--color-accent, #38bdf8);
-    transition:
-      transform 300ms ease,
-      width 300ms ease;
-    pointer-events: none;
-  }
+nav a:hover {
+  opacity: 0.6;
+}
 
-  .glass-nav {
-    background: linear-gradient(
-        to bottom right,
-        rgba(255, 255, 255, 0.12),
-        rgba(255, 255, 255, 0.03)
-      )
-      rgba(0, 0, 0, 0.25);
+/* Underline estilo vercel */
+.nav-underline {
+  position: absolute;
+  bottom: -4px;
+  height: 1.5px;
+  background: white;
+  opacity: 0.9;
+  border-radius: 2px;
+  transition:
+    transform 250ms ease,
+    width 250ms ease;
+  pointer-events: none;
+}
 
-    backdrop-filter: blur(18px) saturate(1.8);
-    box-shadow:
-      inset 0 0 1px rgba(255, 255, 255, 0.3),
-      0 8px 20px rgba(0, 0, 0, 0.25);
-  }
+/* Glass style más vercel */
+.glass-nav {
+  background: rgba(15, 15, 15, 0.35);
+  backdrop-filter: blur(14px) saturate(1.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.045);
+}
 
-  #navbar.navbar--shrink.glass-nav {
-    background: linear-gradient(
-        to bottom right,
-        rgba(255, 255, 255, 0.15),
-        rgba(255, 255, 255, 0.05)
-      )
-      rgba(0, 0, 0, 0.35);
+/* shrink */
+#navbar.navbar--shrink.glass-nav {
+  background: rgba(15, 15, 15, 0.55);
+  backdrop-filter: blur(18px) saturate(2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
 
-    backdrop-filter: blur(22px) saturate(2.2);
+/* Mobile menu estilo Vercel panel */
+#mobile-menu {
+  background: rgba(15, 15, 15, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(18px);
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.35),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+  transition: opacity 200ms ease, transform 200ms ease;
+  transform: translateY(-6px);
+  opacity: 0;
+}
 
-    box-shadow:
-      inset 0 0 1px rgba(255, 255, 255, 0.35),
-      0 6px 16px rgba(0, 0, 0, 0.35);
+#mobile-menu:not(.hidden) {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-    border-color: rgba(255, 255, 255, 0.28);
-  }
+#mobile-menu a:hover {
+  opacity: 0.6;
+}
+
+/* Botón mobile */
+#mobile-toggle svg {
+  stroke: white;
+  opacity: 0.9;
+  transition: opacity 150ms ease;
+}
+
+#mobile-toggle:hover svg {
+  opacity: 0.6;
+}
+
 </style>
 
 <script src="@scripts/scrollspy"></script>

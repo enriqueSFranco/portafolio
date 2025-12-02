@@ -18,8 +18,8 @@ const downloadLink: DownloadLink = {
 const profilesData = profiles as SocialProfile[];
 
 const KEYWORD_CLASSES = {
-  "Desarrollador Frontend Jr": "wolt-highlight highlight-frontend",
-  "Ingeniería en Sistemas Computacionales": "wolt-highlight highlight-engineer",
+  "Desarrollador Frontend": "highlight-frontend",
+  "Ingeniería en Sistemas Computacionales": "highlight-engineer",
 };
 ---
 
@@ -28,7 +28,7 @@ const KEYWORD_CLASSES = {
   .highlight-frontend {
     /* Modo Claro */
     color: #0b50d5;
-    background-color: rgba(186, 230, 253, 0.5);
+    background-color: #bae6fd80;
     padding: 0.2rem 0.4rem;
     border-radius: 0.5rem;
     font-weight: 600;
@@ -44,7 +44,7 @@ const KEYWORD_CLASSES = {
   .highlight-engineer {
     /* Modo Claro */
     color: #9333ea;
-    background-color: rgba(221, 214, 254, 0.5);
+    background-color: #ddd6fe80;
     padding: 0.2rem 0.4rem;
     border-radius: 0.5rem;
     font-weight: 600;
@@ -53,41 +53,87 @@ const KEYWORD_CLASSES = {
   /* Modo Oscuro */
   .dark .highlight-engineer {
     color: #a78bfa;
-    background-color: rgba(126, 34, 206, 0.4);
+    background-color: #7e22ce2c;
   }
+
+
+
+  /* ---- ANIMACIÓN HERO ---- */
+
+/* Contenedor inicial invisible */
+.hero-animate {
+  opacity: 0;
+  transform: translateY(24px);
+  filter: blur(6px);
+}
+
+/* Estado final */
+.hero-animate.show {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+  transition:
+    opacity 700ms ease,
+    transform 700ms ease,
+    filter 700ms ease;
+}
+
+/* Delay escalonado */
+.delay-1 {
+  transition-delay: 120ms;
+}
+.delay-2 {
+  transition-delay: 240ms;
+}
+.delay-3 {
+  transition-delay: 360ms;
+}
+.delay-4 {
+  transition-delay: 480ms;
+}
+
 </style>
 
 <section
   id="sobremi"
   aria-labelledby="hero-title"
-  class="w-full min-h-screen font-light text-sm leading-relaxed flex flex-col items-start justify-start"
+  class="w-full min-h-screen font-light text-sm leading-relaxed flex flex-col items-center justify-center gap-6"
 >
-  <div class="flex flex-col items-start justify-start lg:items-start gap-6">
-    <figure
-      class="size-56 sm:size-32 lg:size-80 overflow-hidden"
-    >
-      <Image src={me} alt={`foto de ${name}`} class="object-cover mask-radial-at-center mask-radial-from-50% mask-radial-to-70%" />
+  <div class="flex flex-col items-center gap-6 max-w-2xl">
 
-      <figcaption
-        class="flex flex-col items-center lg:items-start text-center lg:text-left"
-      >
+    <figure class="flex flex-col items-center hero-animate delay-1">
+      <Image
+        src={me}
+        alt={`foto de ${name}`}
+        class="size-72 sm:size-80 object-cover object-top mask-radial-at-center mask-radial-from-45% mask-radial-to-80%"
+      />
+
+      <figcaption class="flex flex-col items-center text-center hero-animate delay-2">
         <h1
           id="hero-title"
           class="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight leading-tight"
         >
           {name}
         </h1>
-
-        <p class="text-lg sm:text-xl font-medium mt-1">
-          Desarrollador Frontend Jr
-        </p>
       </figcaption>
     </figure>
-  </div>
 
-  <div class="flex flex-col gap-6 max-w-xl text-base leading-relaxed">
-    <TextHighlightKeywords text={summary} keywords={KEYWORD_CLASSES} />
+    <div class="prose prose-invert prose-zinc text-center text-sm md:text-base font-light max-w-xl hero-animate delay-3">
+      <TextHighlightKeywords text={summary} keywords={KEYWORD_CLASSES} />
+    </div>
 
-    <SocialLinks profiles={profilesData} downloadLink={downloadLink} />
+    <div class="hero-animate delay-4">
+      <SocialLinks profiles={profilesData} downloadLink={downloadLink} />
+    </div>
+
   </div>
 </section>
+
+
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".hero-animate").forEach((el) => {
+      requestAnimationFrame(() => el.classList.add("show"));
+    });
+  });
+</script>

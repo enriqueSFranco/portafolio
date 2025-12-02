@@ -10,24 +10,20 @@ interface Props {
     repository: string | null;
     stack: string[];
   };
-  customColor: string;
 }
 
-const { customColor, project } = Astro.props;
+const { project } = Astro.props;
 ---
 
 <article
   aria-labelledby={`project-${project.id}-title`}
-  style={`--project-color: ${customColor};`}
   class="
     group select-none h-full flex flex-col overflow-hidden w-full sm:w-auto
-    rounded-2xl p-5 border border-[var(--wolt-border)] bg-[var(--wolt-surface)]
-    dark:bg-[var(--wolt-surface-dark)] dark:border-[var(--wolt-border-dark)]
+    rounded-2xl p-5 border bg-white/5
+    border-zinc-200/60 dark:border-zinc-800
     shadow-sm transition-all duration-300 ease-out
 
-    hover:shadow-lg hover:-translate-y-[2px]
-    hover:border-[var(--project-color)]/60
-    hover:[box-shadow:0_8px_20px_-6px_rgb(0_0_0_/_15%),0_0_0_2px_var(--project-color)_inset]
+    hover:shadow-lg hover:-translate-y-0.5
   "
 >
   <!-- GitHub Icon -->
@@ -38,36 +34,23 @@ const { customColor, project } = Astro.props;
     target="_blank"
     rel="noopener noreferrer"
   >
-    <img
-      src="/icons/github.svg"
-      alt=""
-      aria-hidden="true"
-      class="
-        opacity-80 transition-all duration-300 ease-out rounded-full
-        group-hover:opacity-100 
-        group-hover:[filter:drop-shadow(0_0_6px_var(--project-color))]
-        group-hover:[transform:scale(1.05)]
-      "
-    />
+    <svg width="28" height="28">
+      <use xlink:href="/sprite.svg#github" />
+    </svg>
   </a>
 
   <!-- Content -->
   <div class="flex flex-col gap-3 mt-2 h-full">
     <header class="flex flex-col gap-0.5">
-      <h2 class="font-semibold text-[1.05rem] sm:text-lg md:text-xl leading-tight text-[var(--wolt-text)] dark:text-[var(--wolt-text-dark)]">
+      <h2 class="font-semibold text-[1.05rem] sm:text-lg md:text-xl leading-tight text-neutral-900 dark:text-white">
         {project.title}
       </h2>
-      <h3
-        class="text-xs sm:text-sm text-[var(--wolt-text-muted)] dark:text-[var(--wolt-text-muted-dark)]"
-      >
+      <h3 class="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400">
         {project.type}
       </h3>
     </header>
 
-    <p
-      class="text-sm sm:text-base leading-relaxed mt-1 flex-grow
-             text-[var(--wolt-text-secondary)] dark:text-[var(--wolt-text-secondary-dark)]"
-    >
+    <p class="text-sm sm:text-base leading-relaxed mt-1 grow text-neutral-700 dark:text-neutral-300">
       {project.description}
     </p>
   </div>
