@@ -4,8 +4,7 @@ import Layout from "@layouts/Layout.astro";
 import Projects from "../sections/Projects.astro";
 import Education from "../sections/Education.astro";
 import Hero from "../components/Hero.astro";
-import Footer from "@components/Footer.astro";
-import FloatingContactButton from "@components/FloatingContactButton.astro";
+
 import ContactModal from "@components/ContactModal.astro";
 import "../styles/global.css";
 
@@ -13,7 +12,6 @@ const { name, label } = cv.basic;
 ---
 
 <Layout title={`Portafolio de ${name} - ${label}`}>
-  
   <Hero />
   <Education />
   <Projects />

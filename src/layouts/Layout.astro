@@ -16,17 +16,24 @@ const { title } = Astro.props;
 <html lang="es">
   <Base title={title} />
   <body
-    class="relative min-h-screen flex flex-col items-center text-base tracking-normal bg-gray-100 text-[#0a111a] dark:bg-[#0a111a] dark:text-gray-100"
+    class="min-h-screen items-center text-balance tracking-normal bg-slate-100 text-gray-700 dark:text-white dark:bg-black"
   >
-    <Header client:idle />
-    
-    <main id="app" class="flex grow flex-col gap-6 w-2/3 text-sm">
+    <Header />
+
+    <main
+      id="app"
+      class="px-4 flex flex-col grow w-full lg:w-2/3 mx-auto"
+    >
+    <div class="prose prose-invert prose-neutral space-y-10">
       <slot />
+    </div>
     </main>
 
     <FloatingContactButton />
     <ContactModal />
-    
+
     <Footer />
   </body>
 </html>
+
+<script src="@scripts/reveal.ts"></script>

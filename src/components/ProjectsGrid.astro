@@ -7,26 +7,18 @@ const { projects } = cv;
 const techs = Array.from(new Set(projects.flatMap((p) => p.stack)));
 ---
 
-<div class="w-full flex flex-col gap-6">
+<div class="w-full flex flex-col gap-6 reveal" data-delay="200">
   <StackFilters options={["Todos", ...techs]} active="Todos" />
-  
+
   <ol
     id="projects-grid"
-    class="
-      grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3
-      gap-4 sm:gap-5 lg:gap-6
-      auto-rows-fr
-    "
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 lg:gap-6 auto-rows-fr"
   >
     {
       projects.map((project) => (
         <li
           data-tech={project.stack.join(" ").toLowerCase()}
-          class="
-            opacity-0 translate-y-4
-            transition-all duration-700 ease-[cubic-bezier(0.18,0.75,0.32,1)]
-            will-change-transform
-          "
+          class="translate-y-4 transition-all duration-700 ease-[cubic-bezier(0.18,0.75,0.32,1)] will-change-transform"
         >
           <ProjectCard project={project} />
         </li>
@@ -36,28 +28,6 @@ const techs = Array.from(new Set(projects.flatMap((p) => p.stack)));
 </div>
 
 <script>
-  // ----------------------------
-  // Scroll Reveal (IntersectionObserver)
-  // ----------------------------
-  const cards = document.querySelectorAll("#projects-grid li");
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.remove("opacity-0", "translate-y-4");
-          entry.target.classList.add("opacity-100", "translate-y-0");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    {
-      threshold: 0.15,
-    }
-  );
-
-  cards.forEach((card) => observer.observe(card));
-
   // ----------------------------
   // Filtros
   // ----------------------------
@@ -84,15 +54,11 @@ const techs = Array.from(new Set(projects.flatMap((p) => p.stack)));
         card.classList.toggle("opacity-0", !matches);
         card.classList.toggle("scale-95", !matches);
         card.classList.toggle("pointer-events-none", !matches);
-        card.classList.toggle("invisible", !matches);
 
         // Si se vuelve a mostrar, reactivar la animación de entrada
         if (matches) {
-          card.classList.add("opacity-0", "translate-y-4");
-          setTimeout(() => {
-            card.classList.remove("translate-y-4");
-            card.classList.add("opacity-100");
-          }, 20);
+          card.classList.remove("is-visible");
+          setTimeout(() => card.classList.add("is-visible"), 20);
         }
       });
     });

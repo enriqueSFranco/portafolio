@@ -1,92 +1,101 @@
 <section
   id="educacion"
-  aria-labelledby="educacion"
-  class="min-h-screen flex flex-col px-4 py-20 sm:px-6 md:px-12 prose prose-invert max-w-none"
+  data-delay="300"
+  aria-labelledby="educacion-title"
+  class="reveal relative w-full text-center pt-10 sm:px-6 md:px-12 flex flex-col justify-start overflow-hidden"
 >
-  <!-- ENCABEZADO -->
-  <header class="mb-12 space-y-3 reveal-on-scroll">
-    <h2
-      id="education-title"
-      class="text-3xl font-semibold tracking-tight text-white capitalize"
-    >
-      Educación
-    </h2>
+  <!-- CONTENT WRAPPER -->
+  <div class="relative flex flex-col gap-10 md:py-16 prose prose-invert max-w-none">
 
-    <p class="text-zinc-400 leading-relaxed font-light max-w-md">
-      Mi formación académica me dio bases sólidas en desarrollo y pensamiento estructurado.
-    </p>
-  </header>
+    <!-- HEADER -->
+    <div class="flex flex-col gap-2 reveal-on-scroll">
+      <span class="uppercase tracking-[0.2em] text-xs text-zinc-400">
+        formación académica
+      </span>
 
-  <!-- GRID MOBILE-FIRST -->
-  <div class="flex flex-col gap-10 lg:grid lg:grid-cols-3 lg:gap-10">
+      <h2
+        id="educacion-title"
+        class="text-3xl mt-6 md:text-4xl font-semibold tracking-tight capitalize"
+      >
+        Educación
+      </h2>
 
-    <!-- TARJETA PRINCIPAL -->
-    <article
-      class="p-6 sm:p-8 rounded-3xl bg-white/5 backdrop-blur-xl
-             border border-white/10
-             shadow-[0_8px_40px_-4px_rgba(0,0,0,0.45)]
-             transition-all duration-500
-             hover:shadow-[0_12px_45px_-2px_rgba(0,0,0,0.55)]
-             hover:bg-white/7 reveal-on-scroll
-             lg:col-span-2"
-    >
-      <h3 class="text-xl sm:text-2xl font-semibold leading-tight mb-2">
+      <p class="text-sm sm:text-base text-zinc-400 max-w-prose">
+        Una etapa que formó mi manera de pensar, resolver problemas y construir tecnología con propósito.
+      </p>
+    </div>
+
+    <!-- CARD -->
+    <div
+    class="relative group grid grid-cols-1 md:grid-cols-3 gap-10
+      p-8 md:p-10 rounded-3xl
+      bg-white/5 backdrop-blur-2xl border border-white/10
+      shadow-[0_8px_40px_-4px_rgba(0,0,0,0.45)]
+      transition-all duration-500
+      hover:bg-white/10 hover:shadow-[0_12px_55px_-4px_rgba(0,0,0,0.6)]
+    "
+  >
+    <!-- SPOTLIGHT ORBITAL EFFECT -->
+    <div
+      class="pointer-events-none absolute -inset-1 rounded-3xl opacity-0 
+             group-hover:opacity-100 transition duration-700 
+             bg-gradient-to-r from-transparent via-pink-500/10 to-transparent blur-xl"
+    ></div>
+  
+    <!-- TOP SOFT GLOW -->
+    <div
+      class="absolute -top-10 left-1/2 -translate-x-1/2 w-40 h-40 
+             bg-pink-500/10 blur-3xl rounded-full opacity-70"
+    ></div>
+  
+    <!-- LEFT CONTENT -->
+    <div class="relative flex flex-col md:col-span-2 z-10">
+      
+      <!-- Badge -->
+      <div class="flex items-center gap-3 mb-4">
+        <div
+          class="w-11 h-11 rounded-xl border border-white/10 
+                 bg-gradient-to-br from-pink-500/40 to-purple-600/40
+                 shadow-[0_0_20px_-2px_rgba(255,0,150,0.35)]
+                 backdrop-blur-xl flex items-center justify-center text-xl"
+        >
+          🎓
+        </div>
+        <span class="text-sm text-zinc-400">Licenciatura</span>
+      </div>
+  
+      <!-- Title + School -->
+      <h3 class="text-2xl md:text-3xl font-semibold leading-tight">
         Instituto Politécnico Nacional
-        <span class="block text-base font-normal text-zinc-400">
+        <span class="block text-base font-normal text-zinc-400 mt-1">
           Escuela Superior de Cómputo (ESCOM)
         </span>
       </h3>
-
-      <p class="text-base sm:text-lg text-zinc-300 font-light mb-6">
-        Ingeniería en Sistemas Computacionales
+  
+      <!-- Description -->
+      <p class="text-base sm:text-lg text-zinc-300 font-light leading-relaxed mt-4">
+        Ingeniería en Sistemas Computacionales — Desarrollo de software.
       </p>
-
-      <!-- Periodo -->
-      <div class="mb-8">
-        <p class="font-medium text-sm sm:text-base text-zinc-400">Periodo</p>
-        <p class="text-lg sm:text-xl font-medium tracking-tight">
-          Enero 2017 — Enero 2023
-        </p>
+    </div>
+  
+    <!-- RIGHT PERIOD -->
+    <div class="relative flex flex-col justify-center md:items-end md:text-right z-10">
+      <p class="font-medium text-sm text-zinc-400">Periodo</p>
+  
+      <p class="text-xl font-semibold tracking-tight mt-1">
+        Enero 2017 — Enero 2023
+      </p>
+  
+      <!-- Dot glow -->
+      <div class="hidden md:block mt-3">
+        <div
+          class="w-2.5 h-2.5 rounded-full bg-pink-400
+                 shadow-[0_0_14px_rgba(255,120,200,0.8)]"
+        ></div>
       </div>
-
-      <div class="h-px w-full bg-white/10"></div>
-
-      <!-- Lista breve -->
-      <ul class="mt-6 space-y-3 text-zinc-300 text-sm sm:text-base">
-        <li class="flex items-center gap-3">
-          <span class="text-white text-xl">🎓</span>
-          Bases en estructuras de datos, sistemas y desarrollo web.
-        </li>
-        <li class="flex items-center gap-3">
-          <span class="text-white text-xl">💡</span>
-          Proyectos individuales y trabajo colaborativo.
-        </li>
-        <li class="flex items-center gap-3">
-          <span class="text-white text-xl">⚙️</span>
-          Metodologías ágiles, documentación y buenas prácticas.
-        </li>
-      </ul>
-    </article>
-
-    <!-- TARJETA ADICIONAL -->
-    <aside
-      class="p-6 sm:p-8 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10
-             shadow-[0_8px_40px_-4px_rgba(0,0,0,0.35)]
-             transition-all duration-500
-             hover:shadow-[0_10px_50px_-2px_rgba(0,0,0,0.5)]
-             hover:bg-white/7 reveal-on-scroll"
-    >
-      <h4 class="text-xl font-semibold mb-6 text-white">
-        Complementos
-      </h4>
-
-      <ul class="space-y-4 text-zinc-300 text-sm sm:text-base">
-        <li><span class="text-white mr-2">📘</span> Cursos online (JS, Web Dev)</li>
-        <li><span class="text-white mr-2">🌐</span> Prácticas de desarrollo responsivo</li>
-        <li><span class="text-white mr-2">⚙️</span> Buenas prácticas con Git</li>
-        <li><span class="text-white mr-2">🚀</span> Trabajo en proyectos reales</li>
-      </ul>
-    </aside>
+    </div>
+  </div>
+  
   </div>
 </section>
 
@@ -94,12 +103,11 @@
 <style is:inline>
   .reveal-on-scroll {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(16px);
     transition:
       opacity 0.6s ease,
       transform 0.6s ease;
   }
-
   .reveal-on-scroll.is-visible {
     opacity: 1;
     transform: translateY(0px);
@@ -111,12 +119,11 @@
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible')
+        entry.target.classList.add('is-visible');
         observer.unobserve(entry.target);
       }
-    })
-  }, {
-    threshold: 0.2
-  })
+    });
+  }, { threshold: 0.2 });
+
   elements.forEach(el => observer.observe(el));
 </script>

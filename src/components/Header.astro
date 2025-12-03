@@ -4,144 +4,170 @@ import ThemeToggle from "./ThemeToggle.astro";
 
 <header
   id="navbar"
-  class="sticky top-0 z-50 h-20 flex items-center justify-between w-full px-4 glass-nav"
+  class="sticky top-0 z-50 h-20 flex items-center justify-between w-full px-4 glass-nav transition-all duration-250"
 >
   <div class="flex items-center gap-4">
     <a
       href="#"
-      class="text-lg font-semibold tracking-wide hover:opacity-80 transition"
-      >MiLogo</a
+      class="flex items-center gap-2 text-lg font-bold tracking-wide text-gray-900 dark:text-gray-100 hover:opacity-80 transition"
     >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="size-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"
+        ></path>
+      </svg>
+
+      Enrique.dev
+    </a>
   </div>
+
   <nav
     id="main-nav"
-    class="hidden md:block relative space-x-4"
+    class="hidden md:flex relative space-x-4"
     aria-label="Main navigation"
   >
-    <span id="nav-underline" class="nav-underline"></span>
-    <a class="nav-link" href="#sobremi">Sobre mí</a>
-    <a class="nav-link" href="#educacion">Educación</a>
-    <a class="nav-link" href="#proyectos">Proyectos</a>
-    <!-- <div class="ml-2">
-        <ThemeToggle />
-      </div> -->
+    <span id="nav-indicator" class="nav-indicator"></span>
+
+    <a class="nav-link text-gray-900 dark:text-gray-100" href="/enriqueSF/#sobremi"
+      >Sobre mí</a
+    >
+    <a class="nav-link text-gray-900 dark:text-gray-100" href="/enriqueSF/#educacion"
+      >Educación</a
+    >
+    <a class="nav-link text-gray-900 dark:text-gray-100" href="/enriqueSF/#proyectos"
+      >Proyectos</a
+    >
   </nav>
 
-  <!-- boton en mobile -->
-  <button
-    id="mobile-toggle"
-    class="md:hidden p-2 rounded-md"
-    aria-label="Abrir menú"
-  >
-    <svg width="20" height="28">
-      <use xlink:href="/sprite.svg#menu" />
-    </svg>
-  </button>
+  <div class="flex items-center gap-2">
+    <!-- <ThemeToggle /> -->
+    <button
+      id="mobile-toggle"
+      class="md:hidden p-2 rounded-md"
+      aria-label="Abrir menú"
+    >
+      <svg
+        width="20"
+        height="28"
+        class="stroke-gray-900 dark:stroke-gray-100 opacity-90 hover:opacity-60 transition"
+      >
+        <use xlink:href="/sprite.svg#menu"></use>
+      </svg>
+    </button>
+  </div>
 </header>
 
 <div
   id="mobile-menu"
-  class="fixed inset-x-4 top-20 z-50 rounded-xl bg-gray-900/75 border border-gray-800 backdrop-blur md:hidden hidden p-4"
+  class="fixed inset-0 top-20 z-50 md:hidden hidden p-6 .dark transition-all duration-300 ease-in-out transform -translate-y-4 opacity-0"
 >
-  <ul class="flex flex-col gap-3 text-base">
+  <ul
+    class="flex flex-col justify-center items-center gap-6 w-full max-w-xs text-center"
+  >
     <li>
-      <a class="nav-link" href="#sobremi">Sobre mí</a>
-      <li><a class="nav-link" href="#educacion">Educación</a></li>
-      <li><a class="nav-link" href="#proyectos">Proyectos</a></li>
-      <li><a class="nav-link" href="#contacto">Contacto</a></li>
+      <a
+        href="/enriqueSF/#sobremi"
+        class="block w-full py-3 rounded-lg text-lg font-medium text-gray-900 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-800 transition"
+      >
+        Sobre mí
+      </a>
+    </li>
+    <li>
+      <a
+        href="/enriqueSF/#educacion"
+        class="block w-full py-3 rounded-lg text-lg font-medium text-gray-900 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-800 transition"
+      >
+        Educación
+      </a>
+    </li>
+    <li>
+      <a
+        href="/enriqueSF/#proyectos"
+        class="block w-full py-3 rounded-lg text-lg font-medium text-gray-900 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-800 transition"
+      >
+        Proyectos
+      </a>
+    </li>
+    <li>
+      <a
+        href="/enriqueSF/#contacto"
+        class="block w-full py-3 rounded-lg text-lg font-medium text-gray-900 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-800 transition"
+      >
+        Contacto
+      </a>
     </li>
   </ul>
 </div>
 
 <style is:inline>
-#navbar {
-  transition: all 250ms ease;
-  backdrop-filter: blur(14px);
-  background: rgba(10, 10, 10, 0.35);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.045);
-}
+  /* NAVBAR */
+  #navbar,
+  #mobile-menu {
+    backdrop-filter: blur(14px);
+    background: rgba(255, 255, 255, 0.55);
+    transition:
+      height 250ms ease,
+      background-color 250ms ease;
+  }
 
-/* Navbar shrink */
-#navbar.navbar--shrink {
-  height: 3.5rem;
-  background: rgba(10, 10, 10, 0.55);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
+  .dark #navbar,
+  #mobile-menu {
+    background: rgba(15, 15, 15, 0.55);
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+  }
 
-/* Links */
-nav a,
-#mobile-menu a {
-  position: relative;
-  padding: 0.25rem 0;
-  font-weight: 500;
-  transition: opacity 150ms ease;
-}
+  /* INDICADOR */
+  .nav-indicator {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    background: #ffffff65;
+    border-radius: 0.65rem;
+    backdrop-filter: blur(6px);
+    transition:
+      transform 250ms ease,
+      width 250ms ease,
+      opacity 200ms ease;
+    pointer-events: none;
+  }
 
-nav a:hover {
-  opacity: 0.6;
-}
+  /* MENÚ MÓVIL QUE CRECE DESDE EL HEADER HACIA ABAJO */
+  #mobile-menu {
+    transform-origin: top;
+    transform: scaleY(0);
+    opacity: 0;
 
-/* Underline estilo vercel */
-.nav-underline {
-  position: absolute;
-  bottom: -4px;
-  height: 1.5px;
-  background: white;
-  opacity: 0.9;
-  border-radius: 2px;
-  transition:
-    transform 250ms ease,
-    width 250ms ease;
-  pointer-events: none;
-}
+    max-height: 0;
+    overflow: hidden;
 
-/* Glass style más vercel */
-.glass-nav {
-  background: rgba(15, 15, 15, 0.35);
-  backdrop-filter: blur(14px) saturate(1.8);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.045);
-}
+    transition:
+      transform 320ms cubic-bezier(0.25, 0.9, 0.32, 1.2),
+      opacity 180ms ease-out,
+      max-height 350ms ease;
+  }
 
-/* shrink */
-#navbar.navbar--shrink.glass-nav {
-  background: rgba(15, 15, 15, 0.55);
-  backdrop-filter: blur(18px) saturate(2);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
+  #mobile-menu.show {
+    transform: scaleY(1);
+    opacity: 1;
+    max-height: 600px;
+  }
 
-/* Mobile menu estilo Vercel panel */
-#mobile-menu {
-  background: rgba(15, 15, 15, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(18px);
-  box-shadow:
-    0 12px 28px rgba(0, 0, 0, 0.35),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.04);
-  transition: opacity 200ms ease, transform 200ms ease;
-  transform: translateY(-6px);
-  opacity: 0;
-}
-
-#mobile-menu:not(.hidden) {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-#mobile-menu a:hover {
-  opacity: 0.6;
-}
-
-/* Botón mobile */
-#mobile-toggle svg {
-  stroke: white;
-  opacity: 0.9;
-  transition: opacity 150ms ease;
-}
-
-#mobile-toggle:hover svg {
-  opacity: 0.6;
-}
-
+  /* HOVER */
+  nav a:hover,
+  #mobile-menu a:hover,
+  #mobile-toggle svg:hover {
+    opacity: 75%;
+  }
 </style>
 
 <script src="@scripts/scrollspy"></script>
