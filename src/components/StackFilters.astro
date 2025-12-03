@@ -11,32 +11,28 @@ const { options, active } = Astro.props;
   aria-label="Filtro de proyectos"
   class="flex items-center flex-wrap gap-2 mb-5 text-sm"
 >
-  <span
-    class="capitalize font-medium text-neutral-300"
-  >
-    filtros:
-  </span>
+  <span class="capitalize font-medium text-neutral-300"> filtros: </span>
 
   {
     options.map((option) => {
-      const isActive = active === option;
       return (
-      <button
-          aria-pressed={isActive}
+        <button
           data-filter={option}
-          class={[
-            "px-3 py-1.5 rounded-sm text-xs cursor-pointer border transition-colors duration-200 backdrop-blur-sm",
-            "border-neutral-700 hover:border-white/75 hover:opacity-90",
-            isActive &&
-              "border-white shadow-sm"
-          ]
-            .filter(Boolean)
-            .join(" ")
-          }
+          class="filter-btn relative px-4 py-2 rounded-full text-xs font-medium
+         text-zinc-400 hover:border-zinc-700 hover:text-white hover:bg-zinc-900/70
+         cursor-pointer border transition-colors duration-200 backdrop-blur-sm
+         border-zinc-800 bg-zinc-900/40 hover:opacity-90"
         >
+          <span class="indicator absolute left-1.5 top-1/2 -translate-y-1/2 hidden w-1.5 h-1.5 bg-white rounded-full"/>
           {option}
         </button>
       );
     })
   }
 </nav>
+
+<style is:inline>
+  .filter-btn.active .indicator {
+    display: block;
+  }
+</style>

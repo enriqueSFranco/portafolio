@@ -12,7 +12,7 @@ const techs = Array.from(new Set(projects.flatMap((p) => p.stack)));
 
   <ol
     id="projects-grid"
-    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 lg:gap-6 auto-rows-fr"
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 md:gap-5 lg:gap-6 auto-rows-fr"
   >
     {
       projects.map((project) => (
@@ -28,39 +28,56 @@ const techs = Array.from(new Set(projects.flatMap((p) => p.stack)));
 </div>
 
 <script>
-  // ----------------------------
-  // Filtros
-  // ----------------------------
   const $buttons = document.querySelectorAll("[data-filter]");
   const $cards = document.querySelectorAll("#projects-grid li");
 
-  const defaultBtn = document.querySelector('[data-filter="Todos"]');
-  defaultBtn.classList.add("active");
+  // botón "Todos" (defensivo)
+  const defaultBtn = document.querySelector('[data-filter="Todos"]') || document.querySelector('[data-filter="todos"]');
+
+  if (defaultBtn) {
+    defaultBtn.classList.add("active");
+  }
+
+  /**
+   * filterHandler: maneja el click en un botón de filtro.
+   */
+  function filterHandler(btn) {
+    const raw = btn.dataset.filter ?? "";
+    const filter = String(raw).toLowerCase();
+
+    // Reset estado botones
+    $buttons.forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    // Filtrar tarjetas
+    $cards.forEach((card) => {
+      const techs = (card.dataset.tech || "").toLowerCase();
+      const isAll = filter === "todos" || filter === "";
+      const matches = isAll || techs.includes(filter);
+
+      card.classList.toggle("opacity-0", !matches);
+      card.classList.toggle("scale-95", !matches);
+      card.classList.toggle("pointer-events-none", !matches);
+
+      // reactivar animación de entrada
+      if (matches) {
+        card.classList.remove("is-visible");
+        setTimeout(() => card.classList.add("is-visible"), 20);
+      }
+    });
+  }
 
   $buttons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const filter = btn.dataset.filter.toLowerCase();
-
-      // Reset estado botones
-      $buttons.forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
-
-      // Filtrar
-      $cards.forEach((card) => {
-        const techs = card.dataset.tech;
-        const isAll = filter === "todos";
-        const matches = isAll || techs.includes(filter);
-
-        card.classList.toggle("opacity-0", !matches);
-        card.classList.toggle("scale-95", !matches);
-        card.classList.toggle("pointer-events-none", !matches);
-
-        // Si se vuelve a mostrar, reactivar la animación de entrada
-        if (matches) {
-          card.classList.remove("is-visible");
-          setTimeout(() => card.classList.add("is-visible"), 20);
-        }
-      });
+    btn.addEventListener("click", (e) => {
+      // en caso de que el click venga de un elemento hijo, nos aseguramos de usar el botón
+      const clickedBtn = e.currentTarget;
+      filterHandler(clickedBtn);
     });
   });
+
+  // Ejecuta el filtrado inicial para que sólo se muestren las tarjetas correspondientes
+  if (defaultBtn) {
+    filterHandler(defaultBtn);
+  }
 </script>
+

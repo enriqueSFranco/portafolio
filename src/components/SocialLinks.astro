@@ -1,25 +1,20 @@
 ---
-import type { DownloadLink, SocialProfile } from "@shared/types";
+import type { SocialProfile } from "@shared/types";
+import CopyButton from "./CopyButton.astro";
 
 interface Props {
-  downloadLink: DownloadLink;
   profiles: SocialProfile[];
 }
 
-const { downloadLink, profiles } = Astro.props;
+const { profiles } = Astro.props;
 ---
 
-<ul
-  class="flex flex-wrap items-center justify-center gap-3 w-full"
->
+<ul class="flex flex-wrap items-center justify-center gap-3 w-full">
   <li>
-    <a
-      href="/cv.pdf"
-      download="CV Salinas Franco"
-      class="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-transparent text-sm font-medium text-zinc-300 transition-all duration-200 ease-out hover:text-white hover:bg-zinc-800 dark:hover:bg-zinc-800 cursor-pointer"
-    >
-      {downloadLink.text}
-    </a>
+    <CopyButton
+      label="enrique.sfranco04@gmail.com"
+      text="enrique.sfranco04@gmail.com"
+    />
   </li>
 
   {
@@ -31,18 +26,12 @@ const { downloadLink, profiles } = Astro.props;
           rel="noopener noreferrer"
           aria-label={`Logo de ${network}`}
           title={`Ir a ${network} de @enriqueSFranco`}
-          class="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-transparent text-sm font-medium text-zinc-400 transition-all duration-200 ease-out hover:text-white hover:bg-zinc-800 dark:hover:bg-zinc-800 cursor-pointer"
-        >
-          <svg
-            width="28"
-            height="28"
-            class="align-middle transition-all duration-200 ease-out group-hover:text-white group-hover:scale-105"
-          >
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-zinc-800 bg-zinc-900/40 text-sm font-medium text-zinc-400  hover:border-zinc-700 hover:text-white hover:bg-zinc-900/70 transition-all duration-200 backdrop-blur-sm">
+          <svg width="16" height="16">
             <use xlink:href={`sprite.svg#${network}`} />
           </svg>
 
-          <span class="align-middle capitalize">{network}</span>
-
+          <span class="capitalize tracking-tight">{network}</span>
         </a>
       </li>
     ))

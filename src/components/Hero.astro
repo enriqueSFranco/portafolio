@@ -1,17 +1,11 @@
 ---
 import cv from "../cv.json";
-import type { DownloadLink, SocialProfile } from "@shared/types";
+import type { SocialProfile } from "@shared/types";
 import TextHighlightKeywords from "@components/TextHighlightKeywords.astro";
 import SocialLinks from "@components/SocialLinks.astro";
 
 const { name, profiles, summary } = cv.basic;
 
-const downloadLink: DownloadLink = {
-  href: "/cv.pdf",
-  downloadName:
-    "CV Salinas Franco Carlos Enrique Ingeniero en Sistemas Computacionales",
-  text: "Descargar CV",
-};
 const profilesData = profiles as SocialProfile[];
 
 const KEYWORD_CLASSES = {
@@ -21,7 +15,7 @@ const KEYWORD_CLASSES = {
 ---
 
 <style is:inline>
-  /* Desarrollador Frontend Jr: Usaremos tonos Azules/Cian */
+  /* Desarrollador Frontend */
   .highlight-frontend {
     /* Modo Claro */
     color: #0b50d5;
@@ -37,7 +31,7 @@ const KEYWORD_CLASSES = {
     background-color: #eb47f72a;
   }
 
-  /* Ingeniería en Sistemas Computacionales: Usaremos tonos Púrpura/Magenta */
+  /* Ingeniería en Sistemas Computacionales */
   .highlight-engineer {
     /* Modo Claro */
     color: #9333ea;
@@ -75,7 +69,7 @@ const KEYWORD_CLASSES = {
 
     <TextHighlightKeywords text={summary} keywords={KEYWORD_CLASSES} />
 
-    <SocialLinks profiles={profilesData} downloadLink={downloadLink} />
+    <SocialLinks profiles={profilesData} />
 
   </div>
 </section>

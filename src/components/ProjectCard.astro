@@ -26,8 +26,8 @@ const { project } = Astro.props;
     target="_blank"
     rel="noopener noreferrer"
   >
-    <svg width="28" height="28">
-      <use xlink:href="/sprite.svg#github" />
+    <svg width="24" height="24">
+      <use xlink:href="sprite.svg#github" />
     </svg>
   </a>
 
@@ -38,8 +38,7 @@ const { project } = Astro.props;
         alt={`Imagen del proyecto ${project.title}`}
         class="w-full aspect-video object-cover rounded-xl border border-white/10 transition duration-500 group-hover:scale-[1.03] group-hover:brightness-[1.15]"
       />
-      <div
-        class="absolute inset-0 bg-radial from-black/40 via-black/10 to-transparent  opacity-50 group-hover:opacity-60 transition"></div>
+      <div class="absolute inset-0 bg-radial from-black/40 via-black/10 to-transparent  opacity-50 group-hover:opacity-60 transition"></div>
     </div>
   )}
 
