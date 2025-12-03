@@ -3,4 +3,14 @@ module.exports = {
   darkMode: "class",
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   plugins: [require("@tailwindcss/typography")],
+  theme: {
+    extend: {
+      spacing: {
+        'header': '5rem',
+      },
+      minHeight: {
+        'screen-minus-header': 'calc(100vh - 5rem)',
+      },
+    }
+  }
 };
