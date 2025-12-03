@@ -1,24 +1,18 @@
 ---
-import Layout from "@/layouts/Layout.astro";
+import cv from "../cv.json";
+import Layout from "@layouts/Layout.astro";
 import Projects from "../sections/Projects.astro";
 import Education from "../sections/Education.astro";
-import Hero from "../sections/Hero.astro";
-import Footer from "@/ui/Footer.astro";
-import Knowledge from "../sections/Knowledge.astro";
-import cv from "@/cv.json";
+import Hero from "../components/Hero.astro";
 
-const { name, label} = cv.basic;
+import "../styles/global.css";
+
+const { name, label } = cv.basic;
 ---
 
 <Layout title={`Portafolio de ${name} - ${label}`}>
-  <main
-    id='app'
-    class='flex grow flex-col gap-6 max-w-4xl text-sm p-6'
-  >
-    <Hero />
-    <Education />
-    <Projects />
-    <Knowledge />
-  </main>
-  <Footer />
+  <Hero />
+  <Education />
+  <Projects />
+  
 </Layout>

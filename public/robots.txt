@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Bloqueos típicos para no indexar archivos internos
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+Disallow: /drafts/
+Disallow: /temp/
+
+# Ubicación del sitemap (cambia el dominio por el tuyo)
+Sitemap: https://tudominio.com/sitemap.xml

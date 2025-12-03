@@ -1,0 +1,111 @@
+---
+interface Props {
+  text: string;
+  label?: string;
+  copiedLabel?: string;
+  iconName?: string;
+}
+
+const {
+  text,
+  label = "Copiar",
+  copiedLabel = "¡Copiado!",
+  iconName = "copy",
+} = Astro.props;
+
+---
+
+<button
+  id="copy-btn"
+  aria-live="polite"
+  data-copy-text={text}
+  data-copied-label={copiedLabel}
+  data-initial-icon={iconName}
+  data-copied-icon="check"
+  class="copy-button relative flex items-center gap-2 px-4 py-2 rounded-full cursor-pointer border border-zinc-800 bg-zinc-900/40 font-medium text-xs shadow-sm transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-zinc-400 hover:border-zinc-700 hover:text-white hover:bg-zinc-900/70">
+  <span
+    class="copy-tooltip absolute bg-green-500/45 text-white px-2 py-0.5 rounded text-xs whitespace-nowrap opacity-0 pointer-events-none transition-all duration-300 transform -translate-x-1/2 -translate-y-1/4 top-0 left-1/2"
+  >
+    {copiedLabel}
+  </span>
+  <svg
+    width="16"
+    height="16"
+    aria-hidden="true"
+    class="copy-icon opacity-80 group-hover:opacity-100 transition-opacity"
+  >
+    <use class="icon-use" xlink:href={`sprite.svg#${iconName}`}></use>
+  </svg>
+
+  {label && <span class="copy-label">{label}</span>}
+</button>
+
+<script>
+  function setupCopyButton(button: HTMLButtonElement) {
+    const textToCopy = button.dataset.copyText;
+    const copiedLabel = button.dataset.copiedLabel;
+
+    const tooltip = button.querySelector(".copy-tooltip");
+
+    let isCopied = false;
+
+    function fallbackCopy(value: string) {
+      const el = document.createElement("textarea");
+      el.value = value;
+      el.setAttribute("readonly", "");
+      el.style.position = "absolute";
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand("copy");
+      el.remove();
+    }
+
+    /** Actualiza el estado visual del botón a 'copiado'. */
+    function setCopiedState() {
+      if (isCopied || !tooltip) return;
+      isCopied = true;
+
+      tooltip.classList.add("is-visible");
+
+      button.setAttribute("aria-label", copiedLabel);
+      
+      setTimeout(() => {
+        isCopied = false;
+
+        tooltip.classList.remove("is-visible");
+
+      }, 2000);
+    }
+
+    button.addEventListener("click", async () => {
+      if (isCopied || !textToCopy) return;
+
+      try {
+        await navigator.clipboard.writeText(textToCopy);
+        setCopiedState();
+      } catch (err) {
+        console.warn("Fallo en la API del portapapeles. Usando fallback.", err);
+        fallbackCopy(textToCopy);
+        setCopiedState();
+      }
+    });
+  }
+
+  const button = document.getElementById("copy-btn") as HTMLButtonElement;
+
+  if (button) {
+    setupCopyButton(button);
+  }
+</script>
+
+<style is:inline>
+  .copy-tooltip {
+    transform: translate(-50%, 0);
+  }
+
+  .copy-tooltip.is-visible {
+    opacity: 1;
+    transform: translate(-50%, -120%);
+    transition: opacity 300ms ease, transform 300ms ease;
+  }
+</style>
