@@ -4,105 +4,147 @@ console.log("[scrollspy.ts]");
 const mobileToggle = document.getElementById("mobile-toggle");
 const mobileMenu = document.getElementById("mobile-menu");
 
+function openMenu() {
+  if (!mobileMenu) return
+  mobileMenu.classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+
+  requestAnimationFrame(() => {
+    mobileMenu.classList.add("show");
+  });
+}
+
+function closeMenu() {
+  if (!mobileMenu) return;
+  mobileMenu.classList.remove("show");
+
+  setTimeout(() => {
+    mobileMenu.classList.add("hidden");
+  }, 380); // coincide con tu CSS
+
+  document.body.style.overflow = "visible";
+}
+
 // Abrir/cerrar en mobile
 mobileToggle?.addEventListener("click", () => {
-  mobileMenu?.classList.toggle("hidden");
+  if (!mobileMenu) return;
+  mobileMenu.classList.contains("show") ? closeMenu() : openMenu();
 });
 
 // Cerrar menú al hacer click
 mobileMenu?.querySelectorAll("a").forEach((a) => {
-  a.addEventListener("click", () => mobileMenu.classList.add("hidden"));
+  a.addEventListener("click", () => {
+    closeMenu();
+  });
 });
 
-// DESKTOP UNDERLINE
+// ------------------------------
+// DESKTOP NAV INDICATOR (TESLA STYLE)
+// ------------------------------
+
 const nav = document.getElementById("main-nav");
 const links =
   document.querySelectorAll<HTMLAnchorElement>("nav#main-nav .nav-link") ?? [];
-const underline = document.getElementById("nav-underline");
+const indicator = document.getElementById("nav-indicator");
 
-// Centrar underline debajo del link
-function moveUnderlineTo(link: HTMLAnchorElement) {
-  if (!underline || !nav) return;
+// Coloca el indicador debajo del link
+function moveIndicatorTo(link: HTMLAnchorElement) {
+  if (!indicator || !nav) return;
 
   const linkRect = link.getBoundingClientRect();
   const navRect = nav.getBoundingClientRect();
 
-  // Posición dentro del nav
   const offsetLeft = linkRect.left - navRect.left;
 
-  underline.style.width = `${linkRect.width}px`;
-  underline.style.transform = `translateX(${offsetLeft}px)`;
+  indicator.style.width = `${linkRect.width}px`;
+  indicator.style.transform = `translateX(${offsetLeft}px)`;
+  indicator.style.opacity = "0.25";
 }
 
+// Hover → mueve el indicador
+links.forEach((link) => {
+  link.addEventListener("mouseenter", () => moveIndicatorTo(link));
+});
+
+// Al salir del nav → vuelve al activo
+nav?.addEventListener("mouseleave", () => {
+  const active = nav.querySelector(".active-link") as HTMLAnchorElement | null;
+  if (active) moveIndicatorTo(active);
+  else if (indicator) indicator.style.opacity = "0";
+});
+
+// Click → marca activo + mueve indicador
+links.forEach((link) => {
+  link.addEventListener("click", () => {
+    links.forEach((l) => l.classList.remove("active-link"));
+    link.classList.add("active-link");
+    moveIndicatorTo(link);
+  });
+});
+
+// ------------------------------
 // SCROLLSPY
+// ------------------------------
+
 const sections = Array.from(links)
   .map((link) =>
     document.getElementById(link.getAttribute("href")!.replace("#", ""))
   )
   .filter(Boolean) as HTMLElement[];
 
-  let currentSectionId = "";
+let currentSectionId = "";
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      let bestEntry: IntersectionObserverEntry | null = null;
-  
-      for (const entry of entries) {
-        if (!entry.isIntersecting) continue;
-        if (!bestEntry || entry.intersectionRatio > bestEntry.intersectionRatio) {
-          bestEntry = entry;
-        }
+const observer = new IntersectionObserver(
+  (entries) => {
+    let bestEntry: IntersectionObserverEntry | null = null;
+
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      if (!bestEntry || entry.intersectionRatio > bestEntry.intersectionRatio) {
+        bestEntry = entry;
       }
-  
-      if (!bestEntry) return;
-  
-      const id = bestEntry.target.id;
-  
-      if (currentSectionId === id) return;
-      currentSectionId = id;
-  
-      // Actualizar UI (sin parpadeo)
-      const link = document.querySelector(
-        `nav#main-nav a.nav-link[href="#${id}"]`
-      );
-  
-      links.forEach((l) => l.classList.remove("active-link"));
-      link?.classList.add("active-link");
-      if (link) moveUnderlineTo(link);
-  
-      if (location.hash !== `#${id}`) {
-        history.replaceState(null, "", `#${id}`);
-      }
-    },
-    {
-      threshold: [0.25, 0.5, 0.75],
-      rootMargin: "-20% 0px",
     }
-  );
-  
+
+    if (!bestEntry) return;
+
+    const id = bestEntry.target.id;
+
+    if (currentSectionId === id) return;
+    currentSectionId = id;
+
+    const link = document.querySelector(
+      `nav#main-nav a.nav-link[href="#${id}"]`
+    ) as HTMLAnchorElement | null;
+
+    links.forEach((l) => l.classList.remove("active-link"));
+    link?.classList.add("active-link");
+
+    if (link) moveIndicatorTo(link);
+
+    if (location.hash !== `#${id}`) {
+      history.replaceState(null, "", `#${id}`);
+    }
+  },
+  {
+    threshold: [0.25, 0.5, 0.75],
+    rootMargin: "-20% 0px",
+  }
+);
 
 sections.forEach((section) => observer.observe(section));
 
-// Posicionar underline al inicio
+// ------------------------------
+// INICIALIZACIÓN
+// ------------------------------
+
 window.addEventListener("load", () => {
-  const first = links[0];
-  if (first) moveUnderlineTo(first);
+  const active = nav?.querySelector(".active-link") as HTMLAnchorElement | null;
+  if (active) moveIndicatorTo(active);
+  else if (links[0]) moveIndicatorTo(links[0]);
 });
 
-const navbar = document.getElementById("navbar");
-const SHRINK_THRESHOLD = 10;
-function handleNavbarShrink() {
-  if (!navbar) return;
 
-  if (window.scrollY > SHRINK_THRESHOLD) {
-    navbar.classList.add("navbar--shrink");
-  } else {
-    navbar.classList.remove("navbar--shrink");
-  }
-}
-
-window.addEventListener("scroll", handleNavbarShrink);
-
+// Detecta sección inicial
 function setInitialActiveSection() {
   const scrollPos = window.scrollY + window.innerHeight / 2;
 
@@ -119,12 +161,12 @@ function setInitialActiveSection() {
 
   const activeLink = document.querySelector(
     `nav#main-nav a.nav-link[href="#${currentSection.id}"]`
-  );
+  ) as HTMLAnchorElement | null;
 
   if (activeLink) {
-    links.forEach(l => l.classList.remove("active-link"));
+    links.forEach((l) => l.classList.remove("active-link"));
     activeLink.classList.add("active-link");
-    moveUnderlineTo(activeLink);
+    moveIndicatorTo(activeLink);
   }
 }
 
