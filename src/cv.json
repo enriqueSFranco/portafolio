@@ -90,7 +90,6 @@
       "stack": [
         "TypeScript",
         "React",
-        "Next.js",
         "Node"
       ]
     }
