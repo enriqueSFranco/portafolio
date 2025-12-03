@@ -1,0 +1,76 @@
+---
+import cv from "../cv.json";
+import type { SocialProfile } from "@shared/types";
+import TextHighlightKeywords from "@components/TextHighlightKeywords.astro";
+import SocialLinks from "@components/SocialLinks.astro";
+
+const { name, profiles, summary } = cv.basic;
+
+const profilesData = profiles as SocialProfile[];
+
+const KEYWORD_CLASSES = {
+  "Desarrollador Frontend": "highlight-frontend",
+  "Ingeniería en Sistemas Computacionales": "highlight-engineer",
+};
+---
+
+<style is:inline>
+  /* Desarrollador Frontend */
+  .highlight-frontend {
+    /* Modo Claro */
+    color: #0b50d5;
+    background-color: #bae6fd80;
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+  }
+
+  /* Modo Oscuro */
+  .dark .highlight-frontend {
+    color: #dc58da;
+    background-color: #eb47f72a;
+  }
+
+  /* Ingeniería en Sistemas Computacionales */
+  .highlight-engineer {
+    /* Modo Claro */
+    color: #9333ea;
+    background-color: #bf3cf7be;
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+  }
+
+  /* Modo Oscuro */
+  .dark .highlight-engineer {
+    color: #a78bfa;
+    background-color: #7e22ce4e;
+  }
+</style>
+
+<section
+  id="sobremi"
+  aria-labelledby="hero-title"
+  data-delay="150"
+  class="reveal w-full font-light text-sm leading-relaxed flex flex-col items-center justify-start gap-6 min-h-screen-minus-header"
+>
+  <div class="flex flex-col items-center gap-6 max-w-2xl relative">
+    <div class="flex flex-col items-center">
+      <img
+        src="/enriqueSF/images/me.jpg"
+        alt={`foto de ${name}`}
+        class="size-48 rounded-full sm:size-56 object-cover object-center border border-white overflow-hidden aspect-square" />
+      <h1
+        id="hero-title"
+        class="mt-6 text-xl text-center font-light tracking-tight leading-tight">
+        Hola, soy {name} 👋
+      </h1>
+    </div>
+
+    <TextHighlightKeywords text={summary} keywords={KEYWORD_CLASSES} />
+
+    <SocialLinks profiles={profilesData} />
+
+  </div>
+</section>
+

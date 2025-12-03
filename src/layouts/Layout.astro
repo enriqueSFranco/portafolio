@@ -1,4 +1,7 @@
 ---
+import Header from "@components/Header.astro";
+import Base from "./Base.astro";
+import Footer from "@components/Footer.astro";
 
 export interface Props {
   title: string;
@@ -7,36 +10,25 @@ export interface Props {
 const { title } = Astro.props;
 ---
 
-<!DOCTYPE html>
-<html lang='en' class='scroll-smooth'>
-  <head>
-    <meta charset='UTF-8' />
-    <meta name='viewport' content='width=device-width' />
-    <link rel='icon' type='image/svg+xml' href='/logo.svg' />
-    <meta
-      name='description'
-      content='curriculum vitae, cv, Frontend Developer, Desarrollo Web'
-    />
-    <meta name='author' content='Enrique SFranco' />
-    <title>{title}</title>
-  </head>
+<!doctype html>
+<html lang="es">
+  <Base title={title} />
   <body
-    class='relative min-h-scree flex flex-col items-center bg-white text-black text-base tracking-normal font-inter'
+    class="snap-y snap-mandatory min-h-screen items-center text-balance tracking-normal bg-slate-100 text-gray-700 dark:text-white dark:bg-black"
   >
-    <slot />
+    <Header />
+
+    <main
+      id="app"
+      class="px-4 flex flex-col grow w-full lg:w-2/3 mx-auto"
+    >
+    <div class="prose prose-invert prose-neutral space-y-10">
+      <slot />
+    </div>
+    </main>
+
+    <Footer />
   </body>
 </html>
-<style is:global>
-  @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
 
-  /* Register your custom font family and tell the browser where to find it. */
-  @font-face {
-    font-family: 'DistantGalaxy';
-    src: url('/fonts/DistantGalaxy.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-  }
-</style>
+<script src="@scripts/reveal.ts"></script>
