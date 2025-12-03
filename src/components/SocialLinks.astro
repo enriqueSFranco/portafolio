@@ -10,13 +10,13 @@ const { downloadLink, profiles } = Astro.props;
 ---
 
 <ul
-  class="flex flex-wrap items-center justify-center gap-3 w-full sm:justify-start"
+  class="flex flex-wrap items-center justify-center gap-3 w-full"
 >
   <li>
     <a
       href="/cv.pdf"
       download="CV Salinas Franco"
-      class="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-transparent text-sm font-medium text-zinc-300 transition-all duration-200 ease-out hover:text-white hover:bg-zinc-800 dark:hover:bg-zinc-700 cursor-pointer"
+      class="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-transparent text-sm font-medium text-zinc-300 transition-all duration-200 ease-out hover:text-white hover:bg-zinc-800 dark:hover:bg-zinc-800 cursor-pointer"
     >
       {downloadLink.text}
     </a>
@@ -31,7 +31,7 @@ const { downloadLink, profiles } = Astro.props;
           rel="noopener noreferrer"
           aria-label={`Logo de ${network}`}
           title={`Ir a ${network} de @enriqueSFranco`}
-          class="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-transparent text-sm font-medium text-zinc-400 transition-all duration-200 ease-out hover:text-white hover:bg-zinc-800 dark:hover:bg-zinc-700 cursor-pointer"
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-transparent text-sm font-medium text-zinc-400 transition-all duration-200 ease-out hover:text-white hover:bg-zinc-800 dark:hover:bg-zinc-800 cursor-pointer"
         >
           <svg
             width="28"
