@@ -1,25 +1,47 @@
-<div class="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-[999]">
-  <button id="floating-button" aria-label="Contáctame" class="group relative flex items-center justify-center h-12 w-12 sm:h-auto sm:w-auto sm:px-5 sm:py-3 rounded-full sm:rounded-[1rem] font-semibold text-sm transition-all duration-200 ease-out shadow-lg hover:shadow-xl border bg-[var(--wolt-blue)] text-white border-white/30 dark:bg-[var(--wolt-blue-dark)] dark:border-white/10 active:scale-[0.97]">
+<div class="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-20">
+  <button
+    id="floating-button"
+    aria-label="Contáctame"
+    class="
+      group relative flex items-center justify-center
+      rounded-xl cursor-pointer overflow-hidden
+
+      /* MOBILE-FIRST */
+      size-12 sm:size-auto
+      px-0 py-0 sm:px-5 sm:py-3
+
+      bg-black/60 dark:bg-zinc-900/70
+      backdrop-blur-xl
+      border border-white/15 dark:border-white/10
+
+      text-white font-medium text-sm
+      shadow-[0_4px_16px_-4px_rgba(0,0,0,0.5)]
+      hover:shadow-[0_6px_22px_-4px_rgba(0,0,0,0.65)]
+      transition-all duration-200 ease-out
+      active:scale-[0.96]
+    "
+  >
     <svg
-      xmlns="http://www.w3.org/2000/svg"
-      class="w-5 h-5"
-      viewBox="0 0 24 24"
-      stroke-width="2"
-      stroke="currentColor"
-      fill="none"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      width="22"
+      height="22"
+      class="stroke-white opacity-90 group-hover:opacity-100 transition-opacity"
     >
-      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-      <path d="M8 9h8"></path>
-      <path d="M8 13h6"></path>
-      <path
-        d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z"
-      ></path>
+      <use xlink:href="sprite.svg#message" />
     </svg>
-    <span class="hidden sm:inline ml-2 tracking-wide whitespace-nowrap transition-opacity duration-200">Contáctame</span>
+
     <span
-      class="absolute inset-0 rounded-full sm:rounded-[1rem] pointer-events-none opacity-0 group-hover:opacity-20 transition-opacity duration-300 bg-white"
+      class="hidden sm:inline ml-2 tracking-wide whitespace-nowrap text-white/90 group-hover:text-white transition-colors"
+    >
+      Contáctame
+    </span>
+
+    <span
+      class="absolute inset-0 rounded-xl pointer-events-none opacity-0 bg-white/10 group-hover:opacity-10 transition-opacity duration-200"
+    ></span>
+
+    <span
+      class="absolute inset-0 rounded-xl border border-white/5 opacity-0 group-hover:opacity-100 transition duration-500"
     ></span>
   </button>
 </div>
+
