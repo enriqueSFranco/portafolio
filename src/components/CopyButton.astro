@@ -3,74 +3,128 @@ interface Props {
   text: string;
   label?: string;
   copiedLabel?: string;
+  iconName?: string;
 }
 
-const { text, label = "Copiar", copiedLabel = "¡Copiado!" } = Astro.props;
+const {
+  text,
+  label = "",
+  copiedLabel = "",
+  iconName = "copy",
+} = Astro.props;
 ---
 
 <button
   aria-live="polite"
-  data-copy={text}
-  class="relative px-3 py-1.5 rounded-lg select-none
-    flex items-center justify-center gap-2
-    font-medium text-sm
-    bg-[var(--wolt-surface)]
-    dark:bg-[var(--wolt-surface-dark)]
-    text-[var(--wolt-text-primary)]
-    dark:text-[var(--wolt-text-primary-dark)]
-    border border-[var(--wolt-border)]
-    dark:border-[var(--wolt-border-dark)]
-    hover:bg-[var(--wolt-hover)]
-    dark:hover:bg-[var(--wolt-hover-dark)]
-    hover:border-[var(--wolt-border-strong)]
-    dark:hover:border-[var(--wolt-border-strong-dark)]
-    transition-all duration-200"
+  data-copy-text={text}
+  data-label={label}
+  data-copied-label={copiedLabel}
+  data-icon-name={iconName}
+  id={`copy-btn-${Math.random().toString(36).substring(2, 9)}`}
+  class="copy-button group relative flex items-center gap-2 size-10 px-3 py-1.5 rounded-lg cursor-pointer hover:bg-white/5 text-white font-medium text-xs shadow-sm hover:shadow-md transition-all duration-150"
 >
-  {label}
+  <svg width="17" height="17" aria-hidden="true" class="opacity-70 group-hover:opacity-100 transition-opacity">
+    <use xlink:href={`sprite.svg#${iconName}`} />
+  </svg>
 
-  <span
-    data-copy-feedback
-    class="absolute -bottom-7 left-1/2 -translate-x-1/2
-      bg-[var(--wolt-blue)] text-white px-2 py-0.5 rounded-md
-      text-[10px] font-medium shadow-md
-      opacity-0 pointer-events-none
-      transition-opacity duration-300"
-  >
-    {copiedLabel}
-  </span>
+  {label && <span class="copy-label">{label}</span>}
 </button>
 
-<script is:inline>
-  const btn = document.currentScript.previousElementSibling;
 
-  const feedback = btn.querySelector("[data-copy-feedback]");
-  const toCopy = btn.dataset.copy;
+<script>
+  function setupCopyButton(button: HTMLButtonElement) {
+    const textToCopy = button.dataset.copyText;
+    const initialLabel = button.dataset.label;
+    const copiedLabel = button.dataset.copiedLabel;
+    const initialIconName = button.dataset.iconName;
 
-  btn.addEventListener("click", async () => {
-    try {
-      await navigator.clipboard.writeText(toCopy);
-      showFeedback();
-    } catch {
-      fallbackCopy(toCopy);
-      showFeedback(true);
+    const icon = button.querySelector(".copy-icon use");
+    const labelSpan = button.querySelector(".copy-label");
+    let isCopied = false;
+
+    // Función de Copia de Reserva (Fallback)
+    function fallbackCopy(value) {
+      const el = document.createElement("textarea");
+      el.value = value;
+      el.setAttribute("readonly", ""); // Para evitar que el teclado aparezca en móviles
+      el.style.position = "absolute";
+      el.style.left = "-9999px";
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand("copy");
+      el.remove();
     }
-  });
 
-  function showFeedback(isFallback = false) {
-    if (!feedback) return;
+    // Función para manejar el estado visual
+    function setCopiedState() {
+      if (isCopied) return;
+      isCopied = true;
 
-    if (isFallback) feedback.textContent = "Copiado (fallback)";
+      // 1. Actualiza el texto
+      labelSpan.textContent = copiedLabel;
 
-    feedback.style.opacity = "1";
-    setTimeout(() => (feedback.style.opacity = "0"), 1500);
+      icon.setAttribute("xlink:href", "sprite.svg#check");
+      icon.setAttribute("href", "sprite.svg#check"); // Para navegadores modernos
+
+      button.classList.add(
+        "is-copied",
+        "bg-green-500/20",
+        "border-green-500/50",
+        "text-green-500",
+        "hover:bg-green-500/30"
+      );
+      button.classList.remove(
+        "bg-white",
+        "dark:bg-[#111]",
+        "text-gray-900",
+        "dark:text-gray-100",
+        "hover:bg-gray-50",
+        "dark:hover:bg-white/5"
+      );
+
+      // 4. Temporizador para resetear
+      setTimeout(() => {
+        isCopied = false;
+        labelSpan.textContent = initialLabel;
+        icon.setAttribute("xlink:href", `sprite.svg#${initialIconName}`);
+        icon.setAttribute("href", `sprite.svg#${initialIconName}`);
+
+        // Vuelve a los estilos originales
+        button.classList.remove(
+          "is-copied",
+          "bg-green-500/20",
+          "border-green-500/50",
+          "text-green-500",
+          "hover:bg-green-500/30"
+        );
+        button.classList.add(
+          "bg-white",
+          "dark:bg-[#111]",
+          "text-gray-900",
+          "dark:text-gray-100",
+          "hover:bg-gray-50",
+          "dark:hover:bg-white/5"
+        );
+      }, 2000);
+    }
+
+    // Listener del click
+    button.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(textToCopy);
+        setCopiedState();
+      } catch (err) {
+        // En caso de fallo (por ejemplo, en HTTP sin SSL o permisos), usamos el fallback
+        console.warn(
+          "Fallo al usar navigator.clipboard. Usando método de reserva.",
+          err
+        );
+        fallbackCopy(textToCopy);
+        setCopiedState(); // Aún mostramos éxito si el fallback funcionó
+      }
+    });
   }
 
-  function fallbackCopy(value) {
-    const el = document.createElement("textarea");
-    el.value = value;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand("copy");
-    el.remove();
-  }
+  // Busca todos los botones de copia y aplica la lógica
+  document.querySelectorAll(".copy-button").forEach(setupCopyButton);
 </script>
