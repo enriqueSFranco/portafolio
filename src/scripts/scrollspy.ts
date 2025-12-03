@@ -20,7 +20,7 @@ function closeMenu() {
 
   setTimeout(() => {
     mobileMenu.classList.add("hidden");
-  }, 380); // coincide con tu CSS
+  }, 380);
 
   document.body.style.overflow = "visible";
 }
@@ -39,7 +39,7 @@ mobileMenu?.querySelectorAll("a").forEach((a) => {
 });
 
 // ------------------------------
-// DESKTOP NAV INDICATOR (TESLA STYLE)
+// DESKTOP NAV INDICATOR
 // ------------------------------
 
 const nav = document.getElementById("main-nav");
@@ -61,19 +61,19 @@ function moveIndicatorTo(link: HTMLAnchorElement) {
   indicator.style.opacity = "0.25";
 }
 
-// Hover → mueve el indicador
+// Hover / mueve el indicador
 links.forEach((link) => {
   link.addEventListener("mouseenter", () => moveIndicatorTo(link));
 });
 
-// Al salir del nav → vuelve al activo
+// Al salir del nav / vuelve al activo
 nav?.addEventListener("mouseleave", () => {
   const active = nav.querySelector(".active-link") as HTMLAnchorElement | null;
   if (active) moveIndicatorTo(active);
   else if (indicator) indicator.style.opacity = "0";
 });
 
-// Click → marca activo + mueve indicador
+// Click / marca activo y mueve indicador
 links.forEach((link) => {
   link.addEventListener("click", () => {
     links.forEach((l) => l.classList.remove("active-link"));
@@ -87,8 +87,10 @@ links.forEach((link) => {
 // ------------------------------
 
 const sections = Array.from(links)
-  .map((link) =>
-    document.getElementById(link.getAttribute("href")!.replace("#", ""))
+  .map((link) => {
+    console.log(link.getAttribute("href")?.replace("/enriqueSF/#", ""))
+    return document.getElementById(link.getAttribute("href")!.replace("/enriqueSF/#", ""))
+  }
   )
   .filter(Boolean) as HTMLElement[];
 
@@ -113,7 +115,7 @@ const observer = new IntersectionObserver(
     currentSectionId = id;
 
     const link = document.querySelector(
-      `nav#main-nav a.nav-link[href="#${id}"]`
+      `nav#main-nav a.nav-link[href="/enriqueSF/#${id}"]`
     ) as HTMLAnchorElement | null;
 
     links.forEach((l) => l.classList.remove("active-link"));

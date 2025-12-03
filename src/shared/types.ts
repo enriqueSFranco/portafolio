@@ -3,9 +3,3 @@ export type SocialProfile = {
     username: string,
     url: string
 }
-
-export type DownloadLink = {
-    href: string;
-    downloadName: string;
-    text: string;
-}
