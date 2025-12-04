@@ -9,7 +9,10 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/enriqueSFranco">
+  <a href="https://enriqueSFranco.github.io/portafolio/">
+    <img src="https://img.shields.io/badge/Ver%20Portafolio-Visit-blue?style=flat-square&logo=github" />
+  </a>
+  <a href="https://github.com/enriqueSFranco/portafolio">
     <img src="https://img.shields.io/badge/GitHub-enriqueSFranco-black?style=flat-square&logo=github" />
   </a>
   <a href="https://www.linkedin.com/in/enrique-sfranco">
@@ -22,6 +25,7 @@
 # 👋 Sobre mí
 
 Soy **Desarrollador Frontend** con experiencia construyendo interfaces modernas utilizando **JavaScript**, **TypeScript**, **React**, **Astro** y **Tailwind CSS**.  
+
 Me enfoco en:
 
 - Crear experiencias accesibles y rápidas  
@@ -35,7 +39,7 @@ Me gusta trabajar en proyectos que resuelvan problemas reales y aprender nuevas 
 # 🛠️ Tecnologías Principales
 
 | Categoría | Tecnologías |
-|----------|-------------|
+|-----------|-------------|
 | **Frontend** | React · Next.js · Astro · Tailwind CSS |
 | **Lenguajes** | TypeScript · Python |
 | **UI / Styling** | Tailwind CSS · Ant Design |
@@ -49,41 +53,39 @@ Me gusta trabajar en proyectos que resuelvan problemas reales y aprender nuevas 
 A continuación encontrarás algunos de mis proyectos principales.  
 Puedes ver el código, tecnologías y enlaces de demo.
 
----
-
-## 🎓 **1. Bolsa de Trabajo ESCOM**  
+## 🎓 Bolsa de Trabajo ESCOM
 **Tipo:** Proyecto de Tesis | Plataforma de vacantes + algoritmo de recomendación  
 **Estado:** Finalizado  
-🔗 *(Agregar enlace)*
+🔗 [Ver proyecto](#)  
 
 **Descripción**  
 Sistema web que conecta estudiantes de la ESCOM con oportunidades laborales mediante un algoritmo que recomienda vacantes según habilidades.
 
-**Stack**  
+**Stack:**  
 `React` · `Styled Components` · `Material UI` · `Python` · `Django REST Framework`
 
 ---
 
-## 🧠 **2. Detección de Toxicidad en Twitch**  
+## 🧠 Detección de Toxicidad en Twitch
 **Tipo:** Proyecto Personal  
-🔗 *(Agregar enlace)*
+🔗 [Ver proyecto](#)  
 
 **Descripción**  
 Sistema que detecta mensajes tóxicos en tiempo real usando un modelo de IA. Ideal para moderación de chats de Twitch.
 
-**Stack**  
+**Stack:**  
 `React` · `Tailwind CSS` · `tmi.js` · `Node.js` · `API REST`
 
 ---
 
-## 📝 **3. Intellice CV – Generador de Currículums**  
+## 📝 Intellice CV – Generador de Currículums
 **Tipo:** Proyecto Personal  
-🔗 *(Agregar enlace)*
+🔗 [Ver proyecto](#)  
 
 **Descripción**  
 Aplicación para crear, editar y exportar currículums de forma interactiva. Incluye drag & drop y edición enriquecida.
 
-**Stack**  
+**Stack:**  
 `TypeScript` · `React` · `Zustand` · `DnD Kit` · `TipTap Editor`
 
 ---
@@ -91,15 +93,9 @@ Aplicación para crear, editar y exportar currículums de forma interactiva. Inc
 # 📸 Galería
 
 <div align="center" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; margin-top: 20px;">
-  <span style="display: inline-block; margin: 10px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-    <img width="281" height="591" alt="portafolio-hero" src="https://github.com/user-attachments/assets/0c7f99ef-fb32-4fd9-a187-93eadc8e328c" alt="Imagen de la sección 'sobre mi'" />
-  </span>
-  <span style="display: inline-block; margin: 10px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-    <img width="281" height="591" alt="portafolio-educacion" src="https://github.com/user-attachments/assets/e599ee06-c6ac-4edf-9355-4a18f21383a4" alt="Imagen de la sección 'educación'" />
-  </span>
-  <span style="display: inline-block; margin: 10px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-    <img width="281" height="591" alt="portafolio-proyectos" src="https://github.com/user-attachments/assets/d9aafa8f-dfc2-4daa-a115-77743d1b08ce" alt="Imagen de la sección 'proyectos'" />
-  </span>
+  <img width="281" height="591" src="https://github.com/user-attachments/assets/0c7f99ef-fb32-4fd9-a187-93eadc8e328c" alt="Sección 'Sobre mí'" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+  <img width="281" height="591" src="https://github.com/user-attachments/assets/e599ee06-c6ac-4edf-9355-4a18f21383a4" alt="Sección 'Educación'" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+  <img width="281" height="591" src="https://github.com/user-attachments/assets/d9aafa8f-dfc2-4daa-a115-77743d1b08ce" alt="Sección 'Proyectos'" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
 </div>
 
 ---
@@ -108,14 +104,12 @@ Aplicación para crear, editar y exportar currículums de forma interactiva. Inc
 
 Si te interesa colaborar, tienes una oportunidad laboral o quieres hablar sobre algún proyecto:
 
-- **Email:** enrique.sfranco04@gmail.com  
-- **GitHub:** https://github.com/enriqueSFranco  
-- **LinkedIn:** https://www.linkedin.com/in/enrique-sfranco  
+- **Email:** [enrique.sfranco04@gmail.com](mailto:enrique.sfranco04@gmail.com)  
+- **GitHub:** [enriqueSFranco](https://github.com/enriqueSFranco)  
+- **LinkedIn:** [enrique-sfranco](https://www.linkedin.com/in/enrique-sfranco)  
 
 ---
 
 # ⭐ Apoya el repositorio
 
-Si te gustó este proyecto, ¡considera dejar una estrella! ⭐  
-
-
+Si te gustó este proyecto, ¡considera dejar una estrella! ⭐
