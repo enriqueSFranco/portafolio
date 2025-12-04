@@ -37,10 +37,10 @@ Me gusta trabajar en proyectos que resuelvan problemas reales y aprender nuevas 
 | Categoría | Tecnologías |
 |----------|-------------|
 | **Frontend** | React · Next.js · Astro · Tailwind CSS |
-| **Lenguajes** | JavaScript · TypeScript · Python |
-| **UI / Styling** | Tailwind CSS · Styled Components · Material UI |
-| **Herramientas** | Git · PNPM · Zustand · Redux · Drizzle |
-| **Backend / Otros** | Node.js · Express · Django REST · Web Scraping (Puppeteer) |
+| **Lenguajes** | TypeScript · Python |
+| **UI / Styling** | Tailwind CSS · Ant Design |
+| **Herramientas** | Git · PNPM · Jotai · Redux Toolkit · Drizzle |
+| **Backend / Otros** | Node.js · Express · Web Scraping (Puppeteer / Playwright) |
 
 ---
 
