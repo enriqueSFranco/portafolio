@@ -1,7 +1,7 @@
 # 🌐 Portafolio – Frontend Developer
 
 <p align="center">
-  <img src="./public/images/portfolio-preview.png" width="700" alt="Vista previa del portafolio" />
+  <img width="700" alt="portafolio" src="https://github.com/user-attachments/assets/519834b2-5e31-41d3-9448-a0a105507537" />
 </p>
 
 <p align="center">
@@ -90,9 +90,17 @@ Aplicación para crear, editar y exportar currículums de forma interactiva. Inc
 
 # 📸 Galería
 
-<p align="center">
-  <img src="./public/images/portfolio-preview.png" width="600" />
-</p>
+<div align="center" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; margin-top: 20px;">
+  <span style="display: inline-block; margin: 10px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+    <img width="281" height="591" alt="portafolio-hero" src="https://github.com/user-attachments/assets/0c7f99ef-fb32-4fd9-a187-93eadc8e328c" alt="Imagen de la sección 'sobre mi'" />
+  </span>
+  <span style="display: inline-block; margin: 10px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+    <img width="281" height="591" alt="portafolio-educacion" src="https://github.com/user-attachments/assets/e599ee06-c6ac-4edf-9355-4a18f21383a4" alt="Imagen de la sección 'educación'" />
+  </span>
+  <span style="display: inline-block; margin: 10px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+    <img width="281" height="591" alt="portafolio-proyectos" src="https://github.com/user-attachments/assets/d9aafa8f-dfc2-4daa-a115-77743d1b08ce" alt="Imagen de la sección 'proyectos'" />
+  </span>
+</div>
 
 ---
 
