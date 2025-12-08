@@ -1,0 +1,72 @@
+---
+import Section from "@layouts/Section.astro";
+---
+
+<Section
+  id="educacion"
+  title="Formación académica"
+  aria-labelledby="educacion-title"
+  data-delay="300"
+>
+  <!-- CARD -->
+  <div
+    class="group relative grid grid-cols-1 md:grid-cols-3 gap-6 p-6 sm:p-8 rounded-2xl
+         border border-white/10 bg-zinc-900/40 backdrop-blur-xl
+         transition-all duration-300 hover:border-white/20 hover:bg-zinc-900/60"
+  >
+    <!-- SPOTLIGHT (más sutil y profesional) -->
+    <div
+      class="pointer-events-none absolute inset-0 rounded-2xl opacity-0
+           group-hover:opacity-100 transition duration-500
+           bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.10),transparent_70%)]"
+    >
+    </div>
+
+    <!-- LEFT CONTENT -->
+    <div class="relative flex flex-col md:col-span-2 z-10">
+      <!-- Badge -->
+      <div class="flex items-center gap-3 mb-3">
+        <div
+          class="w-9 h-9 rounded-xl border border-white/10 bg-zinc-800/70
+               flex items-center justify-center text-lg"
+        >
+          🎓
+        </div>
+        <span class="text-xs sm:text-sm text-zinc-500 tracking-wide uppercase">
+          Ingeniería
+        </span>
+      </div>
+
+      <!-- Title -->
+      <h3 class="text-xl sm:text-2xl font-semibold">
+        Instituto Politécnico Nacional
+        <span class="block font-normal text-sm sm:text-base text-zinc-500 mt-1">
+          Escuela Superior de Cómputo (ESCOM)
+        </span>
+      </h3>
+
+      <!-- Description -->
+      <p class="text-sm sm:text-base text-zinc-400 mt-4 leading-relaxed">
+        Ingeniería en Sistemas Computacionales — Desarrollo de software,
+        análisis, diseño y optimización de soluciones tecnológicas.
+      </p>
+    </div>
+
+    <!-- RIGHT PERIOD -->
+    <div
+      class="relative flex flex-col justify-center md:items-end md:text-right z-10"
+    >
+      <p class="font-medium text-xs text-zinc-500 tracking-wide uppercase">
+        Periodo
+      </p>
+
+      <p class="text-lg sm:text-xl font-semibold mt-1">
+        Enero 2017 — Enero 2023
+      </p>
+
+      <div class="hidden md:block mt-3">
+        <div class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></div>
+      </div>
+    </div>
+  </div>
+</Section>
