@@ -1,0 +1,39 @@
+---
+import type { SocialProfile } from "@lib/types/social-profile";
+import CopyButton from "./CopyButton.astro";
+
+interface Props {
+  profiles: SocialProfile[];
+}
+
+const { profiles } = Astro.props;
+---
+
+<ul class="flex flex-wrap items-center justify-center space-x-1 w-full">
+  <li>
+    <CopyButton
+      label="enrique.sfranco04@gmail.com"
+      text="enrique.sfranco04@gmail.com"
+    />
+  </li>
+
+  {
+    profiles.map(({ network, url }) => (
+      <li>
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Logo de ${network}`}
+          title={`Ir a ${network} de @enriqueSFranco`}
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-zinc-800 bg-zinc-900/40 text-sm font-medium text-zinc-400  hover:border-zinc-700 hover:text-white hover:bg-zinc-900/70 transition-all duration-200 backdrop-blur-sm">
+          <svg width="16" height="16">
+            <use xlink:href={`sprite.svg#${network}`} />
+          </svg>
+
+          <span class="capitalize tracking-tight">{network}</span>
+        </a>
+      </li>
+    ))
+  }
+</ul>
