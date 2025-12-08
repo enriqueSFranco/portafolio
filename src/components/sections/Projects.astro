@@ -1,0 +1,13 @@
+---
+import ProjectsGrid from "@components/ui/ProjectsGrid.astro";
+import Section from "@layouts/Section.astro";
+import { getAllProjects } from "@lib/projects";
+
+
+const projects = await getAllProjects();
+---
+
+<Section id="proyectos" title="Proyectos" data-delay="450" aria-labelledby="projects-title">
+  <ProjectsGrid projects={projects} />
+</Section>
+

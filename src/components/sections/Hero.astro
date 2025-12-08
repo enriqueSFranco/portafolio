@@ -1,0 +1,60 @@
+---
+import cv from "../../cv.json";
+import type { SocialProfile } from "@lib/types/social-profile";
+import SocialLinks from "@components/ui/SocialLinks.astro";
+import Section from "@layouts/Section.astro";
+
+const { name, profiles } = cv.basic;
+
+const profilesData = profiles as SocialProfile[];
+---
+
+<Section id="sobremi" aria-labelledby="hero-title" data-delay="150">
+  <div class="flex flex-col items-center">
+    <!-- Foto -->
+    <div class="relative">
+      <img
+        src="/portafolio/images/me.jpeg"
+        alt={`foto de ${name}`}
+        class="size-40 sm:size-52 md:size-56 rounded-full object-cover object-top"
+      />
+
+      <!-- Glow suave azul (opcional) -->
+      <div
+        class="absolute inset-0 rounded-full bg-blue-500/10 blur-2xl -z-10">
+      </div>
+    </div>
+
+    <!-- Título -->
+    <h3
+      id="hero-title"
+      class="mt-6 text-2xl sm:text-3xl font-semibold text-center tracking-tight leading-tight"
+    >
+      {name}
+    </h3>
+  </div>
+
+  <!-- Descripción -->
+  <div
+    class="mt-6 sm:mt-8 leading-relaxed text-balance text-center text-sm sm:text-base max-w-xl mx-auto space-y-4"
+  >
+    <p>
+      <span class="font-bold italic"> Desarrollador Frontend </span>
+      con formación en
+      <span class="font-bold italic">
+        Ingeniería en Sistemas Computacionales
+      </span>
+      y experiencia construyendo interfaces web con TypeScript, React.js, Next.js
+      y Tailwind CSS.
+    </p>
+
+    <p>
+      Me interesa crear experiencias digitales claras y funcionales, colaborar
+      en equipos donde pueda aportar valor y seguir aprendiendo nuevas
+      tecnologías para crecer como desarrollador.
+    </p>
+  </div>
+
+  <!-- Redes sociales -->
+  <SocialLinks profiles={profilesData} />
+</Section>

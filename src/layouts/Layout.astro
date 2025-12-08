@@ -1,7 +1,8 @@
 ---
-import Header from "@components/Header.astro";
 import Base from "./Base.astro";
-import Footer from "@components/Footer.astro";
+import Footer from "@components/layout/Footer.astro";
+import Prose from "@components/layout/Prose.astro";
+import "../styles/global.css";
 
 export interface Props {
   title: string;
@@ -14,19 +15,11 @@ const { title } = Astro.props;
 <html lang="es">
   <Base title={title} />
   <body
-    class="snap-y snap-mandatory min-h-screen items-center text-balance tracking-normal bg-slate-100 text-gray-700 dark:text-white dark:bg-black"
+    class="min-h-screen flex flex-col items-center text-balance tracking-normal bg-gray-950"
   >
-    <Header />
-
-    <main
-      id="app"
-      class="px-4 flex flex-col grow w-full lg:w-2/3 mx-auto"
-    >
-    <div class="prose prose-invert prose-neutral space-y-10">
+    <Prose>
       <slot />
-    </div>
-    </main>
-
+    </Prose>
     <Footer />
   </body>
 </html>

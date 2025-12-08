@@ -1,0 +1,40 @@
+---
+interface Props {
+  id: string;
+  title?: string;
+  subtitle?: string;
+}
+
+const { id, title, subtitle } = Astro.props;
+---
+
+<section
+  id={id}
+  aria-labelledby={title ? `${id}-title` : undefined}
+  class="relative w-full mt-8 sm:mt-10 flex flex-col items-center text-sm overflow-hidden">
+  <!-- Title -->
+  {
+    title && (
+      <h2
+        id={`${id}-title`}
+        class="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight">
+        {title}
+      </h2>
+    )
+  }
+
+  <!-- Subtitle -->
+  {
+    subtitle && (
+      <p
+        class="mt-1 uppercase tracking-[0.25em] text-[0.65rem] sm:text-xs text-zinc-500">
+        {subtitle}
+      </p>
+    )
+  }
+
+  <!-- Section Content -->
+  <div class="w-full max-w-4xl">
+    <slot />
+  </div>
+</section>

@@ -1,5 +1,5 @@
 ---
-import type { SocialProfile } from "@shared/types";
+import type { SocialProfile } from "@lib/types/social-profile";
 import CopyButton from "./CopyButton.astro";
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 const { profiles } = Astro.props;
 ---
 
-<ul class="flex flex-wrap items-center justify-center gap-3 w-full">
+<ul class="flex flex-wrap items-center justify-center space-x-1 w-full">
   <li>
     <CopyButton
       label="enrique.sfranco04@gmail.com"
@@ -19,7 +19,7 @@ const { profiles } = Astro.props;
 
   {
     profiles.map(({ network, url }) => (
-      <li class="flex">
+      <li>
         <a
           href={url}
           target="_blank"
