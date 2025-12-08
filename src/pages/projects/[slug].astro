@@ -1,0 +1,60 @@
+---
+import { render } from "astro:content";
+import { getAllProjects } from "@lib/projects";
+import Layout from "@layouts/Layout.astro";
+
+export const getStaticPaths = async () => {
+  const projects = await getAllProjects();
+
+  return projects.map((project) => ({
+    params: { slug: project.data.slug },
+    props: { project },
+  }));
+};
+
+const { project } = Astro.props;
+const { data } = project;
+const { title, cover, slug } = data;
+const { Content } = await render(project);
+---
+
+<Layout title={title}>
+  <article class="mx-auto max-w-3xl py-16 space-y-10">
+    <!-- HERO -->
+    <header class="space-y-6">
+      <h1
+        class="text-4xl md:text-5xl font-bold tracking-tight leading-tight
+                 bg-radial from-white to-white/60 bg-clip-text text-transparent"
+      >
+        {title}
+      </h1>
+
+      <p class="text-white/60 text-lg">
+        Un vistazo detallado al proceso, decisiones y aprendizajes detrás de
+        este proyecto.
+      </p>
+
+      <!-- Imagen destacada -->
+      <div
+        class="rounded-2xl overflow-hidden p-0.5
+        shadow-xl border border-white/15"
+      >
+        <div class="rounded-2xl overflow-hidden bg-black">
+          <img
+            transition:name={`img-${slug}`}
+            src={cover}
+            alt={`proyecto-${title}`}
+            class="w-full object-cover rounded-2xl transition-transform
+         duration-500 hover:scale-[1.03]"
+          />
+        </div>
+      </div>
+    </header>
+
+    <hr class="border-white/10" />
+
+    <!-- CONTENIDO DEL BLOG -->
+    <Content />
+    
+  </article>
+</Layout>

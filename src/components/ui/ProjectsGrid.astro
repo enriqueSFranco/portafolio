@@ -1,33 +1,33 @@
 ---
-import cv from "../cv.json";
+import type { Project } from "@lib/types/project";
 import ProjectCard from "./ProjectCard.astro";
-import StackFilters from "./StackFilters.astro";
+// import StackFilters from "./StackFilters.astro";
 
-const { projects } = cv;
-const techs = Array.from(new Set(projects.flatMap((p) => p.stack)));
+// const techs = Array.from(new Set(projects.flatMap((p) => p.stack)));
+
+export interface Props {
+  projects: Project[]
+}
+
+const {projects} = Astro.props
 ---
 
-<div class="w-full flex flex-col gap-6 reveal" data-delay="200">
-  <StackFilters options={["Todos", ...techs]} active="Todos" />
+<ol
+  id="projects-grid"
+  class="w-full grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-5 lg:gap-6 auto-rows-fr"
+>
+  {
+    projects.map((project) => (
+      <li
+        class="translate-y-4 transition-all duration-700 ease-[cubic-bezier(0.18,0.75,0.32,1)] will-change-transform"
+      >
+        <ProjectCard project={project} />
+      </li>
+    ))
+  }
+</ol>
 
-  <ol
-    id="projects-grid"
-    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 md:gap-5 lg:gap-6 auto-rows-fr"
-  >
-    {
-      projects.map((project) => (
-        <li
-          data-tech={project.stack.join(" ").toLowerCase()}
-          class="translate-y-4 transition-all duration-700 ease-[cubic-bezier(0.18,0.75,0.32,1)] will-change-transform"
-        >
-          <ProjectCard project={project} />
-        </li>
-      ))
-    }
-  </ol>
-</div>
-
-<script>
+<!-- <script>
   const $buttons = document.querySelectorAll("[data-filter]");
   const $cards = document.querySelectorAll("#projects-grid li");
 
@@ -79,5 +79,5 @@ const techs = Array.from(new Set(projects.flatMap((p) => p.stack)));
   if (defaultBtn) {
     filterHandler(defaultBtn);
   }
-</script>
+</script> -->
 
