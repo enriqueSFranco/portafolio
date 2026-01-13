@@ -1,0 +1,26 @@
+:root {
+    --bg-main: #0a0a0a;
+    --bg-card: rgba(23, 23, 23, 0.7);
+    --border-subtle: rgba(255, 255, 255, 0.1);
+
+    /* Colores de Acento (Electric Blue) */
+    --accent-primary: #3b82f6;
+    --accent-secondary: #8b5cf6;
+    --accent-glow: rgba(59, 130, 246, 0.3);
+
+    /* Texto */
+    --text-primary: #ededed;
+    --text-secondary: #a1a1aa;
+    --text-muted: #71717a;
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --bg-main: #ffffff;
+        --bg-card: rgba(244, 244, 245, 0.7);
+        --border-subtle: rgba(0, 0, 0, 0.1);
+        --text-primary: #09090b;
+        --text-secondary: #52525b;
+        --text-muted: #71717a;
+    }
+}
