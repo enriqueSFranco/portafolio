@@ -1,6 +1,5 @@
 ---
 title: "PriceTracker"
-slug: "Price-Watch"
 year: 2025
 stack:
     - Typescript
