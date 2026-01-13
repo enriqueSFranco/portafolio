@@ -4,6 +4,7 @@ interface Props {
   label?: string;
   copiedLabel?: string;
   iconName?: string;
+  variant?: "default" | "ghost" | "outline" | "subtle";
 }
 
 const {
@@ -11,8 +12,21 @@ const {
   label = "Copiar",
   copiedLabel = "¡Copiado!",
   iconName = "copy",
+  variant = "default"
 } = Astro.props;
 
+const variants = {
+  default:
+    "border border-(--border-subtle) bg-(--bg-card) shadow-sm hover:border-(--accent-primary)",
+  ghost:
+    "border border-transparent bg-transparent hover:border-(--border-subtle)",
+  outline:
+    "border border-(--text-muted)/40 bg-transparent hover:border-(--accent-primary)",
+  subtle:
+    "border border-transparent bg-(--bg-card)/40 hover:bg-(--bg-card)",
+};
+
+const variantClass = variants[variant];
 ---
 
 <button
@@ -20,92 +34,60 @@ const {
   aria-live="polite"
   data-copy-text={text}
   data-copied-label={copiedLabel}
-  data-initial-icon={iconName}
-  data-copied-icon="check"
-  class="copy-button relative flex items-center gap-2 px-4 py-2 rounded-full cursor-pointer border border-zinc-800 bg-zinc-900/40 font-medium text-xs shadow-sm transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-zinc-400 hover:border-zinc-700 hover:text-white hover:bg-zinc-900/70">
-  <span
-    class="copy-tooltip absolute bg-green-500/45 text-white px-2 py-0.5 rounded text-xs whitespace-nowrap opacity-0 pointer-events-none transition-all duration-300 transform -translate-x-1/2 -translate-y-1/4 top-0 left-1/2"
-  >
+  class={`copy-button group relative flex items-center gap-2.5 px-4 py-2 rounded-full border border-(--border-subtle) bg-(--bg-card) text-[11px] font-mono uppercase tracking-widest text-(--text-muted) transition-all duration-300 hover:border-(--accent-primary) hover:text-(--text-primary) shadow-sm ${variantClass}`}
+>
+  <span class="copy-tooltip absolute -top-8 left-1/2 -translate-x-1/2 bg-(--text-primary) text-(--bg-main) px-2 py-1 rounded text-[9px] font-bold opacity-0 pointer-events-none transition-all duration-300">
     {copiedLabel}
   </span>
-  <svg
-    width="16"
-    height="16"
-    aria-hidden="true"
-    class="copy-icon opacity-80 group-hover:opacity-100 transition-opacity"
-  >
-    <use class="icon-use" xlink:href={`sprite.svg#${iconName}`}></use>
+
+  <svg width="16" height="16">
+    <use xlink:href={`sprite.svg#${iconName}`} />
   </svg>
 
-  {label && <span class="copy-label">{label}</span>}
+  <span class="max-w-36 truncate sm:max-w-none">
+    {label}
+  </span>
 </button>
 
 <script>
-  function setupCopyButton(button: HTMLButtonElement) {
-    const textToCopy = button.dataset.copyText;
-    const copiedLabel = button.dataset.copiedLabel;
+  function setupCopyButtons() {
+    const buttons = document.querySelectorAll<HTMLButtonElement>(".copy-button");
 
-    const tooltip = button.querySelector(".copy-tooltip");
+    buttons.forEach((button) => {
+      if ((button as any).__initialized) return;
+      (button as any).__initialized = true;
 
-    let isCopied = false;
+      const textToCopy = button.dataset.copyText || "";
+      const tooltip = button.querySelector(".copy-tooltip");
 
-    function fallbackCopy(value: string) {
-      const el = document.createElement("textarea");
-      el.value = value;
-      el.setAttribute("readonly", "");
-      el.style.position = "absolute";
-      document.body.appendChild(el);
-      el.select();
-      document.execCommand("copy");
-      el.remove();
-    }
+      button.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(textToCopy);
 
-    /** Actualiza el estado visual del botón a 'copiado'. */
-    function setCopiedState() {
-      if (isCopied || !tooltip) return;
-      isCopied = true;
+          if (tooltip) {
+            tooltip.classList.add("is-visible");
+            button.classList.add("border-(--accent-primary)");
 
-      tooltip.classList.add("is-visible");
-
-      button.setAttribute("aria-label", copiedLabel);
-      
-      setTimeout(() => {
-        isCopied = false;
-
-        tooltip.classList.remove("is-visible");
-
-      }, 2000);
-    }
-
-    button.addEventListener("click", async () => {
-      if (isCopied || !textToCopy) return;
-
-      try {
-        await navigator.clipboard.writeText(textToCopy);
-        setCopiedState();
-      } catch (err) {
-        console.warn("Fallo en la API del portapapeles. Usando fallback.", err);
-        fallbackCopy(textToCopy);
-        setCopiedState();
-      }
+            setTimeout(() => {
+              tooltip.classList.remove("is-visible");
+              button.classList.remove("border-(--accent-primary)");
+            }, 2000);
+          }
+        } catch (err) {
+          console.error("Error al copiar", err);
+        }
+      });
     });
   }
 
-  const button = document.getElementById("copy-btn") as HTMLButtonElement;
-
-  if (button) {
-    setupCopyButton(button);
-  }
+  setupCopyButtons();
+  document.addEventListener("astro:after-swap", setupCopyButtons);
 </script>
 
-<style is:inline>
-  .copy-tooltip {
-    transform: translate(-50%, 0);
-  }
 
+<style>
   .copy-tooltip.is-visible {
     opacity: 1;
-    transform: translate(-50%, -120%);
-    transition: opacity 300ms ease, transform 300ms ease;
+    transform: translate(-50%, -5px);
   }
 </style>

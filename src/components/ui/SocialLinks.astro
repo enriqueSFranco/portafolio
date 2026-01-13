@@ -9,7 +9,7 @@ interface Props {
 const { profiles } = Astro.props;
 ---
 
-<ul class="flex flex-wrap items-center justify-center space-x-1 w-full">
+<ul class="flex flex-wrap items-center justify-center lg:justify-start gap-3 w-full">
   <li>
     <CopyButton
       label="enrique.sfranco04@gmail.com"
@@ -25,13 +25,13 @@ const { profiles } = Astro.props;
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`Logo de ${network}`}
-          title={`Ir a ${network} de @enriqueSFranco`}
-          class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-zinc-800 bg-zinc-900/40 text-sm font-medium text-zinc-400  hover:border-zinc-700 hover:text-white hover:bg-zinc-900/70 transition-all duration-200 backdrop-blur-sm">
-          <svg width="16" height="16">
+          title={`Ir a ${network}`}
+          class="group inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-(--border-subtle) bg-(--bg-card) text-[11px] font-mono uppercase tracking-widest text-(--text-muted) hover:border-(--accent-primary) hover:text-(--text-primary) hover:bg-(--bg-main) transition-all duration-300 backdrop-blur-md shadow-sm"
+        >
+          <svg width="16" height="16" class="opacity-70 group-hover:opacity-100 transition-opacity">
             <use xlink:href={`sprite.svg#${network}`} />
           </svg>
-
-          <span class="capitalize tracking-tight">{network}</span>
+          <span class="hidden sm:inline-block">{network}</span>
         </a>
       </li>
     ))
