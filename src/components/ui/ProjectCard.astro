@@ -1,4 +1,5 @@
 ---
+import { slugify } from "@lib/utils";
 import type { CollectionEntry } from "astro:content"
 
 interface Props {
@@ -25,7 +26,7 @@ const { title, github, cover, summary, stack } = project.data;
     )}
 
     <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center gap-4">
-       <a href={`/projects/${title}`} class="bg-white text-black px-6 py-2 text-[10px] font-bold uppercase tracking-tighter hover:bg-black hover:text-white transition-colors duration-300">
+       <a href={`/portafolio/projects/${slugify(title)}`} class="bg-white text-black px-6 py-2 text-[10px] font-bold uppercase tracking-tighter hover:bg-black hover:text-white transition-colors duration-300">
           Ver caso de estudio
        </a>
     </div>
