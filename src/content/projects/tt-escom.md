@@ -1,6 +1,5 @@
 ---
 title: "Aplicación web de gestión para la Bolsa de Trabajo de ESCOM."
-slug: "tt-escom"
 year: 2023
 stack:
   - Javascript
@@ -57,7 +56,7 @@ Se investigaron plataformas clave para establecer el alcance y las *features* de
 
 ## 🏗 Arquitectura del Sistema
 
-La solución se implementó utilizando una arquitectura desacoplada para manejar la web, la API y los servicios de procesamiento intensivo. 
+La solución se implementó utilizando una arquitectura desacoplada para manejar la web, la API y los servicios de procesamiento intensivo.
 
 | Componente | Tecnología | Descripción / Propósito |
 | :--- | :--- | :--- |

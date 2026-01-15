@@ -1,13 +1,37 @@
 ---
-import ProjectsGrid from "@components/ui/ProjectsGrid.astro";
+import ProjectCard from "@components/ui/ProjectCard.astro";
 import Section from "@layouts/Section.astro";
 import { getAllProjects } from "@lib/projects";
-
 
 const projects = await getAllProjects();
 ---
 
-<Section id="proyectos" title="Proyectos" data-delay="450" aria-labelledby="projects-title">
-  <ProjectsGrid projects={projects} />
-</Section>
+<Section id="proyectos">
+  <div class="max-w-5xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-16">
+      <div class="md:col-span-3">
+        <h2 class="text-xs font-mono uppercase tracking-[0.3em] text-(--text-muted)">
+          Selected Works / 02
+        </h2>
+      </div>
+      <div class="md:col-span-9">
+        <p class="text-2xl font-light text-(--text-secondary) italic">
+          Una selección de soluciones digitales enfocadas en performance y estética.
+        </p>
+      </div>
+    </div>
 
+    <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-20">
+      {
+        projects.map((project, index) => (
+          <div
+            class="animate-in"
+            style={`animation-delay: ${index * 150}ms`}
+          >
+            <ProjectCard project={project} />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</Section>

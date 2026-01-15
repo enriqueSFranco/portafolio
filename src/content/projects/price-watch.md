@@ -1,6 +1,5 @@
 ---
-title: "PriceTracker"
-slug: "Proyecto de Personal - Price Watch"
+title: "Price Watch"
 year: 2025
 stack:
     - Typescript
@@ -10,7 +9,7 @@ stack:
     - Drizzle
     - Postgresql
 summary: "Sistema que monitorea productos en tiendas online, detecta cambios de precio/disponibilidad y expone una API de consulta en tiempo real."
-cover: "/portafolio/images/projects/price-watch.webp"
+cover: "/portafolio/images/projects/price-watch/price-watch.webp"
 github: "https://github.com/enriqueSFranco/price-watch-platform"
 featured: true
 ---
@@ -96,5 +95,3 @@ El proyecto **PriceTracker** es una demostración exitosa de la aplicación de l
 * **Ingeniería de Datos** y manejo de tareas asíncronas.
 * **Diseño de Sistemas** escalables y tolerantes a fallos.
 * **Web Scraping** avanzado y técnicas anti-bloqueo.
-
-Este sistema está listo para ser escalado para soportar múltiples *e-commerce* y gestionar una base de usuarios creciente.
