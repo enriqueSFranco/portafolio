@@ -1,67 +1,58 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
+@import './theme.css';
+@import './animations.css';
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-(--bg-main) text-(--text-primary) antialiased selection:bg-(--accent-glow);
+    font-family: "Geist", sans-serif;
+  }
+
+
+  h1,
+  h2,
+  h3 {
+    @apply font-semibold tracking-tight;
+  }
+
   *,
   ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentcolor);
+  ::before {
+    border-color: var(--border-subtle);
   }
 }
 
+@layer components {
+  /* Clase para tarjetas estilo Glassmorphism */
+  .glass-card {
+    @apply backdrop-blur-md bg-(--bg-card) border border-(--border-subtle) rounded-xl;
+  }
 
-html {
-  font-family: "Geist", sans-serif;
+  /* Gradiente para textos importantes */
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-linear-to-r from-(--accent-primary) to-(--accent-secondary);
+  }
 }
 
-@font-face {
-  font-family: "Geist";
-  src: url("/fonts/Geist-Bold.woft2") format("woft2");
-  font-weight: 600;
-  font-display: swap;
+/* Scrollbar minimalista */
+::-webkit-scrollbar {
+  width: 8px;
 }
 
-@font-face {
-  font-family: "Geist";
-  src: url("/fonts/Geist-ExtraBold.woft2") format("woft2");
-  font-weight: 800;
-  font-display: swap;
+::-webkit-scrollbar-track {
+  background: var(--bg-main);
 }
 
-@font-face {
-  font-family: "Geist";
-  src: url("/fonts/Geist-SemiBold.woft2") format("woft2");
-  font-weight: 500;
-  font-display: swap;
+::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: 10px;
 }
 
-@font-face {
-  font-family: "Geist";
-  src: url("/fonts/Geist-ExtraLight.woft2") format("woft2");
-  font-weight: 200;
-  font-display: swap;
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
 }
-
-@font-face {
-  font-family: "Geist";
-  src: url("/fonts/Geist-Light.woft2") format("woft2");
-  font-weight: 300;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Geist";
-  src: url("/fonts/Geist-Medium.woft2") format("woft2");
-  font-weight: 400;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Geist";
-  src: url("/fonts/Geist-Regular.woft2") format("woft2");
-  font-weight: normal;
-  font-display: swap;
-}
-

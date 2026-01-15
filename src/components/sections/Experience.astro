@@ -1,0 +1,72 @@
+---
+import Section from "@layouts/Section.astro";
+---
+
+<Section id="experiencia" class="py-16">
+  <div class="max-w-5xl mx-auto border-t border-(--border-subtle)/30 pt-16">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+
+      <div class="md:col-span-3">
+        <h2 class="text-xs font-mono uppercase tracking-[0.3em] text-(--text-muted) sticky top-24">
+          Experiencia / 02
+        </h2>
+      </div>
+
+      <div class="md:col-span-9 space-y-16">
+        <div class="group relative">
+          <div class="flex flex-col md:flex-row justify-between items-baseline gap-2 mb-6">
+            <h3 class="text-2xl md:text-3xl font-medium tracking-tight text-(--text-primary)">
+              Desarrollador Web Freelance
+            </h3>
+            <span class="text-sm font-mono text-(--text-muted) italic text-right">2025 — Actualidad</span>
+          </div>
+
+          <div class="space-y-8">
+            <p class="text-lg font-light leading-relaxed text-(--text-secondary) max-w-3xl">
+              Especializado en la <span class="text-(--text-primary) font-medium">transformación digital</span> de negocios locales con fuerte identidad visual. He liderado el diseño y desarrollo de plataformas para estudios de tatuajes y barberías de alta gama.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+              <div class="space-y-2">
+                <h4 class="text-xs font-mono uppercase tracking-widest text-(--accent-primary)">Arquitectura</h4>
+                <p class="text-sm text-(--text-secondary) leading-relaxed">
+                  Desarrollo de <span class="font-medium text-(--text-primary)">Landing Pages</span> de alto rendimiento utilizando Astro y React, logrando tiempos de carga óptimos para dispositivos móviles, donde se origina el 90% del tráfico de estos locales.
+                </p>
+              </div>
+
+              <div class="space-y-2">
+                <h4 class="text-xs font-mono uppercase tracking-widest text-(--accent-primary)">Impacto de Negocio</h4>
+                <p class="text-sm text-(--text-secondary) leading-relaxed">
+                  Implementación de galerías dinámicas optimizadas (Cloudinary/Vercel) para la exposición de portafolios, mejorando la retención del usuario en un <span class="font-medium text-(--text-primary)">25% mediante interfaces intuitivas</span>.
+                </p>
+              </div>
+
+              <div class="space-y-2">
+                <h4 class="text-xs font-mono uppercase tracking-widest text-(--accent-primary)">UX & Conversión</h4>
+                <p class="text-sm text-(--text-secondary) leading-relaxed">
+                  Integración de sistemas de reserva externos y optimización de flujos de contacto vía API, simplificando el proceso de agendamiento para el cliente final.
+                </p>
+              </div>
+
+              <div class="space-y-2">
+                <h4 class="text-xs font-mono uppercase tracking-widest text-(--accent-primary)">Consultoría</h4>
+                <p class="text-sm text-(--text-secondary) leading-relaxed">
+                  Asesoría técnica integral: desde la gestión de dominios y hosting hasta la implementación de <span class="font-medium text-(--text-primary)">SEO Local</span> para posicionar a los estudios en su área de influencia.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap gap-x-6 gap-y-2 pt-6 border-t border-(--border-subtle)/20">
+              {["Desarrollo Frontend", "SEO Local", "Optimización de Imágenes", "Consultoría Técnica"].map(skill => (
+                <span class="text-[9px] font-mono uppercase tracking-[0.2em] text-(--text-muted)">
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</Section>

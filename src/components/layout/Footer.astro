@@ -1,17 +1,88 @@
-<footer
-  class="w-full mt-20 py-10 flex items-center justify-center text-sm font-light text-zinc-400 border-t border-white/5 backdrop-blur-md"
->
-  <p class="flex items-center gap-2 tracking-wide">
-    Hecho con
-    <span class="text-lg animate-pulse">💙</span>
-    por
-    <a
-      href="https://github.com/enriqueSFranco"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="font-medium text-zinc-300 hover:text-white transition-colors inline-flex items-center gap-1"
-    >
-      @enriqueSFranco
-    </a>
-  </p>
+---
+import CopyButton from "@components/ui/CopyButton.astro";
+import cv from "../../cv.json";
+
+const { email } = cv.basic;
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="relative w-full pt-32 pb-12 overflow-hidden border-t border-(--border-subtle)/50">
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-px bg-linear-to-r from-transparent via-(--accent-primary)/20 to-transparent"></div>
+
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="flex flex-col space-y-24">
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+        <div class="lg:col-span-8 space-y-6">
+          <p class="font-mono text-[10px] uppercase tracking-[0.5em] text-(--accent-primary) font-bold">
+            Siguiente paso
+          </p>
+          <h2 class="text-6xl md:text-9xl font-bold tracking-[-0.05em] leading-[0.85] text-(--text-primary)">
+            <a
+              href={`mailto:${email}`}
+              class="group relative inline-block transition-colors duration-700"
+            >
+              <span class="relative z-10">Trabajemos</span>
+              <span class="absolute bottom-2 left-0 w-0 h-2 bg-(--accent-primary)/20 group-hover:w-full transition-all duration-500 -z-10"></span>
+            </a>
+          </h2>
+        </div>
+
+        <div class="lg:col-span-4 flex lg:justify-end">
+          <p class="text-(--text-secondary) font-light italic text-lg lg:text-right max-w-56 leading-relaxed">
+            Abierto a nuevos retos y colaboraciones remotas.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 py-12 border-y border-(--border-subtle)/30">
+
+        <div class="space-y-3">
+          <span class="block text-[10px] font-mono uppercase tracking-widest text-(--text-muted)">Ubicación</span>
+          <p class="text-sm font-medium tracking-tight text-(--text-primary)">
+            CDMX, México <span class="opacity-40 font-light">— UTC-6</span>
+          </p>
+        </div>
+
+        <div class="space-y-3">
+          <span class="block text-[10px] font-mono uppercase tracking-widest text-(--text-muted)">Contacto</span>
+          <div class="flex flex-col items-start">
+             <CopyButton
+              label={email}
+              text={email}
+              variant="ghost"
+            />
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <span class="block text-[10px] font-mono uppercase tracking-widest text-(--text-muted)">Redes</span>
+          <div class="flex gap-4 text-sm font-medium text-(--text-primary)">
+            <a href="#" class="hover:text-(--accent-primary) transition-colors">LinkedIn</a>
+            <a href="#" class="hover:text-(--accent-primary) transition-colors">GitHub</a>
+          </div>
+        </div>
+
+        <div class="space-y-3 md:text-right">
+          <span class="block text-xs font-mono uppercase tracking-widest text-(--text-muted)">Estado Actual</span>
+          <div class="flex items-center md:justify-end gap-2 text-sm font-medium text-(--text-primary)">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+            </span>
+            <span>Disponible</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col md:flex-row justify-between items-center gap-6 text-[9px] font-mono uppercase tracking-wide opacity-40 text-(--text-muted)">
+        <p>© {currentYear} — Todos los derechos reservados</p>
+        <div class="flex flex-wrap justify-center gap-6">
+          <span>Astro 5.0</span>
+          <span>Tailwind CSS</span>
+          <span>Geist Typeface</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </footer>

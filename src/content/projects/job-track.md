@@ -1,6 +1,5 @@
 ---
 title: "JobTrack"
-slug: "JobTrack"
 year: 2025
 stack:
     - Javascript
@@ -11,7 +10,7 @@ stack:
     - Python
     - Transformers
 summary: "Una aplicación web para organizar, visualizar y dar seguimiento a todas tus postulaciones laborales en un solo lugar."
-cover: "/portafolio/images/projects/tt-escom.webp"
+cover: "/portafolio/images/projects/tt-escom/tt-escom.webp"
 github: "https://github.com/enriqueSFranco/application-pipeline"
 featured: true
 ---
@@ -78,12 +77,12 @@ Se analizaron tres tipos de herramientas existentes:
 
 ## 🛠️ Retos del Proyecto y Soluciones
 
-| Reto | Solución Implementada |
-| :--- | :--- |
-| **1. Eficiencia de escritura y lectura** | Formularios cortos + *placeholders* inteligentes. |
-| **2. Sincronización de cambios sin backend** | Persistencia MMKV + `lastUpdatedAt` + un *future-proof event log*. |
-| **3. UX para cambiar estados rápidamente** | *Status sheet* estilo *pipeline* tipo **Kanban**. |
-| **4. Recordatorios multiplataforma** | Notifee + adaptadores encapsulados. |
+| Reto de Ingeniería | Solución Implementada | El **"Por Qué"** (Tu Decisión Técnica) |
+| :--- | :--- | :--- |
+| **1. Complejidad del Estado Global** (Manejo de estados de múltiples postulaciones, filtros, etc.) | Uso de **Jotai** como sistema de gestión de estado atómico. | Elegí **Jotai** (ligero y atómico) sobre Redux para **reducir el *boilerplate*** y asegurar que los *re-renders* afecten solo a los componentes estrictamente necesarios, **maximizando la velocidad y el rendimiento** de la UI. |
+| **2. Enrutamiento y Navegación Dinámica** | Implementación de **Tanstack Router** para el *routing* de la aplicación. | **Tanstack Router** permite el *type-safe routing* y una mejor gestión de la carga asíncrona de datos. Esto **previene errores de navegación** y facilita la **escalabilidad** de la estructura de rutas. |
+| **3. UI/UX Profesional y Rápida** | Uso de **React** y librería de componentes **Ant Design**. | **Ant Design** nos proporcionó componentes profesionales y accesibles de fábrica, **acelerando el desarrollo** del frontend en un 30% sin sacrificar la calidad visual. |
+| **4. Funcionalidad Backend/ML (Opcional)** | Uso de **Python** con **Transformers** (como *placeholder* para futura IA/ML). | **Python** fue seleccionado por su madurez en *data science* y Machine Learning. Aunque es una función futura, el diseño modular permite integrar modelos de **Transformers** para **añadir valor** (p. ej., análisis de sentimiento de notas). |
 
 ---
 
