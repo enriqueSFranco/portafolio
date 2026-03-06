@@ -9,15 +9,18 @@
   }
 
   body {
-    @apply bg-(--bg-main) text-(--text-primary) antialiased selection:bg-(--accent-glow);
-    font-family: "Geist", sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-secondary);
+    font-family: 'Inter Variable', sans-serif;
   }
-
 
   h1,
   h2,
   h3 {
-    @apply font-semibold tracking-tight;
+    color: var(--text-primary);
+    font-family: 'Space Grotesk Variable', sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
   }
 
   *,
@@ -28,7 +31,6 @@
 }
 
 @layer components {
-  /* Clase para tarjetas estilo Glassmorphism */
   .glass-card {
     @apply backdrop-blur-md bg-(--bg-card) border border-(--border-subtle) rounded-xl;
   }
