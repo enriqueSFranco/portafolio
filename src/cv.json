@@ -27,64 +27,13 @@
       "endDate": "2023-06"
     }
   ],
-
-  "skills": {
-    "technical": [
-      "Typescript",
-      "React",
-      "Next.js",
-      "React Native",
-      "Python",
-      "Git"
-    ]
-  },
-
-  "projects": [
-    {
-      "id": 0,
-      "title": "Bolsa de Trabajo ESCOM",
-      "period": "Enero 2022 – Enero 2023",
-      "type": "Proyecto de Tesis",
-      "description": "Sistema web que facilita la búsqueda y postulación de empleo para los alumnos de ESCOM, incluyendo un algoritmo de recomendación que sugiere vacantes basadas en habilidades y perfil del usuario.",
-      "thumbnail": "/portafolio/images/bolsa-trabajo-escom.webp",
-      "repository": "https://github.com/enriqueSFranco/TT-ESCOM",
-      "stack": [
-        "JavaScript",
-        "React",
-        "Python"
-      ]
-    },
-    {
-      "id": 1,
-      "title": "PriceWatch",
-      "period": "",
-      "type": "Web Scraper + API + Automatización",
-      "status": "En desarrollo",
-      "description": "Sistema que monitorea productos en tiendas online, detecta cambios de precio/disponibilidad y expone una API de consulta en tiempo real.",
-      "thumbnail": "/portafolio/images/raspin.webp",
-      "repository": "https://github.com/enriqueSFranco/price-watch-platform",
-      "stack": [
-        "TypeScript",
-        "React",
-        "Next.js",
-        "Node",
-        "Web Scraping"
-      ]
-    },
-    {
-      "id": 2,
-      "title": "Seguimiento de postulaciones",
-      "period": "",
-      "type": "Web App + Web Scraping",
-      "status": "En desarrollo",
-      "description": "Herramienta para monitorear y analizar precios de productos en e-commerce. Permite recibir alertas y tomar decisiones de compra informadas.",
-      "thumbnail": "/portafolio/images/raspin.webp",
-      "repository": "https://github.com/enriqueSFranco/application-pipeline",
-      "stack": [
-        "TypeScript",
-        "React",
-        "Node"
-      ]
-    }
-  ]
+  "skills": [
+    "Typescript",
+    "React",
+    "Next.js",
+    "React Native",
+    "Python",
+    "Git"
+  ],
+  "projects": []
 }

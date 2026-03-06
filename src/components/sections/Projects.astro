@@ -1,37 +1,267 @@
 ---
-import ProjectCard from "@components/ui/ProjectCard.astro";
 import Section from "@layouts/Section.astro";
-import { getAllProjects } from "@lib/projects";
 
-const projects = await getAllProjects();
+const services = [
+  {
+    index: "01",
+    name: "Landing Page",
+    tagline: "Para negocios que necesitan presencia rápida",
+    price: "desde $8,000",
+    currency: "MXN",
+    delivery: "7–10 días",
+    description:
+      "Una página única, rápida y diseñada para convertir visitas en clientes. Ideal para barberías, gimnasios, estudios y servicios locales.",
+    includes: [
+      "Diseño a medida (sin templates)",
+      "Optimización mobile-first",
+      "Formulario o link de contacto",
+      "SEO local básico",
+      "Dominio + hosting 1er mes",
+      "Entrega en Astro o Next.js",
+    ],
+    highlight: false,
+  },
+  {
+    index: "02",
+    name: "Sitio Completo",
+    tagline: "Para negocios que quieren crecer en serio",
+    price: "desde $18,000",
+    currency: "MXN",
+    delivery: "3–4 semanas",
+    description:
+      "Sitio multipágina con sistema de contenido, galería, agenda online y analítica. Tu negocio disponible las 24 horas.",
+    includes: [
+      "Todo lo del plan Landing",
+      "Hasta 5 páginas o secciones",
+      "Integración de agenda (Cal.com / Calendly)",
+      "Galería de trabajos optimizada",
+      "Google Analytics + Search Console",
+      "SEO local avanzado",
+      "Panel de gestión de contenido",
+    ],
+    highlight: true,
+  },
+  {
+    index: "03",
+    name: "Mantenimiento",
+    tagline: "Para sitios que ya existen y necesitan crecer",
+    price: "desde $1,500",
+    currency: "MXN / mes",
+    delivery: "Contrato mensual",
+    description:
+      "Actualización de contenido, correcciones, mejoras de rendimiento y soporte técnico continuo para tu sitio.",
+    includes: [
+      "Hasta 4 cambios por mes",
+      "Backups semanales",
+      "Monitoreo de velocidad",
+      "Reportes de visitas mensuales",
+      "Soporte por WhatsApp",
+    ],
+    highlight: false,
+  },
+];
+
+const faqs = [
+  {
+    q: "¿Necesito saber de tecnología?",
+    a: "No. Me encargo de todo el proceso técnico. Tú solo describes tu negocio y yo lo traduzco a una web que funcione.",
+  },
+  {
+    q: "¿Qué necesito tener para empezar?",
+    a: "Logo (o idea de tu marca), fotos de tu negocio y descripción de tus servicios. Con eso es suficiente para arrancar.",
+  },
+  {
+    q: "¿Puedo pedir cambios después de la entrega?",
+    a: "Sí. El proyecto incluye una ronda de revisiones. Para cambios posteriores existe el plan de mantenimiento mensual.",
+  },
+  {
+    q: "¿Cuánto tarda en aparecer en Google?",
+    a: "El SEO local toma entre 4 y 8 semanas en mostrar resultados. El sitio queda indexado desde el primer día.",
+  },
+];
 ---
 
-<Section id="proyectos">
-  <div class="max-w-5xl mx-auto">
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-16">
-      <div class="md:col-span-3">
-        <h2 class="text-xs font-mono uppercase tracking-[0.3em] text-(--text-muted)">
-          Selected Works / 02
+<Section>
+
+    <!-- Section header -->
+    <header class="flex items-center gap-6 mb-20">
+      <span class="text-[10px] font-mono uppercase tracking-[0.5em] text-(--text-muted)">05 / Servicios</span>
+      <div class="h-px flex-1 bg-(--border-subtle)/40"></div>
+    </header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-20">
+      <div class="lg:col-span-6 space-y-4">
+        <h2 class="text-4xl md:text-5xl font-light tracking-tighter text-(--text-primary) leading-tight">
+          Lo que puedo<br />
+          <em class="font-serif not-italic text-(--text-secondary)">construir para ti.</em>
         </h2>
       </div>
-      <div class="md:col-span-9">
-        <p class="text-2xl font-light text-(--text-secondary) italic">
-          Una selección de soluciones digitales enfocadas en performance y estética.
+      <div class="lg:col-span-5 lg:col-start-8 flex items-end">
+        <p class="text-base text-(--text-secondary) font-light leading-relaxed">
+          Trabajo con negocios locales que quieren tomarse en serio su presencia digital.
+          Sin agencias intermediarias, sin templates genéricos — solo código hecho a medida.
         </p>
       </div>
     </div>
 
-    <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-20">
-      {
-        projects.map((project, index) => (
-          <div
-            class="animate-in"
-            style={`animation-delay: ${index * 150}ms`}
-          >
-            <ProjectCard project={project} />
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-(--border-subtle)/30 border border-(--border-subtle)/30 mb-24">
+      {services.map((service) => (
+        <div
+          class:list={[
+            "relative flex flex-col p-8 space-y-8 group transition-colors duration-300",
+            service.highlight
+              ? "bg-(--text-primary) text-(--bg-main)"
+              : "bg-(--bg-main) hover:bg-(--border-subtle)/10",
+          ]}
+        >
+          <!-- Index + highlight badge -->
+          <div class="flex items-center justify-between">
+            <span
+              class:list={[
+                "text-[9px] font-mono tabular-nums",
+                service.highlight ? "text-(--bg-main)/50" : "text-(--text-muted)/40",
+              ]}
+            >
+              {service.index}
+            </span>
+            {service.highlight && (
+              <span class="text-[8px] font-mono uppercase tracking-[0.35em] border border-(--bg-main)/30 px-2 py-0.5 text-(--bg-main)/70">
+                Popular
+              </span>
+            )}
           </div>
-        ))
-      }
+
+          <div class="space-y-2">
+            <h3
+              class:list={[
+                "text-2xl font-light tracking-tighter",
+                service.highlight ? "text-(--bg-main)" : "text-(--text-primary)",
+              ]}
+            >
+              {service.name}
+            </h3>
+            <p
+              class:list={[
+                "text-[11px] font-mono uppercase tracking-widest",
+                service.highlight ? "text-(--bg-main)/60" : "text-(--text-muted)",
+              ]}
+            >
+              {service.tagline}
+            </p>
+          </div>
+
+          <div class="space-y-1">
+            <p
+              class:list={[
+                "text-3xl font-bold tracking-tighter",
+                service.highlight ? "text-(--bg-main)" : "text-(--text-primary)",
+              ]}
+            >
+              {service.price}
+            </p>
+            <p
+              class:list={[
+                "text-[10px] font-mono",
+                service.highlight ? "text-(--bg-main)/50" : "text-(--text-muted)/60",
+              ]}
+            >
+              {service.currency} · {service.delivery}
+            </p>
+          </div>
+
+          <p
+            class:list={[
+              "text-sm font-light leading-relaxed",
+              service.highlight ? "text-(--bg-main)/80" : "text-(--text-secondary)",
+            ]}
+          >
+            {service.description}
+          </p>
+
+          <div
+            class:list={[
+              "h-px",
+              service.highlight ? "bg-(--bg-main)/20" : "bg-(--border-subtle)/50",
+            ]}
+          ></div>
+
+          <ul class="space-y-3 flex-1">
+            {service.includes.map((item) => (
+              <li class="flex items-start gap-3">
+                <svg
+                  class:list={[
+                    "size-3 mt-0.5 shrink-0",
+                    service.highlight ? "text-(--bg-main)/60" : "text-(--text-muted)",
+                  ]}
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                </svg>
+                <span
+                  class:list={[
+                    "text-xs font-light",
+                    service.highlight ? "text-(--bg-main)/80" : "text-(--text-secondary)",
+                  ]}
+                >
+                  {item}
+                </span>
+              </li>
+            ))}
+          </ul>
+
+          <a
+            href="mailto:enrique.sfranco04@gmail.com"
+            class:list={[
+              "mt-auto flex items-center justify-between text-[10px] font-mono uppercase tracking-[0.25em] transition-all duration-300 pt-2 border-t",
+              service.highlight
+                ? "text-(--bg-main) border-(--bg-main)/20 hover:opacity-70"
+                : "text-(--text-primary) border-(--border-subtle)/40 hover:opacity-60",
+            ]}
+          >
+            Solicitar presupuesto
+            <svg class="size-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M7 17L17 7M17 7H7M17 7v10"/>
+            </svg>
+          </a>
+
+        </div>
+      ))}
     </div>
-  </div>
+
+    <!-- FAQ -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+
+      <div class="lg:col-span-3 space-y-3 lg:sticky lg:top-32 h-fit">
+        <p class="text-[10px] font-mono uppercase tracking-[0.4em] text-(--text-muted)">Preguntas</p>
+        <h3 class="text-2xl font-light tracking-tighter text-(--text-primary)">
+          Lo que suelen<br />preguntar.
+        </h3>
+      </div>
+
+      <div class="lg:col-span-8 lg:col-start-5 divide-y divide-(--border-subtle)/30">
+        {faqs.map((faq) => (
+          <details class="group py-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            <summary class="flex items-center justify-between gap-6 text-sm text-(--text-primary) font-light tracking-tight select-none hover:opacity-70 transition-opacity">
+              {faq.q}
+              <svg
+                class="size-4 shrink-0 text-(--text-muted) transition-transform duration-300 group-open:rotate-45"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+              </svg>
+            </summary>
+            <p class="mt-4 text-sm text-(--text-secondary) font-light leading-relaxed max-w-lg pr-10">
+              {faq.a}
+            </p>
+          </details>
+        ))}
+      </div>
+
+    </div>
 </Section>

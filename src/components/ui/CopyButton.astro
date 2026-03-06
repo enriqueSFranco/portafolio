@@ -3,7 +3,6 @@ interface Props {
   text: string;
   label?: string;
   copiedLabel?: string;
-  iconName?: string;
   variant?: "default" | "ghost" | "outline" | "subtle";
 }
 
@@ -11,70 +10,119 @@ const {
   text,
   label = "Copiar",
   copiedLabel = "¡Copiado!",
-  iconName = "copy",
-  variant = "default"
+  variant = "default",
 } = Astro.props;
 
-const variants = {
-  default:
-    "border border-(--border-subtle) bg-(--bg-card) shadow-sm hover:border-(--accent-primary)",
-  ghost:
-    "border border-transparent bg-transparent hover:border-(--border-subtle)",
-  outline:
-    "border border-(--text-muted)/40 bg-transparent hover:border-(--accent-primary)",
-  subtle:
-    "border border-transparent bg-(--bg-card)/40 hover:bg-(--bg-card)",
+const variants: Record<string, string> = {
+  default: "border-(--border-subtle) bg-(--bg-card) shadow-sm",
+  ghost:   "border-transparent bg-transparent",
+  outline: "border-(--text-muted)/40 bg-transparent",
+  subtle:  "border-transparent bg-(--bg-card)/40",
 };
 
-const variantClass = variants[variant];
+const base = variants[variant];
 ---
 
 <button
-  id="copy-btn"
-  aria-live="polite"
+  type="button"
+  class:list={[
+    "copy-button",
+    "group relative inline-flex items-center gap-2.5",
+    "px-3 py-2 sm:px-4",
+    "border rounded-none",
+    "text-[10px] font-mono uppercase tracking-widest",
+    "text-(--text-muted)",
+    "transition-all duration-300 ease-out",
+    "hover:text-(--text-primary) hover:border-(--text-primary)",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--text-primary) focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-main)",
+    "active:scale-95",
+    "min-h-[40px]",
+    "touch-manipulation",
+    base,
+  ]}
   data-copy-text={text}
+  data-label={label}
   data-copied-label={copiedLabel}
-  class={`copy-button group relative flex items-center gap-2.5 px-4 py-2 rounded-full border border-(--border-subtle) bg-(--bg-card) text-[11px] font-mono uppercase tracking-widest text-(--text-muted) transition-all duration-300 hover:border-(--accent-primary) hover:text-(--text-primary) shadow-sm ${variantClass}`}
+  aria-label={`Copiar ${label}`}
+  aria-live="polite"
+  aria-atomic="true"
 >
-  <span class="copy-tooltip absolute -top-8 left-1/2 -translate-x-1/2 bg-(--text-primary) text-(--bg-main) px-2 py-1 rounded text-[9px] font-bold opacity-0 pointer-events-none transition-all duration-300">
-    {copiedLabel}
-  </span>
 
-  <svg width="16" height="16">
-    <use xlink:href={`sprite.svg#${iconName}`} />
+  <svg
+    class="copy-icon size-3.5 shrink-0 transition-all duration-200"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+  >
+    <rect x="9" y="9" width="13" height="13" rx="1"/>
+    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
   </svg>
 
-  <span class="max-w-36 truncate sm:max-w-none">
+  <svg
+    class="check-icon size-3.5 shrink-0 hidden transition-all duration-200 text-green-500"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+  >
+    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+  </svg>
+
+  <span class="btn-label truncate max-w-[160px] sm:max-w-none leading-none">
     {label}
   </span>
+
 </button>
 
 <script>
   function setupCopyButtons() {
     const buttons = document.querySelectorAll<HTMLButtonElement>(".copy-button");
 
-    buttons.forEach((button) => {
-      if ((button as any).__initialized) return;
-      (button as any).__initialized = true;
+    buttons.forEach((btn) => {
+      if ((btn as any).__init) return;
+      (btn as any).__init = true;
 
-      const textToCopy = button.dataset.copyText || "";
-      const tooltip = button.querySelector(".copy-tooltip");
+      btn.addEventListener("click", async () => {
+        const textToCopy = btn.dataset.copyText ?? "";
+        const copiedLabel = btn.dataset.copiedLabel ?? "¡Copiado!";
+        const originalLabel = btn.dataset.label ?? "Copiar";
 
-      button.addEventListener("click", async () => {
+        const labelEl   = btn.querySelector<HTMLElement>(".btn-label");
+        const copyIcon  = btn.querySelector<SVGElement>(".copy-icon");
+        const checkIcon = btn.querySelector<SVGElement>(".check-icon");
+
         try {
           await navigator.clipboard.writeText(textToCopy);
 
-          if (tooltip) {
-            tooltip.classList.add("is-visible");
-            button.classList.add("border-(--accent-primary)");
+          // Swap state
+          if (labelEl)   labelEl.textContent = copiedLabel;
+          if (copyIcon)  copyIcon.classList.add("hidden");
+          if (checkIcon) checkIcon.classList.remove("hidden");
 
-            setTimeout(() => {
-              tooltip.classList.remove("is-visible");
-              button.classList.remove("border-(--accent-primary)");
-            }, 2000);
-          }
-        } catch (err) {
-          console.error("Error al copiar", err);
+          btn.classList.add("border-green-500/50", "text-green-500");
+          btn.setAttribute("aria-label", `${copiedLabel}`);
+
+          setTimeout(() => {
+            if (labelEl)   labelEl.textContent = originalLabel;
+            if (copyIcon)  copyIcon.classList.remove("hidden");
+            if (checkIcon) checkIcon.classList.add("hidden");
+
+            btn.classList.remove("border-green-500/50", "text-green-500");
+            btn.setAttribute("aria-label", `Copiar ${originalLabel}`);
+          }, 2000);
+
+        } catch {
+          // Fallback for older browsers / insecure contexts
+          const ta = document.createElement("textarea");
+          ta.value = textToCopy;
+          ta.style.cssText = "position:fixed;opacity:0;pointer-events:none";
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand("copy");
+          document.body.removeChild(ta);
         }
       });
     });
@@ -83,11 +131,3 @@ const variantClass = variants[variant];
   setupCopyButtons();
   document.addEventListener("astro:after-swap", setupCopyButtons);
 </script>
-
-
-<style>
-  .copy-tooltip.is-visible {
-    opacity: 1;
-    transform: translate(-50%, -5px);
-  }
-</style>
