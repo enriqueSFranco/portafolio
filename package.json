@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@astrojs/mdx": "4.3.13",
+    "@fontsource-variable/inter": "^5.2.8",
+    "@fontsource-variable/space-grotesk": "^5.2.10",
     "@tailwindcss/vite": "4.1.17",
     "astro": "5.16.9",
     "tailwindcss": "4.1.17"
