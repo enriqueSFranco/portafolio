@@ -17,7 +17,6 @@
     animation: float 2s ease-in-out infinite;
   }
   
-  /* Efecto de resplandor sutil para botones */
   .glow-on-hover:hover {
     box-shadow: 0 0 20px var(--accent-glow);
     transition: box-shadow 0.3s ease;

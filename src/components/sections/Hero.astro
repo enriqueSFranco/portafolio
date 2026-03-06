@@ -1,84 +1,188 @@
 ---
 import cv from "../../cv.json";
-import type { SocialProfile } from "@lib/types/social-profile";
 import SocialLinks from "@components/ui/SocialLinks.astro";
 import Section from "@layouts/Section.astro";
 
-const { name, profiles, summary } = cv.basic;
-const profilesData = profiles as SocialProfile[];
-
-const myStack = ['React', 'Next.js', 'TypeScript', 'Python']
+const { name, label, summary, profiles } = cv.basic;
+const myStack = cv.skills.technical;
+const firstName = name.split(" ")[0];
+const lastName = name.split(" ")[1];
 ---
 
-<Section id="sobremi" class="relative pt-10 md:pt-20 pb-16 overflow-hidden">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-16 items-start">
+<Section>
+    <header class="flex flex-col justify-between lg:flex-row space-y-3.5 mb-12 reveal" style="--delay: 0ms">
+      <span class="text-xs font-mono tracking-[0.5em] uppercase text-(--text-muted)">01 / Inicio</span>
+      <div class="w-full inline-flex items-center justify-between md:justify-end gap-3">
+        <span class="relative flex h-1.5 w-1.5">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-(--text-primary) opacity-30"></span>
+          <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-(--text-primary)"></span>
+        </span>
+        <span class="text-xs font-mono tracking-[0.35em] uppercase text-(--text-muted)">
+          Disponible - Freelance
+        </span>
+      </div>
+    </header>
 
-      <div class="lg:col-span-8 order-2 lg:order-1 flex flex-col space-y-10 text-center lg:text-left">
+    <!-- Main grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 lg:gap-x-0 items-end">
 
-        <div class="flex items-center justify-center lg:justify-start gap-3">
-          <div class="relative flex h-2 w-2">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-40"></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-          </div>
-          <span class="text-[10px] md:text-xs font-mono tracking-[0.3em] uppercase text-(--text-muted)">
-            Disponible para trabajar
-          </span>
-        </div>
+      <!-- Name + headline (spans full width, bleeds into photo column) -->
+      <div class="lg:col-span-12 relative">
 
-        <div class="space-y-6">
-          <h1 class="text-6xl sm:text-7xl md:text-8xl lg:text-[10rem] font-bold tracking-tight text-(--text-primary) leading-[0.85]">
-            {name.split(' ')[0]}<span class="text-(--accent-primary)">.</span>
+        <!-- Overline label -->
+        <p class="text-xs font-mono uppercase tracking-[0.45em] text-(--text-muted) mb-5 reveal" style="--delay: 80ms">
+          {label}
+        </p>
+
+        <!-- Giant name — two lines, second indented -->
+        <div class="relative overflow-hidden">
+          <h1 class="reveal name-line" style="--delay: 140ms">
+            <span class="block text-[19vw] lg:text-[13vw] xl:text-[12rem] font-bold tracking-[-0.04em] leading-[0.85] text-(--text-primary) select-none">
+              {firstName}
+            </span>
           </h1>
-
-          <div class="max-w-2xl mx-auto lg:mx-0">
-            <h2 class="text-xl md:text-3xl font-light text-(--text-primary) leading-tight mb-4">
-              Desarrollador Frontend
-            </h2>
-            <p class="text-sm md:text-lg text-(--text-muted) font-light leading-relaxed max-w-xl">
-              {summary}
-            </p>
-          </div>
-        </div>
-
-        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-8 pt-6 border-t border-(--border-subtle)/30">
-          <SocialLinks profiles={profilesData} />
-
-          <div class="hidden sm:block h-4 w-px bg-(--border-subtle)"></div>
-
-          <div class="flex flex-wrap justify-center gap-6">
-             {myStack.map(tech => (
-               <span class="text-[10px] font-mono uppercase tracking-widest text-(--text-muted) hover:text-(--text-primary) transition-colors">
-                 {tech}
-               </span>
-             ))}
-          </div>
+          <h1 class="reveal name-line" style="--delay: 200ms">
+            <span class="block text-[19vw] lg:text-[13vw] xl:text-[12rem] font-bold tracking-[-0.04em] leading-[0.85] text-(--text-primary)/15 select-none lg:pl-[8vw]">
+              {lastName}
+            </span>
+          </h1>
         </div>
       </div>
 
-      <div class="lg:col-span-4 order-1 lg:order-2 flex justify-center lg:justify-end">
-        <div class="relative group">
-          <div class="absolute -top-4 -right-4 size-24 border-t border-r border-(--border-subtle) opacity-50"></div>
-          <div class="absolute -bottom-4 -left-4 size-24 border-b border-l border-(--border-subtle) opacity-50"></div>
+      <!-- photo | info -->
+      <div class="lg:col-span-12 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start mt-8 lg:-mt-20">
 
-          <div class="relative size-48 sm:size-56 md:size-72 lg:size-80 overflow-hidden bg-(--bg-card) border border-(--border-subtle) grayscale hover:grayscale-0 transition-all duration-700 ease-in-out">
-            <img
-              src="/portafolio/images/me.jpeg"
-              alt={name}
-              class="w-full h-full object-cover object-top scale-100 group-hover:scale-110 transition-transform duration-1000"
-            />
-            <div class="absolute inset-0 bg-linear-to-t from-(--bg-main)/40 to-transparent"></div>
-          </div>
+        <!-- Photo card — overlaps the name -->
+        <div class="lg:col-span-4 lg:col-start-1 reveal" style="--delay: 260ms">
+          <div class="relative w-full max-w-[280px] mx-auto lg:mx-0">
 
-          <div class="absolute -bottom-6 right-0 bg-(--bg-main) border border-(--border-subtle) px-4 py-2 shadow-xl">
-            <p class="text-[9px] font-mono leading-none tracking-tighter text-(--text-primary)">
-              <span class="font-bold">ESCOM</span> / IPN<br/>
-              <span class="text-(--text-muted)">ENG GRADUATE</span>
-            </p>
+            <!-- Photo -->
+            <div class="relative aspect-[3/4] overflow-hidden border border-(--border-subtle) photo-card">
+              <img
+                src="/portafolio/images/me.jpeg"
+                alt={name}
+                class="w-full h-full object-cover object-top photo-img"
+                loading="eager"
+              />
+            </div>
+
+            <!-- Floating badge -->
+            <div class="absolute -bottom-3 -right-3 bg-(--bg-main) border border-(--border-subtle) px-4 py-3 shadow-sm">
+              <p class="text-[9px] font-mono leading-snug tracking-widest text-(--text-primary) uppercase">
+                <span class="block font-bold">ESCOM · IPN</span>
+                <span class="text-(--text-muted)">Ing. Sistemas</span>
+              </p>
+            </div>
+
+            <!-- Vertical label -->
+            <div class="absolute -left-7 top-0 bottom-0 hidden lg:flex items-center">
+              <span class="text-[9px] font-mono uppercase tracking-[0.4em] text-(--text-muted)/40 rotate-180 [writing-mode:vertical-rl]">
+                Enrique Salinas · CDMX
+              </span>
+            </div>
           </div>
         </div>
-      </div>
 
+        <!-- Right: summary + stack + social -->
+        <div class="lg:col-span-7 lg:col-start-6 space-y-10 reveal" style="--delay: 340ms">
+
+          <!-- Role descriptor -->
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-light text-(--text-primary) tracking-tight leading-tight">
+            Diseño interfaces que <br class="hidden md:block" />
+            <em class="font-serif not-italic text-(--text-secondary)">funcionan y convencen.</em>
+          </h2>
+
+          <!-- Summary -->
+          <p class="text-base md:text-lg text-(--text-secondary) font-light leading-relaxed max-w-lg">
+            {summary}
+          </p>
+
+          <!-- Divider -->
+          <div class="h-px w-full bg-(--border-subtle)/50"></div>
+
+          <!-- Stack + social in two columns -->
+          <div class="flex flex-col sm:flex-row items-start gap-10">
+            <div class="space-y-3 flex-1">
+              <p class="text-[9px] font-mono uppercase tracking-[0.4em] text-(--text-muted)">Stack principal</p>
+              <div class="flex flex-wrap gap-x-5 gap-y-2">
+                {myStack.map((tech) => (
+                  <span class="text-[11px] font-mono uppercase tracking-[0.15em] text-(--text-muted) hover:text-(--text-primary) transition-colors cursor-default">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div class="h-px sm:h-auto sm:w-px bg-(--border-subtle)/50 w-full sm:self-stretch"></div>
+
+            <div class="space-y-3">
+              <p class="text-[9px] font-mono uppercase tracking-[0.4em] text-(--text-muted)">Contacto</p>
+              <SocialLinks profiles={profiles} />
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
-  </div>
+
+    <!-- Bottom index line -->
+    <div class="flex items-center gap-4 mt-20 reveal" style="--delay: 420ms">
+      <div class="h-px flex-1 bg-(--border-subtle)/40"></div>
+      <span class="text-[9px] font-mono uppercase tracking-[0.4em] text-(--text-muted)/40">
+        {new Date().getFullYear()} · Desarrollador Frontend
+      </span>
+    </div>
 </Section>
+
+
+<style>
+
+  /* Staggered reveal animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    animation: revealUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: var(--delay, 0ms);
+  }
+
+  @keyframes revealUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .name-line {
+    clip-path: inset(0 0 0 0);
+    opacity: 0;
+    transform: translateX(-24px);
+    animation: revealName 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: var(--delay, 0ms);
+  }
+
+  @keyframes revealName {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Photo hover: lift grayscale */
+  .photo-card {
+    filter: grayscale(80%);
+    transition: filter 1.2s ease;
+  }
+
+  .photo-card:hover {
+    filter: grayscale(0%);
+  }
+
+  .photo-img {
+    transform: scale(1.06);
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .photo-card:hover .photo-img {
+    transform: scale(1);
+  }
+</style>

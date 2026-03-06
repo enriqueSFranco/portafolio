@@ -1,20 +1,16 @@
 ---
 interface Props {
-  id: string;
   title?: string;
   subtitle?: string;
   class?: string; // Permitir clases extra para flexibilidad
 }
 
-const { id, title, subtitle, class: className } = Astro.props;
+const { title, subtitle, class: className } = Astro.props;
 ---
 
 <section
-  id={id}
-  aria-labelledby={title ? `${id}-title` : undefined}
   class:list={[
-    "relative w-full py-16 md:py-28 lg:py-36",
-    "border-t border-(--border-subtle)",
+    "relative w-full py-16 md:py-28 max-w-7xl bg-(--bg-main)",
     className
   ]}
 >
@@ -28,7 +24,6 @@ const { id, title, subtitle, class: className } = Astro.props;
             </span>
           )}
           <h2
-            id={`${id}-title`}
             class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-(--text-primary)"
           >
             {title}<span class="text-(--accent-primary)">.</span>
@@ -36,10 +31,6 @@ const { id, title, subtitle, class: className } = Astro.props;
         </div>
 
         <div class="hidden md:block h-px flex-1 mx-12 bg-(--border-subtle) opacity-50"></div>
-
-        <div class="hidden md:block font-mono text-[10px] text-(--text-muted) uppercase tracking-widest">
-          {id} section
-        </div>
       </header>
     )}
 
