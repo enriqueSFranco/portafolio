@@ -1,0 +1,102 @@
+---
+import Tag from "@components/ui/Tag.astro";
+import type {Service} from "./service.data"
+
+interface Props {
+  service: Service;
+  idx: number;
+}
+
+const { service, idx } = Astro.props;
+
+const formatter = new Intl.NumberFormat('es-MX', {
+  style: 'currency',
+  currency: 'MXN',
+  maximumFractionDigits: 0,
+});
+
+const deliveryLabel = service.delivery.label
+  ? service.delivery.label
+  : `${service.delivery.min}-${service.delivery.max} días hábiles`;
+---
+
+<article
+  class:list={[
+    "reveal rounded-2xl overflow-hidden group relative p-8 md:p-10 flex flex-col transition-all duration-500",
+    service.highlight
+      ? "bg-neutral-900 shadow-2xl z-10"
+      : "bg-gray-200 hover:border-(--text-primary)/30",
+  ]}
+  style={`--delay: ${200 + idx * 100}ms`}
+>
+  <div class="flex justify-between items-start mb-16">
+    <span class:list={[
+      "font-mono text-[10px] font-bold tracking-[0.3em]",
+      service.highlight ? "text-white/30" : "text-(--text-muted)"
+    ]}>
+      /{service.index}
+    </span>
+    {service.highlight && (
+      <Tag label=" Más solicitado" />
+    )}
+  </div>
+
+  <div class="space-y-3 mb-10">
+    <h3 class:list={[
+      "text-3xl md:text-4xl font-black tracking-tighter leading-none",
+      service.highlight ? "text-white" : "text-(--text-primary)"
+    ]}>
+      {service.name}
+    </h3>
+    <p class:list={[
+      "text-[10px] uppercase tracking-[0.15em] font-bold",
+      service.highlight ? "text-blue-400" : "text-blue-600"
+    ]}>
+      {service.tagline}
+    </p>
+  </div>
+
+  <div class:list={["mb-10 pb-8 border-b border-(--border-subtle)/20", service.highlight ? "text-white/70" : "text-(--text-secondary)"]}>
+    <div class="flex items-baseline gap-2">
+      <span class="text-[10px] font-bold uppercase tracking-widest">
+        {service.period === 'mes' ? 'Suscripción' : 'Desde'}
+      </span>
+      <span class="text-4xl font-black tracking-tighter">
+        {formatter.format(service.price)}
+      </span>
+      {service.period === 'mes' && <span class="text-xs font-medium">/ mes</span>}
+    </div>
+    <p class="text-[10px] font-mono mt-2 italic">
+      {deliveryLabel}
+    </p>
+  </div>
+
+  <p class:list={["text-sm leading-relaxed mb-10 font-light", service.highlight ? "text-white/70" : "text-(--text-secondary)"]}>
+    {service.description}
+  </p>
+
+  <ul class="space-y-4 mb-16 flex-1">
+    {service.includes.map((item) => (
+      <li class="flex items-start gap-3">
+        <svg xmlns="http://www.w3.org/2000/svg" class:list={["size-3.5 mt-0.5", service.highlight ? "text-blue-400" : "text-blue-600"]} fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+        </svg>
+        <span class:list={["text-xs font-medium tracking-tight", service.highlight ? "text-white/80" : "text-(--text-secondary)"]}>
+          {item}
+        </span>
+      </li>
+    ))}
+  </ul>
+
+  <a
+    href="https://wa.me/tu-numero"
+    class:list={[
+      "group/btn relative overflow-hidden w-full py-5 text-center text-[10px] font-bold uppercase tracking-[0.3em] transition-all duration-300",
+      service.highlight
+        ? "bg-white text-black hover:bg-blue-600 hover:text-white"
+        : "bg-(--text-primary) text-white hover:bg-blue-600"
+    ]}
+  >
+    <span class="relative z-10">Iniciar Proyecto</span>
+  </a>
+</article>

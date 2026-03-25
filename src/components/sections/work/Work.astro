@@ -1,0 +1,46 @@
+---
+import Tag from "@components/ui/Tag.astro";
+import WorkCard from "./WorkCard.astro";
+
+const featuredProjects = [
+  {
+    title: "Colegio Xaloztoc",
+    category: "Gestión Escolar",
+    description: "Digitalización de procesos administrativos y módulo de citas. Reducción del 60% en carga manual.",
+    image: "/portafolio/images/projects/proyecto-escuela.jpg",
+    tags: ["Next.js", "Sanity CMS"],
+    link: "/portafolio/trabajos/colegio-xaloztoc"
+  },
+  {
+    title: "Barbershop Capos",
+    category: "Plataforma de Reservas",
+    description: "Ecosistema multi-sucursal con gestión de horarios en tiempo real y analítica por barbero.",
+    image: "/portafolio/images/projects/luxury-salon/preview-luxury-salon.png",
+    tags: ["React Native", "Zustand"],
+    link: "/portafolio/trabajos/barbershop-capos"
+  }
+];
+---
+
+<section class="py-24 max-w-7xl mx-auto border-t border-(--border-subtle)/20">
+  <header class="mb-20 reveal">
+    <div aria-hidden="true" class="grid place-content-center">
+      <Tag label="Trabajos" />
+    </div>
+    <h2 class="text-5xl text-center md:text-7xl lg:text-8xl font-extrabold tracking-tighter text-(--text-primary) leading-[1.1]">
+      Proyectos reales que <br />
+      <span class="bg-linear-to-r from-gray-600 to-gray-300 bg-clip-text text-transparent">
+        generan resultados.
+      </span>
+    </h2>
+    <p class="text-center text-(--text-secondary) text-lg mt-4 max-w-4xl mx-auto">
+      Una selección de soluciones que desarrollé para negocios reales, desde presencia web hasta automatización de procesos.
+    </p>
+  </header>
+
+  <div class="space-y-32">
+    {featuredProjects.map((project, i) => (
+      <WorkCard project={project} idx={i} />
+    ))}
+  </div>
+</section>
