@@ -1,17 +1,17 @@
 ---
 import cv from "../cv.json";
 import Layout from "@layouts/Layout.astro";
-import Projects from "@components/sections/Projects.astro";
-import Education from "@components/sections/Education.astro";
-import Hero from "@components/sections/Hero.astro";
-import Experience from "@components/sections/Experience.astro";
+import Services from "@components/sections/Services.astro";
+import Aboutme from "@components/sections/Aboutme.astro";
+import Hero from "@components/sections/hero/Hero.astro";
+import Work from "@components/sections/work/Work.astro";
 
 const { name, label } = cv.basic;
 ---
 
 <Layout title={`Portafolio de ${name} - ${label}`}>
   <Hero />
-  <Experience />
-  <Projects />
-  <Education />
+  <Aboutme />
+  <Services />
+  <Work />
 </Layout>

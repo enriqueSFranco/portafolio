@@ -1,0 +1,72 @@
+---
+interface Project {
+  title: string;
+  category: string;
+  description: string;
+  image: string;
+  tags: string[];
+  link: string;
+}
+
+interface Props {
+  project: Project;
+  idx: number;
+}
+
+const { project, idx }: Props = Astro.props;
+---
+
+<article
+  class={`flex flex-col lg:flex-row gap-8 lg:gap-20 items-center reveal ${idx % 2 !== 0 ? "lg:flex-row-reverse" : ""}`}
+>
+  <div class="w-full lg:w-3/5 group">
+    <a
+      href={project.link}
+      class="block relative aspect-video overflow-hidden rounded-xl border border-(--border-subtle)/30 shadow-2xl transition-all duration-500 group-hover:shadow-blue-600/10"
+    >
+      <img
+        src={project.image}
+        alt={project.title}
+        class="w-full h-full object-cover object-center transition-transform duration-1000 group-hover:scale-105"
+      />
+
+      <div class="absolute inset-0 bg-linear-to-tr from-black/10 to-transparent opacity-40 group-hover:opacity-10 transition-opacity z-10"></div>
+    </a>
+  </div>
+
+  <div class="w-full lg:w-2/5 space-y-8">
+    <div class="space-y-4">
+      <span class="inline-block px-3 py-1 rounded-full bg-blue-600 text-white text-[9px] font-bold uppercase tracking-[0.2em]">
+        {project.category}
+      </span>
+
+      <h3 class="text-4xl md:text-5xl font-black tracking-tighter text-(--text-primary) leading-[0.9]">
+        {project.title}
+      </h3>
+
+      <div class="flex gap-3">
+        {project.tags.map((tag) => (
+          <span class="text-[10px] font-mono font-medium uppercase tracking-wider text-(--text-secondary)">
+            {tag}
+          </span>
+        ))}
+      </div>
+    </div>
+
+    <p class="text-base md:text-lg text-(--text-secondary) leading-relaxed font-light max-w-sm">
+      {project.description}
+    </p>
+
+    <a
+      href={project.link}
+      class="inline-flex items-center gap-3 group pb-1 border-b-2 border-(--text-primary) transition-all hover:border-blue-600"
+    >
+      <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-(--text-primary) group-hover:text-blue-600">
+        Ver detalles
+      </span>
+      <svg xmlns="http://www.w3.org/2000/svg" class="size-4 group-hover:translate-x-1 transition-transform text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+      </svg>
+    </a>
+  </div>
+</article>
