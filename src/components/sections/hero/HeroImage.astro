@@ -1,0 +1,52 @@
+---
+interface Props {
+  src: string;
+  name: string;
+}
+
+const { src, name }: Props = Astro.props;
+---
+
+<div class="relative group reveal" style="--delay: 200ms">
+  <div
+    class="relative p-2 bg-(--bg-card) border border-(--border-subtle) shadow-sm transition-all duration-500 group-hover:border-(--border-strong) group-hover:shadow-lg"
+  >
+    <div class="aspect-square overflow-hidden bg-gray-100">
+      <img
+        src={src}
+        alt={`Retrato profesional de ${name} - Ingeniero en Systems`}
+        class="w-full h-full object-cover object-top transition-all duration-700 ease-in-out group-hover:scale-105"
+        loading="eager"
+        fetchpriority="high"
+        width="400"
+        height="500"
+      />
+    </div>
+
+    <div class="pt-4 pb-1 px-1 mt-2 border-t border-(--border-subtle)">
+      <div class="grid grid-cols-12 gap-2 items-center">
+        <div class="col-span-5 space-y-0.5">
+          <p class="text-[9px] font-medium text-(--text-muted) uppercase tracking-wider">
+            Formación
+          </p>
+          <p class="text-[11px] font-bold text-(--text-primary) font-mono antialiased">
+            ESCOM · IPN
+          </p>
+        </div>
+
+        <div class="col-span-2 flex justify-center">
+          <div class="h-5 w-px bg-(--border-subtle)" aria-hidden="true"></div>
+        </div>
+
+        <div class="col-span-5 text-right space-y-0.5">
+          <p class="text-[9px] font-medium text-(--text-muted) uppercase tracking-wider">
+            Especialidad
+          </p>
+          <p class="text-[11px] font-bold text-(--text-primary) font-mono antialiased">
+            Ing. Sistemas
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
