@@ -1,5 +1,92 @@
 <main
-  class="flex flex-col items-center grow prose-img:m-0 prose max-w-none dark:prose-invert w-full prose-h1:font-bold prose-h1:text-xl prose-headings:no-underline prose-ul:list-none prose-ul:m-0 prose-ul:p-0 prose-ol:list-none prose-ol:p-0"
+  id="main-content"
+  class:list={[
+    "prose-layout",
+    "flex flex-col items-center grow w-full",
+    "prose prose-neutral dark:prose-invert max-w-none",
+    "prose-h1:text-3xl prose-h1:font-bold prose-h1:tracking-tight prose-h1:leading-tight",
+    "prose-h2:text-2xl prose-h2:font-semibold prose-h2:tracking-tight",
+    "prose-h3:text-xl prose-h3:font-semibold",
+    "prose-headings:no-underline prose-headings:scroll-mt-24",
+    "prose-img:m-0 prose-img:rounded-lg prose-img:shadow-md",
+    "prose-li:my-1",
+    "prose-a:font-medium prose-a:decoration-1 prose-a:underline-offset-2",
+    "prose-a:transition-colors prose-a:duration-150",
+    "prose-code:text-[0.875em] prose-code:font-medium",
+    "prose-code:before:content-none prose-code:after:content-none",
+    "prose-blockquote:not-italic prose-blockquote:font-normal",
+    "prose-blockquote:border-l-4 prose-blockquote:border-neutral-300",
+    "dark:prose-blockquote:border-neutral-600",
+    "sm:prose-lg",
+  ]}
 >
-  <slot />
+  <div class="prose-inner container w-full px-5 sm:px-6 lg:px-0 py-10 sm:py-14 lg:py-16">
+    <slot />
+  </div>
 </main>
+
+<style>
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 1rem;
+    z-index: 9999;
+    padding: 0.625rem 1.25rem;
+    background: #1a1a1a;
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: 0 0 0.5rem 0.5rem;
+    text-decoration: none;
+    transition: top 0.15s ease;
+  }
+
+  .skip-link:focus-visible {
+    top: 0;
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+  }
+
+  .prose-layout:focus-visible {
+    outline: none;
+  }
+
+  .prose-layout :global(pre) {
+    border-radius: 0.625rem;
+    font-size: 0.875em;
+    line-height: 1.7;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* iOS momentum scroll */
+  }
+
+  .prose-layout :global(table) {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  .prose-layout :global(img) {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .prose-layout :global(.heading-anchor) {
+    opacity: 0;
+    margin-left: 0.5ch;
+    text-decoration: none;
+    transition: opacity 0.15s ease;
+  }
+
+  .prose-layout :global(:is(h1, h2, h3, h4):hover .heading-anchor) {
+    opacity: 0.5;
+  }
+
+  .prose-layout :global(.heading-anchor:focus-visible) {
+    opacity: 1;
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+</style>
