@@ -1,46 +1,49 @@
 ---
 import Tag from "@components/ui/Tag.astro";
 import WorkCard from "./WorkCard.astro";
-
-const featuredProjects = [
-  {
-    title: "Colegio Xaloztoc",
-    category: "Gestión Escolar",
-    description: "Digitalización de procesos administrativos y módulo de citas. Reducción del 60% en carga manual.",
-    image: "/portafolio/images/projects/proyecto-escuela.jpg",
-    tags: ["Next.js", "Sanity CMS"],
-    link: "/portafolio/trabajos/colegio-xaloztoc"
-  },
-  {
-    title: "Barbershop Capos",
-    category: "Plataforma de Reservas",
-    description: "Ecosistema multi-sucursal con gestión de horarios en tiempo real y analítica por barbero.",
-    image: "/portafolio/images/projects/luxury-salon/preview-luxury-salon.png",
-    tags: ["React Native", "Zustand"],
-    link: "/portafolio/trabajos/barbershop-capos"
-  }
-];
+import {FEATURED_PROJECTS} from "./work.data"
 ---
-
-<section class="py-24 max-w-7xl mx-auto border-t border-(--border-subtle)/20">
-  <header class="mb-20 reveal">
-    <div aria-hidden="true" class="grid place-content-center">
+<section class="max-w-7xl mx-auto py-24 md:py-32 px-6">
+  <header class="mb-20 md:mb-32 reveal flex flex-col items-center text-center">
+    <div class="mb-8">
       <Tag label="Trabajos" />
     </div>
-    <h2 class="text-5xl text-center md:text-7xl lg:text-8xl font-extrabold tracking-tighter text-(--text-primary) leading-[1.1]">
+    <h2 class="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-(--text-primary) leading-[0.85] max-w-5xl">
       Proyectos reales que <br />
-      <span class="bg-linear-to-r from-gray-600 to-gray-300 bg-clip-text text-transparent">
+      <span class="bg-linear-to-b from-white via-neutral-400 to-neutral-600 bg-clip-text text-transparent inline-block">
         generan resultados.
       </span>
     </h2>
-    <p class="text-center text-(--text-secondary) text-lg mt-4 max-w-4xl mx-auto">
-      Una selección de soluciones que desarrollé para negocios reales, desde presencia web hasta automatización de procesos.
+    <p class="mt-10 text-base md:text-lg text-(--text-secondary) leading-relaxed max-w-2xl font-light">
+      Una selección de soluciones desarrolladas para negocios reales, enfocadas en la optimización de procesos y la conversión digital.
     </p>
   </header>
 
-  <div class="space-y-32">
-    {featuredProjects.map((project, i) => (
+  <div class="space-y-32 mb-24 md:mb-32">
+    {FEATURED_PROJECTS.map((project, i) => (
       <WorkCard project={project} idx={i} />
     ))}
   </div>
+
+  <footer class="flex flex-col items-center gap-8 reveal" style="--delay: 400ms">
+    <div class="h-px w-24 bg-(--border-subtle)/40"></div>
+
+    <a
+      href="/portafolio/trabajos/"
+      class="no-underline group relative flex items-center gap-4 px-8 py-4 bg-neutral-900 dark:bg-gray-100 text-white dark:text-black rounded-full transition-all duration-300 hover:scale-105 active:scale-95"
+    >
+      <span class="text-xs font-black tracking-wide">
+        Explorar portafolio completo
+      </span>
+      <div class="size-6 rounded-full bg-blue-600 flex items-center justify-center transition-transform group-hover:rotate-45">
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </div>
+    </a>
+
+    <p class="text-[10px] font-mono text-(--text-muted) uppercase tracking-widest">
+      Sistemas activos: {FEATURED_PROJECTS.length} casos de éxito
+    </p>
+  </footer>
 </section>
