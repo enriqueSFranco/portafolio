@@ -12,26 +12,23 @@ const { title } = Astro.props;
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width" />
   <title>{title}</title>
-  
-  <link rel="icon" type="image/svg+xml" href="/logo.svg" />
-  
-  <meta
-    name="description"
-    content="curriculum vitae, cv, Frontend Developer, Desarrollo Web"
-  />
 
-  <meta property="og:url" content="https://enrique.dev" />
+  <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+
+  <meta name="description" content="Diseño sistemas que trabajan por ti. Ingeniería de software a medida para optimizar procesos y escalar negocios." />
+  <meta name="author" content="Enrique SFranco" />
+
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Bienvenido a mi portafolio web" />
-  <meta property="og:description" content="Portafolio personal" />
-  <meta property="og:image" content="" />
+  <meta property="og:url" content={Astro.url} />
+  <meta property="og:title" content="Enrique SFranco | Ingeniero en Sistemas Computacionales" />
+  <meta property="og:description" content="Ingeniería pensada para elevar el estándar local. Soluciones digitales sólidas y escalables." />
+  <meta property="og:image" content="https://enriquesfranco.github.io/portafolio/og-image.jpg" />
   <meta property="og:locale" content="es_MX" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:site" content="@enrique.dev" />
-  <meta name="twitter:creator" content="@enriqueSFranco" />
-  <meta name="twitter:title" content="Bienvenido a mi portafolio web" />
-  <meta name="twitter:description" content="Portafolio personal" />
-  <meta name="author" content="Enrique SFranco" />
+  <meta name="twitter:title" content="Enrique SFranco | Ingeniero en Sistemas Computacionales" />
+  <meta name="twitter:description" content="Diseño sistemas que trabajan por ti. Ingeniería de software a medida para optimizar procesos y escalar negocios." />
+  <meta name="twitter:image" content="https://enriquesfranco.github.io/portafolio/og-image.jpg" />
+
   <ClientRouter />
 </head>
