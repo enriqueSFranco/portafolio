@@ -1,34 +1,38 @@
 ---
-import { ClientRouter } from "astro:transitions";
-
 export interface Props {
   title: string;
+  description: string
+  image?: string
 }
 
-const { title } = Astro.props;
+const { title, description, image="https://github.com/enriqueSFranco/portafolio/blob/main/public/images/preview.png?raw=true" }: Props = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width" />
-  <title>{title}</title>
-
   <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+  <meta name="generator" content={Astro.generator} />
+  <link rel="canonical" href={canonicalURL} />
 
-  <meta name="description" content="Diseño sistemas que trabajan por ti. Ingeniería de software a medida para optimizar procesos y escalar negocios." />
-  <meta name="author" content="Enrique SFranco" />
+  <title>{title}</title>
+  <meta name="title" content={title} />
+  <meta name="description" content={description} />
+  <meta name="author" content="Enrique S. Franco" />
 
   <meta property="og:type" content="website" />
   <meta property="og:url" content={Astro.url} />
-  <meta property="og:title" content="Enrique SFranco | Ingeniero en Sistemas Computacionales" />
-  <meta property="og:description" content="Ingeniería pensada para elevar el estándar local. Soluciones digitales sólidas y escalables." />
-  <meta property="og:image" content="https://enriquesfranco.github.io/portafolio/og-image.jpg" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={new URL(image, Astro.url)} />
   <meta property="og:locale" content="es_MX" />
 
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Enrique SFranco | Ingeniero en Sistemas Computacionales" />
-  <meta name="twitter:description" content="Diseño sistemas que trabajan por ti. Ingeniería de software a medida para optimizar procesos y escalar negocios." />
-  <meta name="twitter:image" content="https://enriquesfranco.github.io/portafolio/og-image.jpg" />
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content={Astro.url} />
+  <meta property="twitter:title" content={title} />
+  <meta property="twitter:description" content={description} />
+  <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
-  <ClientRouter />
+  <link rel="sitemap" href="/sitemap-index.xml" />
 </head>

@@ -10,7 +10,7 @@ interface Props {
 const {label, variant = 'neutral', customClass = '', ariaLabel, icon}: Props = Astro.props
 
 const variants = {
-  primary: "bg-blue-600 text-white",
+  primary: "bg-blue-100/75 text-blue-700",
   outline: "bg-transparent border-gray-300 text-(--text-primary)",
   neutral: "bg-gray-200 text-(--text-secondary)"
 }
@@ -19,7 +19,7 @@ console.log(variant)
 ---
 
 <div class:list={[
-    "inline-flex items-center gap-1.5 px-4 py-2 rounded-full border text-[10px] font-mono tracking-wider transition-all duration-300 select-none w-fit",
+    "inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-[10px] font-mono tracking-wider transition-all duration-300 select-none w-fit",
     variants[variant],
     customClass,
     ]}>

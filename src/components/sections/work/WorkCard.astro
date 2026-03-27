@@ -40,12 +40,12 @@ const { project, idx }: Props = Astro.props;
   <div class="w-full lg:w-2/5 space-y-8">
     <div class="space-y-2">
       <Tag variant="primary" label={project.category} />
-      <h3 class="text-4xl md:text-5xl font-black tracking-tighter text-(--text-primary) leading-[0.9]">
+      <h3 class="text-4xl md:text-xl font-black tracking-tighter text-(--text-primary) leading-[0.9]">
         {project.title}
       </h3>
     </div>
 
-    <p class="text-base md:text-lg text-(--text-secondary) leading-relaxed font-light max-w-sm">
+    <p class="text-base text-gray-500 leading-relaxed font-light">
       {project.description}
     </p>
 

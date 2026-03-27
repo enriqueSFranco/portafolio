@@ -2,7 +2,6 @@
 import Base from "./Base.astro";
 import Footer from "@components/layout/Footer.astro";
 import Header from "@components/layout/Header.astro";
-import Prose from "@components/layout/Prose.astro";
 import "../styles/global.css";
 
 import '@fontsource-variable/inter';
@@ -11,21 +10,43 @@ import '@fontsource-variable/plus-jakarta-sans/wght.css';
 
 export interface Props {
   title: string;
+  description?: string
 }
 
-const { title } = Astro.props;
+const { title, description="soluciones digitales" }: Props = Astro.props;
 ---
 
 <!doctype html>
-<html lang="es">
-  <Base title={title} />
+<html lang="es" class="scroll-smooth">
+  <Base title={title} description={description} />
   <body
-    class="font-light text-black text-balance tracking-normal bg-white"
+    class="antialiased font-sans text-black text-balance tracking-tight min-h-screen flex flex-col bg-white selection:bg-blue-600/10 selection:text-blue-600 px-5 sm:px-8 lg:px-10"
   >
+  <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-lg"
+    >
+      Saltar al contenido principal
+    </a>
+
   <Header />
-    <Prose>
-      <slot />
-    </Prose>
-    <Footer />
+  <main aria-label="Contenido principal" id="main-content" class="w-full outline-none grow">
+    <slot />
+  </main>
+  <Footer />
   </body>
 </html>
+
+<style is:global>
+  /* Evita que el scroll se vea cortado por el header sticky */
+  :root {
+    scroll-padding-top: 5rem;
+  }
+
+  /* Mejora la renderización de fuentes en pantallas de alta densidad */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+</style>
